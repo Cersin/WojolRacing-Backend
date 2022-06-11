@@ -5,8 +5,10 @@ import mongoSanitize from 'express-mongo-sanitize';
 import xss from 'xss-clean';
 import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
-
-import { config } from "./config-server";
+import AppError from "~/server/utils/appError";
+import globalErrorHandler from "~/server/controllers/errorController";
+import { config } from "~/server/config-server";
+import userRoutes from "~/server/routes/userRoutes";
 
 const app = express();
 
@@ -22,5 +24,13 @@ app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 app.use(cookieParser());
+
+app.use('/users', userRoutes);
+
+app.all('*', (req,res,next) => {
+    next(new AppError(`Nie mogę znaleźć ${req.originalUrl} na tym serwerze!`, 404));
+});
+
+app.use(globalErrorHandler);
 
 export default app
