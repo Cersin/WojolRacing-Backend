@@ -3,6 +3,7 @@ import User from '../models/userModel';
 import { config } from "~/server/config-server";
 import catchAsync from "~/server/utils/catchAsync";
 import AppError from "~/server/utils/appError";
+import ApiFeatures from "~/server/utils/apiFeatures";
 
 const signToken = id => {
     return jwt.sign({id: id}, config.JWT_SECRET, {
@@ -45,10 +46,22 @@ export const signUp = catchAsync(async (req, res, next) => {
 });
 
 export const getUsers = catchAsync(async (req, res, next) => {
-    const users = await User.find();
+    const features = new ApiFeatures(User.find(), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+    const users = await features.query;
+    const count = await User.countDocuments();
+    let pagination = {};
+    if (req.query.limit && req.query.page) {
+        pagination.page = +req.query.page;
+        pagination.pages = Math.ceil(count / +req.query.limit)
+    };
     if (!users) return next(new AppError('Brak użytkowników', 404))
     res.status(200).json({
             status: 'success',
+            pagination: {...pagination},
             data: {
                 users
             }
