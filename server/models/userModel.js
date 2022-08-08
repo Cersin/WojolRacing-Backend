@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Twoje hasła nie są takie same'
         }
-    }
+    },
+    player: {
+        type: mongoose.Schema.Types.ObjectId
+    },
 });
 
 userSchema.pre('save', async function (next) {
