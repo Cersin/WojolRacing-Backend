@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         select: false // never show up in any output
     },
     role: {
-        type: [String],
+        type: String,
         enum: ['user'],
         default: 'user'
     },

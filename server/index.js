@@ -9,6 +9,7 @@ import AppError from "~/server/utils/appError";
 import {globalErrorHandler} from "~/server/controllers/errorController";
 import { config } from "~/server/config-server";
 import userRoutes from "~/server/routes/userRoutes";
+import playersRoutes from "~/server/routes/playersRoutes";
 
 process.on('uncaughtException', err => {
     console.log(err.name, err.message);
@@ -32,6 +33,7 @@ app.use(hpp());
 app.use(cookieParser());
 
 app.use('/users', userRoutes);
+app.use('/players', playersRoutes);
 
 app.all('*', (req,res,next) => {
     next(new AppError(`Nie mogę znaleźć ${req.originalUrl} na tym serwerze!`, 404));
