@@ -11,6 +11,7 @@ import { config } from "~/server/config-server";
 import userRoutes from "~/server/routes/userRoutes";
 import playersRoutes from "~/server/routes/playersRoutes";
 import racesRoutes from "~/server/routes/racesRoutes";
+import calendarRoutes from "~/server/routes/calendarRoutes";
 
 process.on('uncaughtException', err => {
     console.log(err.name, err.message);
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use('/users', userRoutes);
 app.use('/players', playersRoutes);
 app.use('/race', racesRoutes);
+app.use('/calendar', calendarRoutes);
 
 app.all('*', (req,res,next) => {
     next(new AppError(`Nie mogę znaleźć ${req.originalUrl} na tym serwerze!`, 404));
