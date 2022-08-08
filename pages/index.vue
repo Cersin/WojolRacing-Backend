@@ -1,13 +1,17 @@
 <template>
-<h1>hey</h1>
+  <div class="container">
+    <MainHeader/>
+    <slot></slot>
+  </div>
+
 </template>
 
-<script>
-export default {
-  name: "index"
-}
+<script setup>
+import MainHeader from "../components/layout/MainHeader";
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.container {
+  height: 100%;
+}
 </style>

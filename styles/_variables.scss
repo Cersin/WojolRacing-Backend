@@ -1,0 +1,19 @@
+
+@use 'element-plus/dist/index.css';
+@use 'element-plus/theme-chalk/display.css';
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-weight: 400;
+  src: local("Chakra Petch"), url("/font/ChakraPetch-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-weight: 800;
+  src: local("Chakra Petch"), url("/font/ChakraPetch-Bold.ttf");
+}
+
+$color-primary: #FFEB00;
+
+

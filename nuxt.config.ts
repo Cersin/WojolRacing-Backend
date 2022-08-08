@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+ // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     head: {
         title: 'Wojol Racing',
@@ -15,6 +14,15 @@ export default defineNuxtConfig({
     css: [
         '~/styles/_base.scss'
     ],
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: '@import "~/styles/_variables.scss";',
+                },
+            },
+        },
+    },
     publicRuntimeConfig: {
         api: process.env.NODE_ENV !== 'production' ? process.env.API : process.env.API_PROD
     }

@@ -1,0 +1,25 @@
+@import '../variables';
+
+.button {
+  background-color: $color-primary;
+  color: black;
+  padding: .7rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+
+
+  &--outline {
+    background-color: transparent;
+    border-color: $color-primary;
+    border: 2px solid black;
+    color: $color-primary;
+  }
+
+  &--secondary {
+    color: $color-primary;
+    background-color: black;
+  }
+
+}
+

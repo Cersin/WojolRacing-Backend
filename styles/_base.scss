@@ -1,9 +1,19 @@
+@import 'layout/_button.scss';
+@import "@fontsource/chakra-petch/index.css";
+
+
+:root {
+  --el-color-primary: #FFEB00;
+  --015c408c-color: red;
+}
+
 *,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  font-family: 'Chakra Petch', sans-serif;
 }
 
 html {

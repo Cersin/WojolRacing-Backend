@@ -1,11 +1,13 @@
 <template>
+  <el-container>
     <slot></slot>
+  </el-container>
+
 </template>
 
-<script>
-export default {
-  name: "default"
-}
+<script setup>
+import { ElContainer } from "element-plus/dist/index.full.js"
+
 </script>
 
 <style scoped>
