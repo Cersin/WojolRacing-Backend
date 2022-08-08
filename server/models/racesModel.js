@@ -8,7 +8,7 @@ const racesSchema = new mongoose.Schema({
     },
     split: {
         type: Number,
-        required: true,
+        required: [true, 'Split wymagany'],
         trim: true
     },
     date: {

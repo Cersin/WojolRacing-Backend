@@ -17,7 +17,7 @@ const findRaces = catchAsync(async (req, res) => {
         const races = await Races.aggregate([
             {
                 "$match": {
-                    "split": req.query.split,
+                    "split": +req.query.split,
                     "season": +req.query.season
                 }
             },
@@ -107,7 +107,7 @@ const userPoints = catchAsync(async (req, res) => {
         const users = await Races.aggregate([
             {
                 "$match": {
-                    "platform": req.query.platform,
+                    "split": +req.query.split,
                     "season": +req.query.season
                 }
             },
@@ -144,7 +144,7 @@ const playerStatistics = catchAsync(async (req, res) => {
         const users = await Races.aggregate([
             {
                 "$match": {
-                    "platform": req.query.platform,
+                    "split": +req.query.split,
                     "season": +req.query.season
                 }
             },
@@ -255,7 +255,7 @@ const constructorsPoints = catchAsync(async (req, res) => {
         const constructors = await Races.aggregate([
             {
                 "$match": {
-                    "platform": req.query.platform,
+                    "split": +req.query.split,
                     "season": +req.query.season
                 },
             },
