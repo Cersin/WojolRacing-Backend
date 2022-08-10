@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <button class="button button--secondary button--outline">Kalendarz</button>
-
+    <img class="header__img" src="logo_wojol.png" alt="Wojol Racing">
+    <button class="button button--outline ripple">ZALOGUJ</button>
   </div>
 </template>
 
@@ -12,4 +12,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.header {
+  grid-area: head;
+  padding: $default-padding;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__img {
+    height: 100%;
+    width: auto;
+  }
+}
 </style>

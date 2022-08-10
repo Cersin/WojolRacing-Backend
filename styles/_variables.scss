@@ -1,6 +1,7 @@
 
 @use 'element-plus/dist/index.css';
 @use 'element-plus/theme-chalk/display.css';
+@import "utils";
 
 @font-face {
   font-family: 'Chakra Petch';
@@ -16,4 +17,4 @@
 
 $color-primary: #FFEB00;
 
-
+$default-padding: 0 2rem;
