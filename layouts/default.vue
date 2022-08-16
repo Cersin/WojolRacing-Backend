@@ -1,6 +1,9 @@
 <template>
   <div class="layout">
     <MainHeader/>
+    <AsideWrapper>
+      <h1>Wkrótce więcej</h1>
+    </AsideWrapper>
     <slot></slot>
   </div>
 
@@ -9,6 +12,7 @@
 <script setup>
 
 import MainHeader from "../components/layout/MainHeader";
+import AsideWrapper from "../components/Wrappers/AsideWrapper";
 </script>
 
 <style scoped lang="scss">

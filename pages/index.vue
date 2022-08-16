@@ -1,27 +1,24 @@
 <template>
-  <AsideWrapper>
-    Test
-  </AsideWrapper>
   <div class="home">
-    <div class="margin-bottom margin-top">
-      <FirmTitle class="margin-bottom"/>
-      <FirmDescription/>
-    </div>
+      <div class="margin-bottom margin-top">
+        <FirmTitle class="margin-bottom"/>
+        <FirmDescription/>
+      </div>
 
-    <div class="gallery margin-bottom">
-      <BaseCard
-        title="Wojol Racing F1 League"
-        image-path="formula.png"
-        route-path="/formula"
-      />
+      <div class="gallery margin-bottom">
+        <BaseCard
+          title="Wojol Racing F1 League"
+          image-path="formula.png"
+          route-path="/formula"
+        />
 
-      <BaseCard
-        title="Assetto Corsa"
-        image-path="assettocorsa.jpeg"
-        route-path="/formula"
-      />
+        <BaseCard
+          title="Assetto Corsa"
+          image-path="assettocorsa.jpeg"
+          route-path="/assetto"
+        />
+      </div>
     </div>
-  </div>
 
 </template>
 
@@ -43,10 +40,9 @@ import BaseCard from "../components/container/BaseCard";
 .gallery {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
   grid-gap: 10rem 10rem;
-  margin-top: 60px;
   justify-content: center;
-
+  padding: 6rem;
 }
 </style>

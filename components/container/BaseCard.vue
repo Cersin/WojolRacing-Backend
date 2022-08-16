@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="redirect">
     <div class="card_title">
 
       {{ title }}
@@ -13,7 +13,11 @@
 </template>
 
 <script setup>
-defineProps({
+import {navigateTo} from "nuxt/app";
+
+const router = useRouter();
+
+const props = defineProps({
   title: {
     type: String,
     required: true
@@ -27,6 +31,13 @@ defineProps({
     required: true
   }
 })
+
+function redirect() {
+  navigateTo({
+    path: props.routePath
+  });
+
+}
 
 </script>
 

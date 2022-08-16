@@ -1,14 +1,12 @@
 <template>
   <div class="header">
-    <img class="header__img" src="logo_wojol.png" alt="Wojol Racing">
+    <img @click="navigateTo('/')" class="header__img" src="logo_wojol.png" alt="Wojol Racing">
     <button class="button button--outline ripple">ZALOGUJ</button>
   </div>
 </template>
 
-<script>
-export default {
-  name: "MainHeader",
-}
+<script setup>
+import {navigateTo} from "nuxt/app";
 </script>
 
 <style scoped lang="scss">
@@ -23,6 +21,7 @@ export default {
   &__img {
     height: 100%;
     width: auto;
+    cursor: pointer;
   }
 }
 </style>
