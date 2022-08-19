@@ -1,5 +1,6 @@
 <template>
   <div class="header">
+<!--    <div class="header__img"></div>-->
     <img @click="navigateTo('/')" class="header__img" src="logo_wojol.png" alt="Wojol Racing">
     <button class="button button--outline ripple">ZALOGUJ</button>
   </div>
@@ -19,7 +20,7 @@ import {navigateTo} from "nuxt/app";
   align-items: center;
 
   &__img {
-    height: 100%;
+    height: 100px;
     width: auto;
     cursor: pointer;
   }
