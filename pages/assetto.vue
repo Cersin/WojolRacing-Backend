@@ -10,7 +10,6 @@
 
 <style scoped lang="scss">
 .assetto {
-  min-height: 100vh;
   padding: $default-padding;
   background-color: black;
   display: flex;

@@ -24,7 +24,10 @@ import AsideWrapper from "../components/Wrappers/AsideWrapper";
                       "main"
                       "aside";
   grid-template-rows: 100px auto auto;
-
+  //max-width: 1440px;
+  //justify-content: center;
+  //margin-left: 50%;
+  //transform:translateX(-50%);
 
   @include tabletAndUp {
     grid-template-areas:

@@ -36,7 +36,7 @@ const findRaces = catchAsync(async (req, res) => {
                     _id: '$_id',
                     track: {"$first": '$track'},
                     season: {"$first": '$season'},
-                    platform: {"$first": '$platform'},
+                    split: {"$first": '$split'},
                     date: {"$first": '$date'},
                     points: {$sum: "$results.points"},
                     results: {"$push": '$results'},
@@ -49,10 +49,10 @@ const findRaces = catchAsync(async (req, res) => {
 
         ])
 
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             length: races.length,
-            races
+            data: races
         })
 });
 
@@ -92,7 +92,7 @@ const formatData = async (req, res) => {
             console.log(e);
         })
 
-        res.status(201).json({
+        res.status(200).json({
             status: 'success'
         })
     } catch (e) {
@@ -133,7 +133,7 @@ const userPoints = catchAsync(async (req, res) => {
                 }
             }
         ])
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             users,
             length: users.length
@@ -244,7 +244,7 @@ const playerStatistics = catchAsync(async (req, res) => {
                 }
             }
         ])
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             users,
             length: users.length
@@ -273,7 +273,7 @@ const constructorsPoints = catchAsync(async (req, res) => {
             }
         ])
 
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             constructors,
             length: constructors.length

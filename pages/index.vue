@@ -44,5 +44,9 @@ import BaseCard from "../components/container/BaseCard";
   grid-gap: 10rem 10rem;
   justify-content: center;
   padding: 6rem;
+
+  @include big-desktop() {
+    margin-top: 15rem;
+  }
 }
 </style>

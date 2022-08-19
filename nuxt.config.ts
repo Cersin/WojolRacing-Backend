@@ -15,6 +15,7 @@ export default defineNuxtConfig({
         '~/styles/_base.scss',
         'css-ripple-effect/dist/ripple.css'
     ],
+    ssr: true,
     vite: {
         css: {
             preprocessorOptions: {
