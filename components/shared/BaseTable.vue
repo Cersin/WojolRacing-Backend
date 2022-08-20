@@ -62,8 +62,10 @@ defineExpose(data);
 
 <style scoped lang="scss">
 .table_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   padding: 1.5rem;
-
   width: 100%;
   max-height: 600px;
   overflow: scroll;
@@ -71,6 +73,7 @@ defineExpose(data);
 
 .table_header {
   color: $color-primary;
+  border: 2px solid $color-primary;
 }
 
 table {
@@ -87,9 +90,8 @@ td {
   border: 1px solid white;
 }
 
-
 td, th {
-  padding: .5rem;
+  padding: .8rem;
 }
 
 tr:nth-child(even) {
