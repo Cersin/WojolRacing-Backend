@@ -14,7 +14,7 @@ const createRace = catchAsync(async (req, res) => {
 });
 
 const findRaces = catchAsync(async (req, res) => {
-        const races = await Races.aggregate([
+        let races = await Races.aggregate([
             {
                 "$match": {
                     "split": +req.query.split,
@@ -31,6 +31,7 @@ const findRaces = catchAsync(async (req, res) => {
                     as: "results.playerDetails"
                 },
             },
+            {"$unwind": "$results.playerDetails"},
             {
                 "$group": {
                     _id: '$_id',
@@ -40,14 +41,16 @@ const findRaces = catchAsync(async (req, res) => {
                     date: {"$first": '$date'},
                     points: {$sum: "$results.points"},
                     results: {"$push": '$results'},
-
                 }
             },
             {
-                "$sort": {'date': -1}
-            }
-
+                "$sort": {'date': -1},
+            },
         ])
+
+        if (req.query.number) {
+            races = {...races[req.query.number], length: races.length}
+        }
 
         res.status(200).json({
             status: 'success',

@@ -19,17 +19,19 @@ import AsideWrapper from "../components/Wrappers/AsideWrapper";
 .layout {
   display: grid;
   min-height: 100vh;
+
   grid-template-areas:
                       "head"
                       "main"
                       "aside";
   grid-template-rows: 100px auto auto;
+  grid-template-columns: 100%;
 
   @include tabletAndUp {
     grid-template-areas:
                       "head aside"
                       "main aside";
-    grid-template-columns: .65fr .35fr;
+    grid-template-columns: .75fr auto;
     grid-template-rows: 100px 1fr;
   }
 }

@@ -8,7 +8,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="data in key ? data.data[key] : data.data" :key="data._id">
+          <tr v-for="data in key ? fetched.data[key] : fetched.data" :key="data._id">
             <td v-for="({ name, title }, index) in columns" :key="index">
               <slot :name="title" :data="data[name]">
                 {{ data[name] }}
@@ -26,7 +26,6 @@
 
 <script setup>
 import {useFetch, useRuntimeConfig} from "nuxt/app";
-import { ref } from "vue"
 
 const config = useRuntimeConfig()
 
@@ -42,21 +41,21 @@ const props = defineProps({
   key: {
     type: String,
     default: 'results'
+  },
+  params: {
+    type: Object,
+    default: () => {}
   }
 });
 
-const params = ref({
-  split: 1,
-  season: 1,
-  number: 1
-});
-
-const {data, pending} = await useFetch(props.endpoint, {
-  params: params.value,
+const {data: fetched, pending} = await useFetch(props.endpoint, {
+  params: props.params,
   baseURL: config.API_BASE_URL
 });
 
-defineExpose(data);
+defineExpose({
+  data: fetched
+});
 
 </script>
 
