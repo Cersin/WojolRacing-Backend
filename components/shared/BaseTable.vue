@@ -1,58 +1,33 @@
 <template>
   <div class="table_wrapper">
-  <table>
-    <tr class="table_header">
-      <th>Test1</th>
-      <th>Test2</th>
-      <th>Test3</th>
-      <th>Test4</th>
-      <th>Test4</th>
-      <th>Test4</th>
-      <th>Test4</th>
-    </tr>
+      <table>
+        <thead>
+        <tr class="table_header">
+          <th v-for="({ title }, index) in columns" :key="index">{{ title }}</th>
+        </tr>
+        </thead>
 
-    <tr>
-      <td>eee</td>
-      <td>eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee</td>
-      <td>eee</td>
-      <td>eee eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee eee sas </td>
-      <td>eeeeee sas</td>
-    </tr>
-
-    <tr>
-      <td>eee</td>
-      <td>eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee</td>
-      <td>eee</td>
-      <td>eee eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee eee sas </td>
-      <td>eeeeee sas</td>
-    </tr>
-
-    <tr>
-      <td>eee</td>
-      <td>eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee</td>
-      <td>eee</td>
-      <td>eee eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas eee sas</td>
-      <td>eee eee sas </td>
-      <td>eeeeee sas</td>
-    </tr>
-  </table>
-
-    <div v-if="pending && !data">
-      ELO CAPTAIN JACK
-    </div>
+        <tbody>
+          <tr v-for="data in key ? data.data[key] : data.data" :key="data._id">
+            <td v-for="({ name, title }, index) in columns" :key="index">
+              <slot :name="title" :data="data[name]">
+                {{ data[name] }}
+              </slot>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </div>
-  {{ data?.data }}
 
+<!--    <div v-if="pending && !data">-->
+<!--      ELO CAPTAIN JACK-->
+<!--    </div>-->
 </template>
 
 <script setup>
 import {useFetch, useRuntimeConfig} from "nuxt/app";
 import { ref } from "vue"
+
 const config = useRuntimeConfig()
 
 const props = defineProps({
@@ -63,27 +38,35 @@ const props = defineProps({
   endpoint: {
     type: String,
     required: true
+  },
+  key: {
+    type: String,
+    default: 'results'
   }
-})
+});
 
-const api = process;
 const params = ref({
   split: 1,
-  season: 1
-})
+  season: 1,
+  number: 1
+});
 
 const {data, pending} = await useFetch(props.endpoint, {
   params: params.value,
   baseURL: config.API_BASE_URL
-})
+});
+
+defineExpose(data);
 
 </script>
 
 <style scoped lang="scss">
 .table_wrapper {
-  display: flex;
-  max-width: 100%;
   padding: 1.5rem;
+
+  width: 100%;
+  max-height: 600px;
+  overflow: scroll;
 }
 
 .table_header {
@@ -92,7 +75,6 @@ const {data, pending} = await useFetch(props.endpoint, {
 
 table {
   font-size: 1.3rem;
-  width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
