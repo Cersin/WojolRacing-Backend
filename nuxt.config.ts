@@ -25,7 +25,10 @@ export default defineNuxtConfig({
             },
         },
     },
-    publicRuntimeConfig: {
-        api: process.env.NODE_ENV !== 'production' ? process.env.API : process.env.API_PROD
+    runtimeConfig: {
+        public: {
+            status: process.env.NODE_ENV,
+            API_BASE_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : process.env.API_BASE_URL
+        }
     }
 })

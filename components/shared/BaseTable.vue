@@ -42,34 +42,40 @@
     </tr>
   </table>
 
-    <div v-if="pending">
+    <div v-if="pending && !data">
       ELO CAPTAIN JACK
     </div>
   </div>
   {{ data?.data }}
+
 </template>
 
 <script setup>
-import {useFetch, useLazyFetch, useState} from "nuxt/app";
+import {useFetch, useRuntimeConfig} from "nuxt/app";
 import { ref } from "vue"
-defineProps({
+const config = useRuntimeConfig()
+
+const props = defineProps({
   columns: {
     type: Array,
+    required: true
+  },
+  endpoint: {
+    type: String,
     required: true
   }
 })
 
+const api = process;
 const params = ref({
   split: 1,
   season: 1
 })
 
-const {data, pending} = await useLazyFetch('api/race', {
-  server: false,
-  params: params.value
+const {data, pending} = await useFetch(props.endpoint, {
+  params: params.value,
+  baseURL: config.API_BASE_URL
 })
-
-
 
 </script>
 

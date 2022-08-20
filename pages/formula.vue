@@ -4,6 +4,7 @@
 
     <BaseTable
     :columns="[]"
+    endpoint="race"
     />
   </div>
 </template>
