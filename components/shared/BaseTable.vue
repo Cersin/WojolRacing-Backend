@@ -8,10 +8,10 @@
         </thead>
 
         <tbody>
-          <tr v-for="data in key ? fetched.data[key] : fetched.data" :key="data._id">
+          <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data" :key="data._id">
             <td v-for="({ name, title }, index) in columns" :key="index">
-              <slot :name="title" :data="data[name]">
-                {{ data[name] }}
+              <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="fetched" :columnData="getNestedObject(data, splitString(name, '.'))">
+                {{ getNestedObject(data, splitString(name, '.')) }}
               </slot>
             </td>
           </tr>
@@ -25,7 +25,14 @@
 </template>
 
 <script setup>
+// slot passing
+// columnData - data of column
+// rowData - data of whole row
+// rowIndex - row index
+// columnIndex - column index
+
 import {useFetch, useRuntimeConfig} from "nuxt/app";
+import { getNestedObject, splitString } from "../../utils/helpers";
 
 const config = useRuntimeConfig()
 
@@ -38,9 +45,9 @@ const props = defineProps({
     type: String,
     required: true
   },
-  key: {
+  arrayKey: {
     type: String,
-    default: 'results'
+    default: null
   },
   params: {
     type: Object,
@@ -64,7 +71,7 @@ defineExpose({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 1.5rem;
+  margin: 2rem 0;
   width: 100%;
   max-height: 600px;
   overflow: scroll;

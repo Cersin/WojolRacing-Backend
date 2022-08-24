@@ -46,7 +46,9 @@ const findRaces = catchAsync(async (req, res) => {
             {
                 "$sort": {'date': -1},
             },
-        ])
+        ]);
+
+        const tracks = races.map(race => race.track);
 
         if (req.query.number) {
             races = {...races[req.query.number], length: races.length}
@@ -55,7 +57,7 @@ const findRaces = catchAsync(async (req, res) => {
         res.status(200).json({
             status: 'success',
             length: races.length,
-            data: races
+            data: {...races, tracks: tracks}
         })
 });
 
@@ -130,6 +132,7 @@ const userPoints = catchAsync(async (req, res) => {
                     as: "player"
                 }
             },
+            {"$unwind": "$player"},
             {
                 "$sort": {
                     points: -1
@@ -138,7 +141,7 @@ const userPoints = catchAsync(async (req, res) => {
         ])
         res.status(200).json({
             status: 'success',
-            users,
+            data: users,
             length: users.length
         })
 });

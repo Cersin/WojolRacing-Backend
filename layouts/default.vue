@@ -1,9 +1,7 @@
 <template>
   <div class="layout">
     <MainHeader/>
-    <AsideWrapper>
-      <h1>Wkrótce więcej</h1>
-    </AsideWrapper>
+    <AsideWrapper/>
     <slot></slot>
   </div>
 

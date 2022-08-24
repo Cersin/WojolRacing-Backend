@@ -1,67 +1,46 @@
 <template>
   <div class="formula">
+    <Teleport to="#aside">
+      eee
+    </Teleport>
     <BaseHeader title="Klasyfikacja generalna"/>
-
-    {{ response?.data?.track }}
 
     <BaseTable
         ref="classification"
         :columns="raceColumn"
         :params="params"
-        endpoint="race"
-        key="results"
+        endpoint="race/playerPoints"
     >
-      <template #DRIVER="{data}">
-        {{ data?.name || '---' }}
+      <template #POS="{rowIndex}">
+       {{ +rowIndex + 1 }}
       </template>
     </BaseTable>
   </div>
 </template>
 
 <script setup>
-import BaseHeader from "../components/shared/BaseHeader";
-import BaseTable from "../components/shared/BaseTable";
+import BaseHeader from "../../components/shared/BaseHeader";
+import BaseTable from "../../components/shared/BaseTable";
 import {ref, computed} from "vue";
 
 const raceColumn = [
     {
       title: 'POS',
-      name: 'position'
+      name: ''
     },
     {
       title: 'DRIVER',
-      name: 'playerDetails'
+      name: 'player.name'
     },
     {
       title: 'TEAM',
-      name: 'team'
-    },
-    {
-      title: 'GRID',
-      name: 'grid'
-    },
-    {
-      title: 'STOPS',
-      name: 'pitStops'
-    },
-    {
-      title: 'BEST',
-      name: 'bestLap'
-    },
-    {
-      title: 'GAP',
-      name: 'gap'
-    },
-    {
-      title: 'PTS',
-      name: 'points'
-    },
+      name: 'player.team'
+    }
 ]
 
 const params = ref({
   split: 1,
   season: 1,
-  number: 1
 });
 
 const classification = ref();

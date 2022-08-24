@@ -1,6 +1,5 @@
 <template>
-  <div class="aside">
-    <slot></slot>
+  <div id="aside" class="aside">
   </div>
 </template>
 
@@ -14,9 +13,6 @@ export default {
   .aside {
     grid-area: aside;
     color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: $color-primary;
   }
 </style>
