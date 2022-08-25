@@ -4,10 +4,12 @@
 
     {{ response?.data?.track }}
 
-    <BaseSelects />
+    <BaseSelects
+      :data="response?.data.tracks"
+    />
 
     <BaseTable
-        ref="classification"
+        ref="results"
         :columns="raceColumn"
         :params="params"
         endpoint="race"
@@ -63,10 +65,10 @@ const params = ref({
   number: 1
 });
 
-const classification = ref();
+const results = ref();
 
 const response = computed(() => {
-  return classification?.value?.data;
+  return results?.value?.data;
 })
 </script>
 

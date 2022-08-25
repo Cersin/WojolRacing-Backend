@@ -1,7 +1,7 @@
 <template>
   <div class="header">
 <!--    <div class="header__img"></div>-->
-    <img @click="navigateTo('/')" class="header__img" src="logo_wojol.png" alt="Wojol Racing">
+    <img @click="navigateTo('/')" class="header__img" src="/logo_wojol.png" alt="Wojol Racing">
     <button class="button button--outline ripple">ZALOGUJ</button>
   </div>
 </template>

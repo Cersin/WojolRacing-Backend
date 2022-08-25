@@ -1,40 +1,60 @@
 <template>
-  <button class="selector" :class="{ 'selector--dark': dark}">
-      Wybierz wyścig
-    <img class="arrow" src="/ui/arrow-right.svg" alt="arrow" width="25px" height="25px">
+  <button ref="selector" class="selector" @click.self="toggleVisibility()"
+          :class="{ 'selector--dark': dark}">
+      {{ label }}
+    <img @click.self="toggleVisibility()" class="arrow" src="/ui/arrow-right.svg" alt="arrow" width="25px" height="25px">
       <div class="arrow_wrapper"><i class="arrow arrow--down"></i></div>
 
-    <div class="selector__options">
-      <div class="selector__options-value">
-        test
-      </div>
-
-      <div class="selector__options-value">
-        test
-      </div>
-
-      <div class="selector__options-value">
-        test
-      </div>
-
-      <div class="selector__options-value">
-        test
+    <div v-if="visible" class="selector__options">
+      <div v-for="(el, index) in data" :key="index"
+          @click="selected(el)" class="selector__options-value">
+        {{ el }}
       </div>
     </div>
   </button>
-
-
 </template>
 
-<script>
-export default {
-  name: "BaseSelects",
-  props: {
-    dark: {
-      type: Boolean,
-      default: false
-    }
+<script setup>
+import {ref} from "vue";
+import { onClickOutside } from '@vueuse/core'
+
+const selector = ref(null);
+
+defineProps({
+  dark: {
+    type: Boolean,
+    default: false
+  },
+  label: {
+    type: String,
+    default: "Wybierz"
+  },
+  data: {
+    type: Array,
+    default: null
+  },
+  key: {
+    type: String,
+    default: ""
   }
+})
+
+const emit = defineEmits(['selected'])
+
+const visible = ref(false);
+
+onClickOutside(selector, (event) => {
+  toggleVisibility(false);
+})
+
+function toggleVisibility(state) {
+  if (state !== undefined) return visible.value = state;
+  visible.value = !visible.value;
+}
+
+function selected(data) {
+  emit('selected', data);
+  toggleVisibility(false);
 }
 </script>
 
@@ -50,8 +70,11 @@ export default {
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
   padding: 1rem 1.2rem;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &:hover > &__options {
-    visibility: visible;
     opacity: 95;
   }
 
@@ -61,7 +84,6 @@ export default {
   }
 
   &__options {
-    visibility: hidden;
     position: absolute;
     width: 100%;
     top: 90%;
@@ -71,7 +93,6 @@ export default {
     color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 999;
-    opacity: 0;
     transition: all .5s;
 
     &-value {

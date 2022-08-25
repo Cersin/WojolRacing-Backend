@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     serverMiddleware: [
         {path: '/api', handler: '~/server/index.js'}
     ],
+    modules: [
+      '@vueuse/nuxt'
+    ],
     devtools: process.env.NODE_ENV !== 'production',
     css: [
         '~/styles/_base.scss',
