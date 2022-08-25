@@ -57,7 +57,8 @@ const props = defineProps({
 
 const {data: fetched, pending} = await useFetch(props.endpoint, {
   params: props.params,
-  baseURL: config.API_BASE_URL
+  baseURL: config.API_BASE_URL,
+  server: false
 });
 
 defineExpose({

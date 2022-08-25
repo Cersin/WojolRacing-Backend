@@ -10,6 +10,10 @@
           @click="selected(el)" class="selector__options-value">
         {{ el }}
       </div>
+
+      <div v-if="!data || data?.length === 0" class="selector__options-value">
+        Brak danych
+      </div>
     </div>
   </button>
 </template>

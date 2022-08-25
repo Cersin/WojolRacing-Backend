@@ -35,7 +35,11 @@ const raceColumn = [
     {
       title: 'TEAM',
       name: 'player.team'
-    }
+    },
+  {
+    title: 'Points',
+    name: 'points'
+  }
 ]
 
 const params = ref({
@@ -54,8 +58,6 @@ const response = computed(() => {
 .formula {
   padding: $default-padding;
   background-color: black;
-  display: flex;
-  flex-direction: column;
   grid-area: main;
 
   h1 {
