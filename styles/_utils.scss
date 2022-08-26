@@ -4,6 +4,7 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 $big-desktop-width: 1440px;
 $base-margin: 4rem;
+$small-margin: 1rem;
 
 @mixin smallDevices {
   @media (max-width: #{$small-width}) {
@@ -53,4 +54,12 @@ $base-margin: 4rem;
 
 .margin-top {
   margin-top: $base-margin;
+}
+
+.margin-bottom--sm {
+  margin-bottom: $small-margin;
+}
+
+.margin-top--sm {
+  margin-top: $small-margin;
 }

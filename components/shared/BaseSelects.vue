@@ -2,7 +2,7 @@
   <button ref="selector" class="selector" @click.self="toggleVisibility()"
           :class="{ 'selector--dark': dark}">
       {{ label }}
-    <img @click.self="toggleVisibility()" class="arrow" src="/ui/arrow-right.svg" alt="arrow" width="25px" height="25px">
+    <img @click.self="toggleVisibility()" class="arrow" src="~/assets/ui/arrow-right.svg" alt="arrow" width="25px" height="25px">
       <div class="arrow_wrapper"><i class="arrow arrow--down"></i></div>
 
     <div v-if="visible" class="selector__options">
@@ -73,6 +73,7 @@ function selected(data) {
   border: none;
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
   padding: 1rem 1.2rem;
+  z-index: 998;
 
   &:hover {
     cursor: pointer;

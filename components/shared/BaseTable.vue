@@ -57,8 +57,7 @@ const props = defineProps({
 
 const {data: fetched, pending} = await useFetch(props.endpoint, {
   params: props.params,
-  baseURL: config.API_BASE_URL,
-  server: false
+  baseURL: config.API_BASE_URL
 });
 
 defineExpose({
@@ -72,34 +71,45 @@ defineExpose({
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 2rem 0;
+  margin: 1rem 0;
   width: 100%;
   max-height: 600px;
   overflow: scroll;
 }
 
 .table_header {
-  color: $color-primary;
-  border: 2px solid $color-primary;
+  color: black;
+  background-color: $color-primary;
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+tr {
+  border-radius: 15px;
 }
 
 table {
   font-size: 1.3rem;
   text-align: center;
-  border-collapse: collapse;
+  border-spacing: 0 2rem;
+}
+
+thead {
+  position: sticky;
+  top: 0;
 }
 
 th {
-  border: 1px solid white;
+  padding: .8rem;
 }
 
 td {
-  border: 1px solid white;
+  border-bottom: 3px solid rgba(200, 200, 200, 0.28);
+  padding: 0 .8rem;
 }
 
-td, th {
-  padding: .8rem;
-}
+
 
 tr:nth-child(even) {
 }

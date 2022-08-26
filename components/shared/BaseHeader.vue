@@ -1,5 +1,5 @@
 <template>
-  <div class="header margin-top">
+  <div class="header margin-bottom--sm margin-top--sm">
     <span>{{ splitTitle[0] }}</span> {{ splitTitle[1] }}
   </div>
 </template>
