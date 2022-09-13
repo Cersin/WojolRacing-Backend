@@ -18,6 +18,7 @@ export default defineNuxtConfig({
         '~/styles/_base.scss',
         'css-ripple-effect/dist/ripple.css'
     ],
+    plugins: ["~/plugins/vee-validate"],
     ssr: true,
     vite: {
         css: {
