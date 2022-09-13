@@ -1,5 +1,5 @@
 <template>
-  <div class="table_wrapper">
+  <div v-if="!pending" class="table_wrapper">
       <table>
         <thead>
         <tr class="table_header">
@@ -19,9 +19,9 @@
       </table>
   </div>
 
-<!--    <div v-if="pending && !data">-->
-<!--      ELO CAPTAIN JACK-->
-<!--    </div>-->
+    <div class="margin-top" v-if="pending">
+      <BaseLoading/>
+    </div>
 </template>
 
 <script setup>
@@ -33,6 +33,8 @@
 
 import {useFetch, useRuntimeConfig} from "nuxt/app";
 import { getNestedObject, splitString } from "../../utils/helpers";
+import BaseLoading from "./BaseLoading";
+import { watch } from "vue";
 
 const config = useRuntimeConfig()
 
@@ -55,10 +57,15 @@ const props = defineProps({
   }
 });
 
-const {data: fetched, pending} = await useFetch(props.endpoint, {
+const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
   params: props.params,
-  baseURL: config.API_BASE_URL
+  baseURL: config.API_BASE_URL,
+  server: false
 });
+
+watch(props.params, () => {
+  refresh();
+})
 
 defineExpose({
   data: fetched

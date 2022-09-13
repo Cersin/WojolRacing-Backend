@@ -5,6 +5,7 @@ $desktop-width: 1024px;
 $big-desktop-width: 1440px;
 $base-margin: 4rem;
 $small-margin: 1rem;
+$margin-left-right: 20px;
 
 @mixin smallDevices {
   @media (max-width: #{$small-width}) {
@@ -50,6 +51,14 @@ $small-margin: 1rem;
 
 .margin-bottom {
   margin-bottom: $base-margin;
+}
+
+.margin-left{
+  margin-bottom: $margin-left-right;
+}
+
+.margin-right{
+  margin-bottom: $margin-left-right;
 }
 
 .margin-top {
