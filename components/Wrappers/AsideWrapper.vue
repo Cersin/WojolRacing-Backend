@@ -1,5 +1,6 @@
 <template>
   <div id="aside" class="aside">
+    <slot></slot>
   </div>
 </template>
 

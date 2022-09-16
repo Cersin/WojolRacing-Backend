@@ -1,33 +1,44 @@
 <template>
-  <div class="formula">
-    <BaseHeader title="Wyniki wyścigów"/>
+  <div class="layout">
+    <MainHeader/>
+    <div class="formula">
+      <BaseHeader title="Wyniki wyścigów"/>
 
-<!--    {{ response?.data?.track }}-->
-
-    <div class="form">
-      <BaseSelects
-        label="Wyścig"
-        :data="response?.data.tracks"
-        v-model="selectedTrack"
-        @selected="selectTrack"
-      />
-
-      <BaseSelects
-        label="Sezon"
-        additionalLabel="Sezon "
-        :data="seasons"
-        v-model="params.season"
-      />
+  <!--    {{ response?.data?.track }}-->
+      <BaseTable
+          ref="results"
+          :columns="raceColumn"
+          :params="params"
+          endpoint="race"
+          arrayKey="results"
+      ></BaseTable>
     </div>
 
+    <div class="aside">
+      <div class="grids">
+        <BaseSelects
+          class="el-col-12"
+          label="Wyścig"
+          dark
+          :data="response?.data.tracks"
+          v-model="selectedTrack"
+          @selected="selectTrack"
+        />
 
-    <BaseTable
-        ref="results"
-        :columns="raceColumn"
-        :params="params"
-        endpoint="race"
-        arrayKey="results"
-    ></BaseTable>
+        <BaseSelects
+          class="el-col-12"
+          label="Sezon"
+          dark
+          additionalLabel="Sezon "
+          :data="seasons"
+          v-model="params.season"
+        />
+      </div>
+
+      <div class="margin-top" style="width: 50%; height: 50%;  margin-left: auto;  transform: translateX(-50%)">
+       <Circuit :track="selectedTrack || response?.data?.track"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +47,9 @@ import {ref, computed} from "vue";
 import BaseTable from "../../components/shared/BaseTable";
 import BaseHeader from "../../components/shared/BaseHeader";
 import BaseSelects from "../../components/shared/BaseSelects";
-import seasons from "../../components/shared/data/seasons";
+import seasons from "../../data/seasons";
+import MainHeader from "../../components/layout/MainHeader";
+import Circuit from "../../components/tracks/circuit";
 
 const raceColumn = [
   {
@@ -101,5 +114,11 @@ function selectTrack({index}) {
   h1 {
     font-size: 6rem;
   }
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

@@ -15,6 +15,11 @@
               </slot>
             </td>
           </tr>
+
+          <tr v-if="arrayKey ? !fetched?.data[arrayKey] : !fetched?.data">
+            <td :rowspan="columns.length">Brak znalezionych danych</td>
+          </tr>
+
         </tbody>
       </table>
   </div>

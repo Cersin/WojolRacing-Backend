@@ -1,9 +1,9 @@
 <template>
-  <div style="position: relative">
+  <div style="position: relative; display: flex;">
     <button ref="selector" class="selector" @click.self="toggleVisibility()"
             :class="{ 'selector--dark': dark}">
         {{ model ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
-      <img @click.self="toggleVisibility()" class="arrow" src="~/assets/ui/arrow-right.svg" alt="arrow" width="25px" height="25px">
+      <img @click.self="toggleVisibility()" class="arrow" src="~/assets/ui/arrow-right.svg?url" alt="arrow" width="25px" height="25px">
         <div class="arrow_wrapper"><i class="arrow arrow--down"></i></div>
     </button>
 
@@ -90,14 +90,16 @@ function selected(data, index) {
 .selector {
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 10px;
   position: relative;
   background-color: $color-primary;
   color: black;
   border: none;
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
-  padding: 1rem 1.2rem;
+  padding: 1rem 0rem 1rem 1.2rem;
   z-index: 998;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
@@ -117,6 +119,7 @@ function selected(data, index) {
     width: 100%;
     background-color: $color-grey-dark;
     color: white;
+    top: 95%;
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -139,6 +142,7 @@ function selected(data, index) {
 
 
 .arrow {
+  margin-left: .5rem;
 }
 
 </style>
