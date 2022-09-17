@@ -10,7 +10,7 @@
         <tbody>
           <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data" :key="data._id">
             <td v-for="({ name, title }, index) in columns" :key="index">
-              <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="fetched" :columnData="getNestedObject(data, splitString(name, '.'))">
+              <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="data" :columnData="getNestedObject(data, splitString(name, '.'))">
                 {{ getNestedObject(data, splitString(name, '.')) }}
               </slot>
             </td>

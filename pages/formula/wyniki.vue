@@ -4,20 +4,53 @@
     <div class="formula">
       <BaseHeader title="Wyniki wyścigów"/>
 
-  <!--    {{ response?.data?.track }}-->
+      <div class="row hidden-lg">
+        <BaseSelects
+            class="col-12 md-col-4"
+            label="Wyścig"
+            :data="response?.data.tracks"
+            v-model="selectedTrack"
+            @selected="selectTrack"
+        />
+
+        <BaseSelects
+            class="col-6 md-col-4"
+            label="Sezon"
+            display-value
+            additionalLabel="Sezon "
+            :data="seasons"
+            v-model="params.season"
+        />
+
+        <BaseSelects
+            class="col-6 md-col-4"
+            label="Split"
+            display-value
+            additionalLabel="Split "
+            :data="split"
+            v-model="params.split"
+        />
+      </div>
+
       <BaseTable
           ref="results"
           :columns="raceColumn"
           :params="params"
           endpoint="race"
           arrayKey="results"
-      ></BaseTable>
+      >
+        <template #BEST="{rowData, columnData}">
+          <div :class="{bestLap: rowData?.fastestLap}">
+            {{ columnData }}
+          </div>
+        </template>
+      </BaseTable>
     </div>
 
     <div class="aside">
-      <div class="grids">
+      <div class="row hidden-md">
         <BaseSelects
-          class="el-col-12"
+          class="col-12 md-col-4"
           label="Wyścig"
           dark
           :data="response?.data.tracks"
@@ -26,13 +59,23 @@
         />
 
         <BaseSelects
-          class="el-col-12"
+          class="col-6 md-col-4"
           label="Sezon"
           dark
           display-value
           additionalLabel="Sezon "
           :data="seasons"
           v-model="params.season"
+        />
+
+        <BaseSelects
+            class="col-6 md-col-4"
+            label="Split"
+            dark
+            display-value
+            additionalLabel="Split "
+            :data="split"
+            v-model="params.split"
         />
       </div>
 
@@ -49,6 +92,7 @@ import BaseTable from "../../components/shared/BaseTable";
 import BaseHeader from "../../components/shared/BaseHeader";
 import BaseSelects from "../../components/shared/BaseSelects";
 import seasons from "../../data/seasons";
+import split from "../../data/split";
 import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
 
@@ -129,6 +173,9 @@ function selectTrack({index}) {
   align-items: center;
   padding: 1rem;
   gap: 2rem;
+}
 
+.bestLap {
+  color: $color-primary;
 }
 </style>
