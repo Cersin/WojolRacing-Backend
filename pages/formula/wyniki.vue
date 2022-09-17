@@ -35,7 +35,7 @@
         />
       </div>
 
-      <div class="margin-top" style="width: 50%; height: 50%;  margin-left: auto;  transform: translateX(-50%)">
+      <div class="margin-top circuit">
        <Circuit :track="selectedTrack || response?.data?.track"/>
       </div>
     </div>
@@ -120,5 +120,12 @@ function selectTrack({index}) {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.circuit {
+  width: 50%;
+  height: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%)
 }
 </style>
