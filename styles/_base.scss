@@ -50,7 +50,7 @@ body {
     grid-template-areas:
                       "head aside"
                       "main aside";
-    grid-template-columns: .75fr auto;
+    grid-template-columns: .70fr .30fr;
     grid-template-rows: 100px 1fr;
   }
 }

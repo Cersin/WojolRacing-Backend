@@ -2,7 +2,7 @@
   <div style="position: relative; display: flex;">
     <button ref="selector" class="selector" @click.self="toggleVisibility()"
             :class="{ 'selector--dark': dark}">
-        {{ model ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
+        {{ model && displayValue ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
       <img @click.self="toggleVisibility()" class="arrow" src="~/assets/ui/arrow-right.svg?url" alt="arrow" width="25px" height="25px">
         <div class="arrow_wrapper"><i class="arrow arrow--down"></i></div>
     </button>
@@ -35,6 +35,10 @@ const props = defineProps({
   label: {
     type: String,
     default: "Wybierz"
+  },
+  displayValue: {
+    type: Boolean,
+    default: false
   },
   displayLabel: {
     type: String,
