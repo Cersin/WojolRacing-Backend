@@ -4,6 +4,26 @@
     <div class="formula">
       <BaseHeader title="Klasyfikacja generalna"/>
 
+      <div class="row hidden-lg">
+        <BaseSelects
+            class="col-6"
+            label="Sezon"
+            display-value
+            additionalLabel="Sezon "
+            :data="seasons"
+            v-model="params.season"
+        />
+
+        <BaseSelects
+            class="col-6"
+            label="Split"
+            display-value
+            additionalLabel="Split "
+            :data="split"
+            v-model="params.split"
+        />
+      </div>
+
       <BaseTable
         ref="classification"
         :columns="raceColumn"
@@ -16,8 +36,28 @@
       </BaseTable>
     </div>
 
-    <div class="aside">
-      <h1>Wkrótce więcej</h1>
+      <div class="aside">
+        <div class="row hidden-md">
+          <BaseSelects
+              class="col-6 md-col-4"
+              label="Sezon"
+              dark
+              display-value
+              additionalLabel="Sezon "
+              :data="seasons"
+              v-model="params.season"
+          />
+
+          <BaseSelects
+              class="col-6 md-col-4"
+              label="Split"
+              dark
+              display-value
+              additionalLabel="Split "
+              :data="split"
+              v-model="params.split"
+          />
+        </div>
     </div>
   </div>
 
@@ -28,6 +68,9 @@ import BaseHeader from "../../components/shared/BaseHeader";
 import BaseTable from "../../components/shared/BaseTable";
 import {ref, computed} from "vue";
 import MainHeader from "../../components/layout/MainHeader";
+import seasons from "../../data/seasons";
+import split from "../../data/split";
+import BaseSelects from "../../components/shared/BaseSelects";
 
 const raceColumn = [
     {
