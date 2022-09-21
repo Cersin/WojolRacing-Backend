@@ -3,6 +3,9 @@
     <div class="circuit__header">
       {{ track }}
     </div>
+    <div class="circuit--track">
+      <div v-html="tracks[track]?.svg"/>
+
     <div v-if="tracks[track]?.svg" id="motionPath">
       <div class="motion-path">
         <!-- Car -->
@@ -12,7 +15,8 @@
           </svg>
         </div>
 
-        <div class="circuit" v-html="tracks[track].svg"></div>
+<!--        <div class="circuit" v-html="tracks[track]?.svg"/>-->
+      </div>
       </div>
     </div>
   </div>
@@ -42,7 +46,7 @@ watch(() => props.track, (val) => {
       if (anime.running.length === 0) {
         startAnimation();
       } else {
-        const path = anime.path('#motionPath .circuit path');
+        const path = anime.path('.circuit--track path');
         animation.value.pause();
         startAnimation();
       }
@@ -57,7 +61,7 @@ onMounted(() => {
 })
 
 function startAnimation() {
-  const path = anime.path('#motionPath .circuit path');
+  const path = anime.path('.circuit--track path');
   animation.value = anime({
     targets: '#motionPath .car1',
     translateX: path('x'),
@@ -92,15 +96,24 @@ function startAnimation() {
 #motionPath {
 }
 
-.motion-path {
+.circuit--track {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  width: 90%;
+  color: black;
+}
+
+.motion-path {
 }
 
 .car {
   position: absolute;
   display: block;
-  width: 20px;
-  height: 50px;
+  width: 15px;
+  height: 35px;
   top: -9px;
   left: -9px;
   z-index: 30;
