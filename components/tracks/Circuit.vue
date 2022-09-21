@@ -103,7 +103,7 @@ function startAnimation() {
   height: 50px;
   top: -9px;
   left: -9px;
-  z-index: 99999;
+  z-index: 30;
 }
 
 .car svg {

@@ -102,7 +102,7 @@ function selected(data, index) {
   border: none;
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
   padding: 1rem 0rem 1rem 1.2rem;
-  z-index: 998;
+  z-index: 50;
   width: 100%;
 
   &:hover {
@@ -127,17 +127,17 @@ function selected(data, index) {
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 999;
+    z-index: 60;
     transition: all .5s;
 
     &-value {
       padding: .7rem;
       cursor: pointer;
-      z-index: 999;
+      z-index: 60;
 
       &:hover {
         background-color: lighten($color-grey-dark, 15%);
-        z-index: 999;
+        z-index: 60;
 
       }
     }

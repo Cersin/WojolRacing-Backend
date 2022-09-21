@@ -49,8 +49,9 @@
 
     <div class="aside">
       <div class="row hidden-md">
+        <NavHeader aside/>
         <BaseSelects
-          class="col-12 md-col-4"
+          class="col-12 md-col-4 margin-top"
           label="Wyścig"
           dark
           :data="response?.data.tracks"
@@ -87,7 +88,7 @@
 </template>
 
 <script setup>
-import {ref, computed} from "vue";
+import {computed, ref} from "vue";
 import BaseTable from "../../components/shared/BaseTable";
 import BaseHeader from "../../components/shared/BaseHeader";
 import BaseSelects from "../../components/shared/BaseSelects";
@@ -95,6 +96,8 @@ import seasons from "../../data/seasons";
 import split from "../../data/split";
 import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
+import BaseMenu from "../../components/shared/BaseMenu";
+import NavHeader from "../../components/layout/NavHeader";
 
 const raceColumn = [
   {

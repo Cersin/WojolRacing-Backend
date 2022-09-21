@@ -3,19 +3,17 @@
 <!--    <div class="header__img"></div>-->
     <img @click="navigateTo('/')" class="header__img" src="/logo_wojol.png" alt="Wojol Racing">
     <div class="right_side">
-      <button class="button button--outline ripple">ZALOGUJ</button>
+      <button class="button button--outline ripple hidden-md">ZALOGUJ</button>
 
-      <BaseMenu :active="active"/>
+      <NavHeader  class="hidden-lg"/>
     </div>
   </div>
 </template>
 
 <script setup>
 import {navigateTo} from "nuxt/app";
-import BaseMenu from "../shared/BaseMenu";
-import {ref} from "vue";
+import NavHeader from "./NavHeader";
 
-const active = ref(false);
 </script>
 
 <style scoped lang="scss">
@@ -38,5 +36,11 @@ const active = ref(false);
   gap: 2rem;
   justify-content: center;
   align-items: center;
+}
+
+.hidden-lg {
+  @media only screen and (min-width: $breakpoint-med) {
+    display: none;
+  }
 }
 </style>
