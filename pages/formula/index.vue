@@ -37,6 +37,7 @@
     </div>
 
       <div class="aside">
+        <NavHeader aside/>
         <div class="row hidden-md">
           <BaseSelects
               class="col-6 md-col-4"
@@ -71,6 +72,7 @@ import MainHeader from "../../components/layout/MainHeader";
 import seasons from "../../data/seasons";
 import split from "../../data/split";
 import BaseSelects from "../../components/shared/BaseSelects";
+import NavHeader from "../../components/layout/NavHeader";
 
 const raceColumn = [
     {

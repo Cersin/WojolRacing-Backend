@@ -2,15 +2,27 @@
   <div @click="active = !active" class="menu" :class="{'menu--active': active, 'menu--black': aside && !active}">
     <div class="menu-button"/>
   </div>
-  <div v-if="active" class="menu_overlay">
-    test
-  </div>
+
+  <Transition>
+    <div v-if="active" class="menu_overlay">
+      <div class="navigation">
+        <NuxtLink to="/">Strona Główna</NuxtLink>
+        <div class="navigation__block">
+          <h2>Formuła 1</h2>
+          <NuxtLink exact-active-class="active-route" to="/formula">Klasyfikacje generalne</NuxtLink>
+          <NuxtLink exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </Transition>
 
 
 </template>
 
 <script setup>
 import { IconLogin } from "@iconify-prerendered/vue-mdi"
+import {useRoute} from "nuxt/app";
+const route = useRoute();
 
 defineProps({
   active: {
@@ -25,6 +37,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
+
 .menu {
   display: flex;
   justify-content: center;
@@ -83,9 +96,52 @@ defineProps({
   left: 0;
   top: 0;
   overflow-x: hidden;
-  background-color: green;
+  background-color: transparentize(black, .1);
   height: 100%;
   width: 100%;
   z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  font-size: 2rem;
+  color: #818181;
+
+  a {
+    text-decoration: none;
+    font-size: 1.5;
+    display: block;
+    transition: 0.3s;
+    color: #818181;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
 }
+
+.navigation {
+  display: flex;
+  gap: 3rem;
+  margin-top: 8rem;
+  margin-right: 2rem;
+  flex-direction: column;
+  align-items: flex-end;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    align-items: flex-end;
+  }
+}
+
+.active-route {
+  color: $color-primary !important;
+}
+a.nuxt-link-active {
+  color: $color-primary !important;
+}
+
 </style>

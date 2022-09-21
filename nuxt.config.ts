@@ -20,10 +20,9 @@ export default defineNuxtConfig({
         '~/styles/_base.scss',
         'css-ripple-effect/dist/ripple.css'
     ],
-    plugins: ["~/plugins/vee-validate"],
+    // plugins: ["~/plugins/vee-validate"],
     ssr: true,
     vite: {
-        plugins: [svgLoader()],
         css: {
             preprocessorOptions: {
                 scss: {
@@ -35,7 +34,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             status: process.env.NODE_ENV,
-            API_BASE_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : process.env.API_BASE_URL
+            API_BASE_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : 'http://localhost:3000/api/'
         }
     }
 })

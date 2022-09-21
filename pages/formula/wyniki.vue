@@ -48,8 +48,8 @@
     </div>
 
     <div class="aside">
+      <NavHeader aside/>
       <div class="row hidden-md">
-        <NavHeader aside/>
         <BaseSelects
           class="col-12 md-col-4 margin-top"
           label="Wyścig"

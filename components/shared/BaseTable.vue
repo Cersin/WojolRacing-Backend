@@ -65,7 +65,8 @@ const props = defineProps({
 const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
   params: props.params,
   baseURL: config.API_BASE_URL,
-  server: false
+  server: false,
+  initialCache: false
 });
 
 watch(props.params, () => {

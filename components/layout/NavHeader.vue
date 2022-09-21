@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{'hidden-md': aside}">
       <div class="socials">
         <IconFacebook @click="navigateToSocial('https://www.facebook.com/wojolracing')"/>
         <IconTwitch @click="navigateToSocial('https://www.twitch.tv/wojolracing')"/>

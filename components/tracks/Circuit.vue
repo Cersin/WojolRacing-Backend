@@ -24,7 +24,7 @@
 
 <script setup>
 import anime from "animejs";
-import {onMounted, watch, ref} from "vue";
+import {onMounted, watch, ref, onBeforeUnmount} from "vue";
 import { tracks } from "../../data/tracks";
 
 const props = defineProps({
@@ -55,9 +55,13 @@ watch(() => props.track, (val) => {
 })
 
 onMounted(() => {
-  if (tracks[props.track]?.svg) {
+  if (tracks[props.track]?.svg && animation.value) {
     startAnimation();
   }
+})
+
+onBeforeUnmount(() => {
+  animation.value.pause();
 })
 
 function startAnimation() {

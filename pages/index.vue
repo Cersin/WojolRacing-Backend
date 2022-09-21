@@ -23,6 +23,7 @@
     </div>
 
     <div class="aside">
+      <NavHeader aside/>
       <h1>Wkrótce więcej</h1>
     </div>
   </div>
@@ -36,6 +37,7 @@ import FirmDescription from "../components/layout/FirmDescription";
 import AsideWrapper from "../components/Wrappers/AsideWrapper";
 import BaseCard from "../components/container/BaseCard";
 import MainHeader from "../components/layout/MainHeader";
+import NavHeader from "../components/layout/NavHeader";
 </script>
 
 <style scoped lang="scss">

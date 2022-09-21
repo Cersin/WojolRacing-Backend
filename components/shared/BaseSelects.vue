@@ -3,8 +3,7 @@
     <button ref="selector" class="selector" @click.self="toggleVisibility()"
             :class="{ 'selector--dark': dark}">
         {{ model && displayValue ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
-      <img @click.self="toggleVisibility()" class="arrow" src="~/assets/ui/arrow-right.svg?url" alt="arrow" width="25px" height="25px">
-        <div class="arrow_wrapper"><i class="arrow arrow--down"></i></div>
+      <IconArrowDownCircle class="arrow"/>
     </button>
 
     <div v-if="visible" class="selector__options">
@@ -24,6 +23,7 @@
 <script setup>
 import {ref, computed} from "vue";
 import { onClickOutside } from '@vueuse/core'
+import { IconArrowDownCircle } from "@iconify-prerendered/vue-mdi"
 
 const selector = ref(null);
 
@@ -147,6 +147,7 @@ function selected(data, index) {
 
 .arrow {
   margin-left: .5rem;
+  font-size: 1.5rem;
 }
 
 </style>

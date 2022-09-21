@@ -36,7 +36,6 @@
     "mongoose": "^6.3.5",
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",
-    "validator": "^13.7.0",
-    "vee-validate": "^4.6.7"
+    "validator": "^13.7.0"
   }
 }
