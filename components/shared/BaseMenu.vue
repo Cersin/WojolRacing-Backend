@@ -6,7 +6,7 @@
   <Transition>
     <div v-if="active" class="menu_overlay">
       <div class="navigation">
-        <NuxtLink to="/">Strona Główna</NuxtLink>
+        <NuxtLink exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
         <div class="navigation__block">
           <h2>Formuła 1</h2>
           <NuxtLink exact-active-class="active-route" to="/formula">Klasyfikacje generalne</NuxtLink>
