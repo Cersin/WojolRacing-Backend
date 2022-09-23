@@ -12,6 +12,10 @@ export default defineNuxtConfig({
     serverMiddleware: [
         {path: '/api', handler: '~/server/index.js'}
     ],
+    plugins: [{ src: "~/plugins/vee-validate.js", ssr: true}],
+    build: {
+        transpile: ['vee-validate']
+    },
     modules: [
       '@vueuse/nuxt'
     ],
@@ -20,8 +24,7 @@ export default defineNuxtConfig({
         '~/styles/_base.scss',
         'css-ripple-effect/dist/ripple.css'
     ],
-    // plugins: ["~/plugins/vee-validate"],
-    ssr: true,
+    ssr: false,
     vite: {
         css: {
             preprocessorOptions: {
