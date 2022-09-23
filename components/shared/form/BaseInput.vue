@@ -1,0 +1,52 @@
+<template>
+  <VField v-model="model" :label="label" :name="name" v-slot="{ field }" :rules="rules">
+    <div class="form--wrapper">
+      <label class="form--label">{{ label }}</label>
+      <input class="form--input" :type="type" v-bind="field">
+      <VErrorMessage :name="name" v-slot="{ message }">
+        <p class="form--error">{{ message }}</p>
+      </VErrorMessage>
+    </div>
+  </VField>
+</template>
+
+<script setup>
+import {computed} from "vue";
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: ""
+  },
+  name: {
+    type: String,
+    default: ""
+  },
+  rules: {
+    type: String,
+    default: ""
+  },
+  type: {
+    type: String,
+    default: 'text'
+  },
+  modelValue: {
+    type: [String, Array, Object, Boolean],
+    default: null
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const model = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:messageObj', value),
+});
+
+</script>
+
+<style scoped>
+
+
+
+</style>

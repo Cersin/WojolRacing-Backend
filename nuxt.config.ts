@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     serverMiddleware: [
         {path: '/api', handler: '~/server/index.js'}
     ],
-    plugins: [{ src: "~/plugins/vee-validate.js", ssr: true}],
+    plugins: ["~/plugins/vee-validate", "~/plugins/vee-validate-components"],
     build: {
         transpile: ['vee-validate']
     },
