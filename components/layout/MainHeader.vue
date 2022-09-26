@@ -3,7 +3,7 @@
 <!--    <div class="header__img"></div>-->
     <img @click="navigateTo('/')" class="header__img" src="/logo_wojol.png" alt="Wojol Racing">
     <div class="right_side">
-      <button class="button button--outline ripple hidden-md">ZALOGUJ</button>
+      <button v-if="!authState.logged" @click="navigateTo('login')" class="button button--outline ripple hidden-md">ZALOGUJ</button>
 
       <NavHeader  class="hidden-lg"/>
     </div>
@@ -13,6 +13,10 @@
 <script setup>
 import {navigateTo} from "nuxt/app";
 import NavHeader from "./NavHeader";
+import {useAuthComposable} from "../../composables/auth-composable";
+
+const {authState} = useAuthComposable();
+
 
 </script>
 

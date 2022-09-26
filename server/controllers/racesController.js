@@ -74,7 +74,6 @@ const formatData = async (req, res) => {
                         for (let [indexes, res] of race.results.entries()) {
                             if (player.name === res.player) {
                                 // console.log(new mongoose.Types.ObjectId(player.id));
-                                console.log(player.id);
                                 copyRaces[ind].results[indexes].player = new mongoose.Types.ObjectId(player.id);
                             }
                         }

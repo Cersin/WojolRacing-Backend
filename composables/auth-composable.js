@@ -1,5 +1,6 @@
 import {reactive} from 'vue';
 import {useRuntimeConfig} from "nuxt/app";
+import {navigateTo} from "nuxt/app";
 
 const authState = reactive({
     logged: false
@@ -9,7 +10,6 @@ export const useAuthComposable = () => {
     const config = useRuntimeConfig();
 
     const login = async ({username, password}) => {
-        console.log(username);
         try {
             const res = await $fetch(`/users/login`, {
                 method: 'POST',
@@ -25,6 +25,8 @@ export const useAuthComposable = () => {
                 throw new Error(message);
             } else {
                 authState.logged = true;
+                navigateTo('/');
+
             }
         } catch (e) {
             console.log(e);

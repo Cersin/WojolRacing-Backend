@@ -58,8 +58,7 @@ export const protect = (async (req, res, next) => {
     }
 });
 
-export const verify = async (req, res) => {
-    try {
+export const verify = catchAsync(async (req, res) => {
         let token;
         if (req.cookies.jwt) {
             token = req.cookies.jwt;
@@ -77,14 +76,7 @@ export const verify = async (req, res) => {
             status: 'success',
             logged: true
         })
-    } catch (err) {
-        deleteTokenCookie(res);
-        res.status(401).json({
-            status: 'failed',
-            logged: false
-        });
-    }
-}
+});
 
 export const logIn = catchAsync(async (req, res, next) => {
         const {name, password} = req.body;

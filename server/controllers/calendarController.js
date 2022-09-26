@@ -34,7 +34,6 @@ const editCalendar = catchAsync(async (req, res, next) => {
             new: true,
             runValidators: true
         });
-        console.log(calendar);
 
         if (!calendar) return next(new AppError('Brak kalendarza o takim id', 404))
 

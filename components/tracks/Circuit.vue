@@ -61,7 +61,9 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  animation.value.pause();
+  if (anime.running.length > 0) {
+    animation.value.pause();
+  }
 })
 
 function startAnimation() {

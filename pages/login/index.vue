@@ -8,7 +8,7 @@
     </Html>
 
     <h1>Logowanie</h1>
-    <VForm @submit="login" ref="loginForm">
+    <VForm style="display: flex; flex-direction: column;" @submit="login" ref="loginForm">
       <BaseInput
           v-model="user.name"
           label="Nazwa"
@@ -37,7 +37,7 @@ import {useAuthComposable} from "../../composables/auth-composable";
 import {reactive} from "vue";
 import BaseInput from "../../components/shared/form/BaseInput";
 
-const {login, showToast} = useAuthComposable();
+const {login} = useAuthComposable();
 const user = reactive({
   name: '',
   password: ''
