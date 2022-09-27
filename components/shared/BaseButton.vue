@@ -1,6 +1,6 @@
 <template>
-  <div v-bind="$attrs" style="display: flex;">
-    <button @click="emit('click')" class="button" :class="{'button--secondary': secondary}"><slot></slot></button>
+  <div v-bind="$attrs" style="display: flex; flex: 1;" >
+    <button @click="emit('click')" class="button" :class="{'button--secondary': secondary}" style="flex: 1;"><slot></slot></button>
   </div>
 </template>
 

@@ -6,7 +6,7 @@
         <slot name="header"/>
         <IconClose class="button--icon" @click="dialogOpen = false"></IconClose>
       </div>
-      ee
+      <slot></slot>
     </div>
   </div>
   </transition>

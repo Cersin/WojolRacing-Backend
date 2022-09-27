@@ -16,7 +16,7 @@
             </td>
           </tr>
 
-          <tr v-if="arrayKey ? !fetched?.data[arrayKey] : !fetched?.data">
+          <tr v-if="arrayKey ? !fetched?.data[arrayKey] : fetched?.data.length === 0">
             <td :rowspan="columns.length">Brak znalezionych danych</td>
           </tr>
 
@@ -37,9 +37,10 @@
 // columnIndex - column index
 
 import {useFetch, useRuntimeConfig} from "nuxt/app";
-import { getNestedObject, splitString } from "../../utils/helpers";
+import {getNestedObject, removeFalsy, splitString} from "../../utils/helpers";
 import BaseLoading from "./BaseLoading";
-import { watch } from "vue";
+import {computed, watch} from "vue";
+import {isEmpty, isObjectLike} from "lodash";
 
 const config = useRuntimeConfig()
 
@@ -68,7 +69,6 @@ const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
   server: false,
   initialCache: false
 });
-
 watch(props.params, () => {
   refresh();
 })
@@ -76,7 +76,6 @@ watch(props.params, () => {
 defineExpose({
   data: fetched
 });
-
 </script>
 
 <style scoped lang="scss">

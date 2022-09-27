@@ -18,9 +18,11 @@
             class="col-6"
             label="Split"
             display-value
+            display-label="label"
             additionalLabel="Split "
             :data="split"
-            v-model="params.split"
+            v-model="selectedSplit"
+            @update:model-value="selectSplit"
         />
       </div>
 
@@ -54,9 +56,11 @@
               label="Split"
               dark
               display-value
+              display-label="label"
               additionalLabel="Split "
               :data="split"
-              v-model="params.split"
+              v-model="selectedSplit"
+              @update:model-value="selectSplit"
           />
         </div>
     </div>
@@ -93,6 +97,8 @@ const raceColumn = [
   }
 ]
 
+const selectedSplit = ref();
+
 const params = ref({
   split: 1,
   season: 1,
@@ -103,6 +109,10 @@ const classification = ref();
 const response = computed(() => {
   return classification?.value?.data;
 })
+
+function selectSplit({value}) {
+  params.value.split = value;
+}
 </script>
 
 <style scoped lang="scss">

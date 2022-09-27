@@ -1,3 +1,6 @@
+import lodash from "lodash";
+import removeFalsyObject from "~/server/utils/functions";
+
 class APIFeatures {
     constructor(query, queryString) {
         this.query = query;
@@ -5,7 +8,7 @@ class APIFeatures {
     }
 
     filter() {
-        const queryObj = { ...this.queryString };
+        const queryObj = { ...removeFalsyObject(this.queryString) };
         const excludedFields = ['page', 'sort', 'limit', 'fields'];
         excludedFields.forEach(el => delete queryObj[el]);
         // 1B) Advanced filtering

@@ -26,9 +26,11 @@
             class="col-6 md-col-4"
             label="Split"
             display-value
+            display-label="label"
             additionalLabel="Split "
             :data="split"
-            v-model="params.split"
+            v-model="selectedSplit"
+            @update:model-value="selectSplit"
         />
       </div>
 
@@ -74,9 +76,11 @@
             label="Split"
             dark
             display-value
+            display-label="label"
             additionalLabel="Split "
             :data="split"
-            v-model="params.split"
+            v-model="selectedSplit"
+            @update:model-value="selectSplit"
         />
       </div>
 
@@ -96,7 +100,6 @@ import seasons from "../../data/seasons";
 import split from "../../data/split";
 import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
-import BaseMenu from "../../components/shared/BaseMenu";
 import NavHeader from "../../components/layout/NavHeader";
 
 const raceColumn = [
@@ -142,7 +145,7 @@ const params = ref({
 
 const results = ref();
 const selectedTrack = ref();
-const selectedSeason = ref(1);
+const selectedSplit = ref(split["1"]);
 
 const response = computed(() => {
   return results?.value?.data;
@@ -150,6 +153,10 @@ const response = computed(() => {
 
 function selectTrack({index}) {
   params.value.number = index;
+}
+
+function selectSplit({value}) {
+  params.value.split = value;
 }
 </script>
 

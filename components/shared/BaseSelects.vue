@@ -9,7 +9,7 @@
     <div v-if="visible" class="selector__options">
       <div v-for="(el, index) in data" :key="index"
            @click="selected(el, index)" class="selector__options-value">
-        {{ el }}
+        {{ displayLabel ? el[displayLabel] : el }}
       </div>
 
       <div v-if="!data || data?.length === 0" class="selector__options-value">
@@ -44,12 +44,16 @@ const props = defineProps({
     type: String,
     default: ""
   },
+  selectValue: {
+    type: String,
+    default: ""
+  },
   additionalLabel: {
     type: String,
     default: ""
   },
   data: {
-    type: Array,
+    type: [Array, Object],
     default: null
   },
   key: {
@@ -68,7 +72,7 @@ const visible = ref(false);
 
 const model = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', props.selectValue ? value[props.selectValue] : value)
 });
 
 onClickOutside(selector, (event) => {

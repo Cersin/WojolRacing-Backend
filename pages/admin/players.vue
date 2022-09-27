@@ -9,6 +9,7 @@
       :columns="playerColumns"
       endpoint="players"
       array-key="players"
+      :params="params"
     />
     </div>
 
@@ -17,16 +18,26 @@
 
       <div class="row">
         <BaseSelects
-          class="col-12"
-          label="Sezon"
+          v-model="selectedSplit"
+          class="col-6"
+          label="Split"
           dark
           display-value
-          additionalLabel="Sezon "
+          display-label="label"
+          additionalLabel="Split "
+          :data="split"
+          @update:model-value="selectSplit"
         />
-<!--        <div class="col-12" style="display: flex;">-->
-<!--          <button @click="playerDialog = true" class="button button&#45;&#45;secondary">Dodaj zawodnika</button>-->
-<!--        </div>-->
-<!--        <button @click="playerDialog = true" class="button button&#45;&#45;secondary col-12">Dodaj zawodnika</button>-->
+
+        <BaseSelects
+          v-model="params.team"
+          class="col-6"
+          label="Zespół"
+          dark
+          display-value
+          :data="team"
+        />
+
         <BaseButton class="col-12" @click="playerDialog = true" secondary>Dodaj zawodnika</BaseButton>
       </div>
     </div>
@@ -35,6 +46,22 @@
       <template #header>
         Dodaj ziomeczka
       </template>
+      <VForm style="display: flex; flex-direction: column;" @submit="login" ref="loginForm">
+        <BaseInput
+          v-model="player.name"
+          label="Nazwa"
+          name="username"
+          rules="required"
+        />
+
+        <BaseInput
+          v-model="player.password"
+          label="Hasło"
+          name="Split"
+          rules="required"
+        />
+        <button class="button button--outline ripple">ZALOGUJ</button>
+      </VForm>
     </BaseDialog>
   </div>
 </template>
@@ -47,6 +74,9 @@ import BaseDialog from "../../components/shared/BaseDialog";
 import {ref} from "vue";
 import BaseSelects from "../../components/shared/BaseSelects";
 import BaseButton from "../../components/shared/BaseButton";
+import split from "../../data/split";
+import team from "../../data/team";
+import BaseInput from "../../components/shared/form/BaseInput";
 
 const playerColumns = [
   {
@@ -63,12 +93,21 @@ const playerColumns = [
   },
 ]
 
+const selectedSplit = ref();
+
+const params = ref({
+  split: '',
+  team: ''
+});
+
+
+const player = ref({});
+
 const playerDialog = ref(false);
 
-function f() {
-
+function selectSplit({value}) {
+  params.value.split = value;
 }
-
 </script>
 
 <style scoped lang="scss">
