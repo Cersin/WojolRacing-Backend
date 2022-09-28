@@ -1,7 +1,8 @@
 <template>
   <div style="position: relative; display: flex;">
     <button ref="selector" class="selector" @click.self="toggleVisibility()"
-            :class="{ 'selector--dark': dark}">
+            :class="{ 'selector--dark': dark, 'selector--form': form}"
+    >
         {{ model && displayValue ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
       <IconArrowDownCircle class="arrow"/>
     </button>
@@ -63,6 +64,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Object, Array],
     default: null
+  },
+  form: {
+    default: false,
+    type: Boolean
   }
 })
 
@@ -108,6 +113,10 @@ function selected(data, index) {
   padding: 1rem 0rem 1rem 1.2rem;
   z-index: 50;
   width: 100%;
+
+  &--form {
+    margin-top: 1.5rem;
+  }
 
   &:hover {
     cursor: pointer;

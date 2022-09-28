@@ -1,13 +1,15 @@
 <template>
-  <VField v-model="model" :label="label" :name="name" v-slot="{ field }" :rules="rules">
-    <div class="form--wrapper">
-      <label class="form--label">{{ label }}</label>
-      <input class="form--input" :type="type" v-bind="field">
-      <VErrorMessage :name="name" v-slot="{ message }">
-        <p class="form--error">{{ message }}</p>
-      </VErrorMessage>
-    </div>
-  </VField>
+  <div style="position: relative; display: flex;">
+    <VField v-model="model" :label="label" :name="name" v-slot="{ field }" :rules="rules">
+      <div class="form--wrapper">
+        <label class="form--label">{{ label }}</label>
+        <input class="form--input" :type="type" v-bind="field">
+        <VErrorMessage :name="name" v-slot="{ message }">
+          <p class="form--error">{{ message }}</p>
+        </VErrorMessage>
+      </div>
+    </VField>
+  </div>
 </template>
 
 <script setup>

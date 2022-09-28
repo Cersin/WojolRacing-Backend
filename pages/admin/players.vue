@@ -37,7 +37,6 @@
           display-value
           :data="team"
         />
-
         <BaseButton class="col-12" @click="playerDialog = true" secondary>Dodaj zawodnika</BaseButton>
       </div>
     </div>
@@ -46,21 +45,42 @@
       <template #header>
         Dodaj ziomeczka
       </template>
-      <VForm style="display: flex; flex-direction: column;" @submit="login" ref="loginForm">
-        <BaseInput
-          v-model="player.name"
-          label="Nazwa"
-          name="username"
-          rules="required"
-        />
+      <VForm style="display: flex; flex-direction: column;" @submit.prevent ref="loginForm">
+        <div class="row">
+          <BaseInput
+            v-model="model.name"
+            class="col-6 md-col-12"
+            label="Nazwa"
+            name="name"
+            rules="required"
+          />
+          <BaseSelects
+            v-model="playerSplit"
+            class="col-6 md-col-12"
+            label="Split"
+            form
+            dark
+            display-value
+            display-label="label"
+            additionalLabel="Split "
+            :data="split"
+            @update:model-value="model.split = $event"
+          />
 
-        <BaseInput
-          v-model="player.password"
-          label="Hasło"
-          name="Split"
-          rules="required"
-        />
-        <button class="button button--outline ripple">ZALOGUJ</button>
+          <BaseSelects
+            v-model="model.team"
+            class="col-6 md-col-12"
+            label="Zespół"
+            form
+            dark
+            display-value
+            :data="team"
+          />
+
+        </div>
+
+
+        <BaseButton class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
       </VForm>
     </BaseDialog>
   </div>
@@ -94,19 +114,23 @@ const playerColumns = [
 ]
 
 const selectedSplit = ref();
+const playerSplit = ref();
 
 const params = ref({
   split: '',
   team: ''
 });
 
-
-const player = ref({});
+const model = ref({});
 
 const playerDialog = ref(false);
 
 function selectSplit({value}) {
   params.value.split = value;
+}
+
+function send(e) {
+  console.log(e);
 }
 </script>
 

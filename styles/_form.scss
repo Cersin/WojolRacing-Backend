@@ -1,10 +1,11 @@
 form {
   .form--wrapper {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: .2rem;
     position: relative;
-    padding-bottom: 1.5rem;
+    justify-content: center;
   }
 
   .form--label {
@@ -17,18 +18,7 @@ form {
 
   .form--error {
     position: absolute;
-    bottom: 0;
+    bottom: -1.5rem;
     left: 0;
   }
-  //input {
-  //  padding: .5rem 1rem;
-  //  position: relative;
-  //  background-color: green;
-  //}
-  //
-  //p {
-  //  color: $color-warning;
-  //  position: absolute;
-  //  top: 0;
-  //}
 }
