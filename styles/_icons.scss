@@ -1,0 +1,47 @@
+.icon {
+  cursor: pointer;
+
+  &--primary {
+    color: $color-primary;
+  }
+
+  &--primary-light {
+    color: $color-primary--light;
+  }
+
+  &--grey {
+    color: $color-grey;
+  }
+
+  &--grey-dark {
+    color: $color-grey-dark;
+  }
+
+  &--warning {
+    color: $color-warning;
+  }
+
+  &--dark {
+    color: black;
+  }
+
+  &--white {
+    color: white;
+  }
+
+  &--sm {
+    font-size: .5rem;
+  }
+
+  &--md {
+    font-size: 1rem;
+  }
+
+  &--xl {
+    font-size: 2rem;
+  }
+
+  &--xxl {
+    font-size: 3rem;
+  }
+}

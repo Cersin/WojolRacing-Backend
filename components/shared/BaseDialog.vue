@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import {computed, watch} from "vue";
 import { IconClose } from "@iconify-prerendered/vue-mdi"
 
 const props = defineProps({
@@ -23,14 +23,16 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:open']);
+const emit = defineEmits(['update:open', 'show', 'hide']);
 
 const dialogOpen = computed({
   get: () => props.open,
   set: (value) => emit('update:open', value)
 });
 
-
+watch(() => props.open, value => {
+  emit(value ? 'show' : 'hide');
+})
 </script>
 
 <style scoped lang="scss">

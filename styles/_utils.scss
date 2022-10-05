@@ -54,11 +54,19 @@ $margin-left-right: 20px;
 }
 
 .margin-left{
-  margin-bottom: $margin-left-right;
+  margin-left: $margin-left-right;
+}
+
+.margin-left--sm{
+  margin-left: $small-margin;
 }
 
 .margin-right{
-  margin-bottom: $margin-left-right;
+  margin-right: $margin-left-right;
+}
+
+.margin-right--sm{
+  margin-right: $small-margin;
 }
 
 .margin-top {

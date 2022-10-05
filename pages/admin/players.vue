@@ -10,7 +10,15 @@
       endpoint="players"
       array-key="players"
       :params="params"
-    />
+    >
+      <template #Split="{columnData}">
+        {{ columnData === 0 ? 'Rezerwa' : columnData }}
+      </template>
+      <template #Opcje="{ rowData }">
+        <IconEdit class="icon icon--xl icon--primary" @click="openDialog(rowData)"></IconEdit>
+        <IconTrashAlt class="icon icon--xl icon--warning margin-left--sm"></IconTrashAlt>
+      </template>
+    </BaseTable>
     </div>
 
     <div class="aside">
@@ -37,7 +45,7 @@
           display-value
           :data="team"
         />
-        <BaseButton class="col-12" @click="playerDialog = true" secondary>Dodaj zawodnika</BaseButton>
+        <BaseButton class="col-12" @click="openDialog" secondary>Dodaj zawodnika</BaseButton>
       </div>
     </div>
 
@@ -45,14 +53,13 @@
       <template #header>
         Dodaj ziomeczka
       </template>
-      <VForm style="display: flex; flex-direction: column;" @submit.prevent ref="loginForm">
+      <VForm style="display: flex; flex-direction: column;" @submit="send" ref="loginForm">
         <div class="row">
           <BaseInput
             v-model="model.name"
             class="col-6 md-col-12"
-            label="Nazwa"
+            label="Imię nazwisko"
             name="name"
-            rules="required"
           />
           <BaseSelects
             v-model="playerSplit"
@@ -64,7 +71,7 @@
             display-label="label"
             additionalLabel="Split "
             :data="split"
-            @update:model-value="model.split = $event"
+            @update:model-value="model.split = $event.value"
           />
 
           <BaseSelects
@@ -76,9 +83,7 @@
             display-value
             :data="team"
           />
-
         </div>
-
 
         <BaseButton class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
       </VForm>
@@ -97,24 +102,31 @@ import BaseButton from "../../components/shared/BaseButton";
 import split from "../../data/split";
 import team from "../../data/team";
 import BaseInput from "../../components/shared/form/BaseInput";
+import {useMyFetch} from "../../composables/useMyFetch";
+import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
 
 const playerColumns = [
   {
-    title: 'IMIĘ NAZWISKO',
+    title: 'Imię Nazwisko',
     name: 'name'
   },
   {
-    title: 'TEAM',
+    title: 'Team',
     name: 'team'
   },
   {
-    title: 'SPLIT',
+    title: 'Split',
     name: 'split'
   },
+  {
+    title: 'Opcje',
+    name: 'options'
+  }
 ]
 
 const selectedSplit = ref();
 const playerSplit = ref();
+const loginForm = ref();
 
 const params = ref({
   split: '',
@@ -129,8 +141,24 @@ function selectSplit({value}) {
   params.value.split = value;
 }
 
-function send(e) {
-  console.log(e);
+// function dialogOpened(player = null) {
+//   player ? model.value = player : model.value = {};
+// }
+
+function openDialog(player = null) {
+  console.log(player);
+   player ? model.value = player : model.value = {};
+   playerDialog.value = true;
+}
+
+async function send() {
+    const {error} = await useMyFetch('/players', {
+       method: 'POST',
+       body: {
+         ...model.value
+       }
+     })
+    console.log(error.value.data);
 }
 </script>
 
@@ -138,6 +166,5 @@ function send(e) {
 .players {
   padding: $default-padding;
   grid-area: main;
-
 }
 </style>
