@@ -104,6 +104,7 @@ import team from "../../data/team";
 import BaseInput from "../../components/shared/form/BaseInput";
 import {useMyFetch} from "../../composables/useMyFetch";
 import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
+import {tryParseJSONObject} from "../../utils/helpers";
 
 const playerColumns = [
   {
@@ -152,13 +153,22 @@ function openDialog(player = null) {
 }
 
 async function send() {
+  console.log('essa');
     const {error} = await useMyFetch('/players', {
        method: 'POST',
        body: {
          ...model.value
        }
-     })
-    console.log(error.value.data);
+     });
+
+  console.log(error.value.data);
+  if (error.value.data) {
+    if (tryParseJSONObject(error.value.data?.message)) {
+      console.log(JSON.parse(error.value.data.message));
+    } else {
+      console.log(error.value.data.message);
+    }
+  }
 }
 </script>
 

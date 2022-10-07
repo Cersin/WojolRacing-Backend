@@ -19,7 +19,6 @@ const handleValidationErrorDB = err => {
             name: el.path
         }
     });
-
     // const message = `${errors.join('. ')}`; // ewentualnie tak
     return new AppError(JSON.stringify(errors), 400);
 }
