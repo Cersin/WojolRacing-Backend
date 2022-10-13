@@ -1,5 +1,7 @@
 <template>
-  <div v-if="!pending" class="table_wrapper">
+  <LoadingWrapper :loading="pending">
+
+  <div class="table_wrapper">
       <table>
         <thead>
         <tr class="table_header">
@@ -23,10 +25,7 @@
         </tbody>
       </table>
   </div>
-
-    <div class="margin-top" v-if="pending">
-      <BaseLoading/>
-    </div>
+  </LoadingWrapper>
 </template>
 
 <script setup>
@@ -41,6 +40,7 @@ import {getNestedObject, removeFalsy, splitString} from "../../utils/helpers";
 import BaseLoading from "./BaseLoading";
 import {computed, watch} from "vue";
 import {isEmpty, isObjectLike} from "lodash";
+import LoadingWrapper from "../Wrappers/LoadingWrapper";
 
 const config = useRuntimeConfig()
 
@@ -74,7 +74,8 @@ watch(props.params, () => {
 })
 
 defineExpose({
-  data: fetched
+  data: fetched,
+  refresh
 });
 </script>
 

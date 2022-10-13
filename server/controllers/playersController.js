@@ -40,7 +40,9 @@ const getPlayer = catchAsync(async (req, res) => {
 
     res.status(201).json({
         status: 'success',
-        player
+        data: {
+            player
+        }
     });
 });
 
@@ -64,7 +66,7 @@ const deletePlayer = catchAsync(async (req, res) => {
     const player = await Players.findByIdAndDelete(req.params.id);
     if (!player) throw new Error('Nie ma kalendarza o takim id');
 
-    res.status(200).json({
+    res.status(204).json({
         status: 'deleted'
     });
 });

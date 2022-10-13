@@ -51,57 +51,60 @@
 
     <BaseDialog v-model:open="playerDialog">
       <template #header>
-        Dodaj ziomeczka
+        {{ editMode ? 'Edytuj ziomeczka' : 'Dodaj ziomeczka' }}
       </template>
-      <VForm class="form--wrapper" style="display: flex; flex-direction: column;" as="div" ref="loginForm">
-        <div class="row">
-          <BaseInput
-            v-model="model.name"
-            class="col-6 md-col-12"
-            label="Imię nazwisko"
-            name="name"
-            rules="required"
-          />
 
-          <ValidationWrapper
-            class="col-6 md-col-12"
-            :value="model.split"
-            label="Split"
-            name="split"
-          >
-            <BaseSelects
-              v-model="playerSplit"
+      <LoadingWrapper :loading="loading">
+        <VForm class="form--wrapper" style="display: flex; flex-direction: column;" as="div" ref="loginForm">
+          <div class="row">
+            <BaseInput
+              v-model="model.name"
+              class="col-6 md-col-12"
+              label="Imię nazwisko"
+              name="name"
+              rules="required"
+            />
+
+            <ValidationWrapper
+              class="col-6 md-col-12"
+              :value="model.split"
               label="Split"
-              form
-              dark
-              display-value
-              display-label="label"
-              additionalLabel="Split "
-              :data="split"
-              @update:model-value="model.split = $event.value"
-            />
-          </ValidationWrapper>
+              name="split"
+            >
+              <BaseSelects
+                v-model="playerSplit"
+                label="Split"
+                form
+                dark
+                display-value
+                display-label="label"
+                additionalLabel="Split "
+                :data="split"
+                @update:model-value="model.split = $event.value"
+              />
+            </ValidationWrapper>
 
 
-          <ValidationWrapper
-            class="col-6 md-col-12"
-            :value="model.team"
-            label="Zespół"
-            name="team"
-          >
-            <BaseSelects
-              v-model="model.team"
+            <ValidationWrapper
+              class="col-6 md-col-12"
+              :value="model.team"
               label="Zespół"
-              form
-              dark
-              display-value
-              :data="team"
-            />
-          </ValidationWrapper>
-        </div>
+              name="team"
+            >
+              <BaseSelects
+                v-model="model.team"
+                label="Zespół"
+                form
+                dark
+                display-value
+                :data="team"
+              />
+            </ValidationWrapper>
+          </div>
 
-        <BaseButton @click="send()" class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
-      </VForm>
+          <BaseButton @click="send()" class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
+        </VForm>
+      </LoadingWrapper>
     </BaseDialog>
   </div>
 </template>
@@ -119,10 +122,9 @@ import team from "../../data/team";
 import BaseInput from "../../components/shared/form/BaseInput";
 import {useMyFetch} from "../../composables/useMyFetch";
 import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
-import {tryParseJSONObject} from "../../utils/helpers";
-import {useToast} from "vue-toastification";
 import ValidationWrapper from "../../components/Wrappers/ValidationWrapper";
-const toast = useToast();
+import LoadingWrapper from "../../components/Wrappers/LoadingWrapper";
+import {isObject} from "lodash";
 
 const playerColumns = [
   {
@@ -146,6 +148,7 @@ const playerColumns = [
 const selectedSplit = ref();
 const playerSplit = ref();
 const loginForm = ref();
+const results = ref();
 
 const params = ref({
   split: '',
@@ -155,16 +158,15 @@ const params = ref({
 const model = ref({});
 
 const playerDialog = ref(false);
+const editMode = ref(false);
+const loading = ref(false);
 
 function selectSplit({value}) {
   params.value.split = value;
 }
 
-// function dialogOpened(player = null) {
-//   player ? model.value = player : model.value = {};
-// }
-
 function openDialog(player = null) {
+  player ? editMode.value = true : editMode.value = false;
    player ? model.value = player : model.value = {};
    playerDialog.value = true;
 }
@@ -172,21 +174,22 @@ function openDialog(player = null) {
 async function send() {
   const { valid } = await loginForm.value.validate();
   if (valid) {
-    const {error} = await useMyFetch('/players', {
-      method: 'POST',
-      body: {
-        ...model.value
-      }
-    });
-
-    // console.log(error.value.data);
-    if (error.value.data) {
-      if (tryParseJSONObject(error.value.data?.message)) {
-        const errors = JSON.parse(error.value.data.message);
+    try {
+      loading.value = true;
+      const res = await useMyFetch(model.value._id ? `/players/${model.value._id}` : '/players', {
+        method: model.value._id ? 'PATCH' : 'POST',
+        body: {
+          ...model.value
+        }
+      });
+      results.value.refresh();
+    } catch (e) {
+      const errors = JSON.parse(e.message);
+      if (errors && isObject(errors)) {
         loginForm.value.setErrors(errors);
-      } else {
-        toast.error(error.value.data.message || 'error');
       }
+    } finally {
+      loading.value = false;
     }
   }
 }
