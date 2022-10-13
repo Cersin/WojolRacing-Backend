@@ -22,7 +22,8 @@ export default defineNuxtConfig({
     devtools: process.env.NODE_ENV !== 'production',
     css: [
         '~/styles/_base.scss',
-        'css-ripple-effect/dist/ripple.css'
+        'css-ripple-effect/dist/ripple.css',
+        'vue-toastification/dist/index.css'
     ],
     ssr: false,
     vite: {

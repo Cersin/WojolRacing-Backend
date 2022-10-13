@@ -10,7 +10,6 @@ export const splitString = (value, separator) => {
 }
 
 export const removeFalsy = obj => {
-    console.log(obj);
     let newObj = {};
     Object.keys(obj).forEach(prop => {
         if (

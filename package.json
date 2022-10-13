@@ -39,6 +39,7 @@
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",
     "validator": "^13.7.0",
-    "vee-validate": "^4.6.9"
+    "vee-validate": "^4.6.9",
+    "vue-toastification": "^2.0.0-rc.5"
   }
 }

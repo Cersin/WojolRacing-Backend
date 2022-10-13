@@ -2,25 +2,22 @@ import AppError from "~/server/utils/appError";
 
 const handleCastErrorDB = err => {
     const message = `Błędny ${err.path}: ${err.value}`;
-    return new AppError(message, 400);
+    return new AppError(message, 422);
 }
 
 const handleDuplicateFieldsDB = err => {
     const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
     const message = `Taka nazwa już istnieje: ${value}. Proszę użyj innej.`
-    return new AppError(message, 400);
+    return new AppError(message, 422);
 }
 
 const handleValidationErrorDB = err => {
-    // const errors = Object.values(err.errors).map(el => el.message); // ewentualnie tak
-    const errors = Object.values(err.errors).map(el => {
-        return {
-            message: el.message,
-            name: el.path
-        }
-    });
-    // const message = `${errors.join('. ')}`; // ewentualnie tak
-    return new AppError(JSON.stringify(errors), 400);
+    const obj = {};
+    const errors = Object.values(err.errors);
+    errors.forEach((el) => {
+        obj[el.path] = el.message
+    })
+    return new AppError(JSON.stringify(obj), 422);
 }
 
 const sendErrorDev = (err, res) => {
@@ -60,7 +57,6 @@ export const globalErrorHandler =  (err, req, res, next) => {
         if (error.code === 11000) error = handleDuplicateFieldsDB(error);
         if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
         sendErrorProd(error, res);
-
     }
 
     if (process.env.NODE_ENV === 'production') {

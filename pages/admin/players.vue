@@ -53,7 +53,7 @@
       <template #header>
         Dodaj ziomeczka
       </template>
-      <VForm style="display: flex; flex-direction: column;" @submit="send" ref="loginForm">
+      <VForm class="form--wrapper" style="display: flex; flex-direction: column;" as="div" ref="loginForm">
         <div class="row">
           <BaseInput
             v-model="model.name"
@@ -85,7 +85,7 @@
           />
         </div>
 
-        <BaseButton class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
+        <BaseButton @click="send()" class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
       </VForm>
     </BaseDialog>
   </div>
@@ -105,6 +105,8 @@ import BaseInput from "../../components/shared/form/BaseInput";
 import {useMyFetch} from "../../composables/useMyFetch";
 import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
 import {tryParseJSONObject} from "../../utils/helpers";
+import {useToast} from "vue-toastification";
+const toast = useToast();
 
 const playerColumns = [
   {
@@ -147,13 +149,11 @@ function selectSplit({value}) {
 // }
 
 function openDialog(player = null) {
-  console.log(player);
    player ? model.value = player : model.value = {};
    playerDialog.value = true;
 }
 
 async function send() {
-  console.log('essa');
     const {error} = await useMyFetch('/players', {
        method: 'POST',
        body: {
@@ -161,12 +161,13 @@ async function send() {
        }
      });
 
-  console.log(error.value.data);
+  // console.log(error.value.data);
   if (error.value.data) {
     if (tryParseJSONObject(error.value.data?.message)) {
-      console.log(JSON.parse(error.value.data.message));
+      const errors = JSON.parse(error.value.data.message);
+      loginForm.value.setErrors(errors);
     } else {
-      console.log(error.value.data.message);
+      toast.error(error.value.data.message || 'error');
     }
   }
 }
