@@ -9,6 +9,7 @@ const playersModel = new mongoose.Schema({
     team: {
         type: String,
         default: null,
+        required: true
     },
     split: {
         type: Number,

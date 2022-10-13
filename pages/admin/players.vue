@@ -60,29 +60,44 @@
             class="col-6 md-col-12"
             label="Imię nazwisko"
             name="name"
-          />
-          <BaseSelects
-            v-model="playerSplit"
-            class="col-6 md-col-12"
-            label="Split"
-            form
-            dark
-            display-value
-            display-label="label"
-            additionalLabel="Split "
-            :data="split"
-            @update:model-value="model.split = $event.value"
+            rules="required"
           />
 
-          <BaseSelects
-            v-model="model.team"
+          <ValidationWrapper
             class="col-6 md-col-12"
+            :value="model.split"
+            label="Split"
+            name="split"
+          >
+            <BaseSelects
+              v-model="playerSplit"
+              label="Split"
+              form
+              dark
+              display-value
+              display-label="label"
+              additionalLabel="Split "
+              :data="split"
+              @update:model-value="model.split = $event.value"
+            />
+          </ValidationWrapper>
+
+
+          <ValidationWrapper
+            class="col-6 md-col-12"
+            :value="model.team"
             label="Zespół"
-            form
-            dark
-            display-value
-            :data="team"
-          />
+            name="team"
+          >
+            <BaseSelects
+              v-model="model.team"
+              label="Zespół"
+              form
+              dark
+              display-value
+              :data="team"
+            />
+          </ValidationWrapper>
         </div>
 
         <BaseButton @click="send()" class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
@@ -106,6 +121,7 @@ import {useMyFetch} from "../../composables/useMyFetch";
 import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
 import {tryParseJSONObject} from "../../utils/helpers";
 import {useToast} from "vue-toastification";
+import ValidationWrapper from "../../components/Wrappers/ValidationWrapper";
 const toast = useToast();
 
 const playerColumns = [
@@ -154,20 +170,23 @@ function openDialog(player = null) {
 }
 
 async function send() {
+  const { valid } = await loginForm.value.validate();
+  if (valid) {
     const {error} = await useMyFetch('/players', {
-       method: 'POST',
-       body: {
-         ...model.value
-       }
-     });
+      method: 'POST',
+      body: {
+        ...model.value
+      }
+    });
 
-  // console.log(error.value.data);
-  if (error.value.data) {
-    if (tryParseJSONObject(error.value.data?.message)) {
-      const errors = JSON.parse(error.value.data.message);
-      loginForm.value.setErrors(errors);
-    } else {
-      toast.error(error.value.data.message || 'error');
+    // console.log(error.value.data);
+    if (error.value.data) {
+      if (tryParseJSONObject(error.value.data?.message)) {
+        const errors = JSON.parse(error.value.data.message);
+        loginForm.value.setErrors(errors);
+      } else {
+        toast.error(error.value.data.message || 'error');
+      }
     }
   }
 }
