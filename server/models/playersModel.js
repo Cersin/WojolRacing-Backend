@@ -15,6 +15,10 @@ const playersModel = new mongoose.Schema({
         type: Number,
         default: null,
         trim: true
+    },
+    active: {
+        type: Boolean,
+        default: true
     }
 });
 

@@ -5,7 +5,7 @@
     <div class="players">
 
     <BaseTable
-      ref="results"
+      ref="playersRef"
       :columns="playerColumns"
       endpoint="players"
       array-key="players"
@@ -16,7 +16,7 @@
       </template>
       <template #Opcje="{ rowData }">
         <IconEdit class="icon icon--xl icon--primary" @click="openDialog(rowData)"></IconEdit>
-        <IconTrashAlt class="icon icon--xl icon--warning margin-left--sm"></IconTrashAlt>
+        <IconTrashAlt class="icon icon--xl icon--warning margin-left--sm" @click="deletePlayer(rowData)"></IconTrashAlt>
       </template>
     </BaseTable>
     </div>
@@ -125,6 +125,7 @@ import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
 import ValidationWrapper from "../../components/Wrappers/ValidationWrapper";
 import LoadingWrapper from "../../components/Wrappers/LoadingWrapper";
 import {isObject} from "lodash";
+import {useToast} from "vue-toastification";
 
 const playerColumns = [
   {
@@ -148,11 +149,13 @@ const playerColumns = [
 const selectedSplit = ref();
 const playerSplit = ref();
 const loginForm = ref();
-const results = ref();
+const playersRef = ref();
+const toast = useToast();
 
 const params = ref({
   split: '',
-  team: ''
+  team: '',
+  active: true
 });
 
 const model = ref({});
@@ -167,7 +170,7 @@ function selectSplit({value}) {
 
 function openDialog(player = null) {
   player ? editMode.value = true : editMode.value = false;
-   player ? model.value = player : model.value = {};
+   player ? model.value = {...player} : model.value = {};
    playerDialog.value = true;
 }
 
@@ -182,7 +185,8 @@ async function send() {
           ...model.value
         }
       });
-      results.value.refresh();
+      playersRef.value.refresh();
+      playerDialog.value = false;
     } catch (e) {
       const errors = JSON.parse(e.message);
       if (errors && isObject(errors)) {
@@ -191,6 +195,20 @@ async function send() {
     } finally {
       loading.value = false;
     }
+  }
+}
+
+async function deletePlayer({_id: id}) {
+  try {
+    loading.value = true;
+    await useMyFetch(`/players/${id}`, {
+      method: 'DELETE'
+    });
+    playersRef.value.refresh();
+    playerDialog.value = false;
+    toast.success('Zawodnik oznaczony jako nieaktywny');
+  } finally {
+    loading.value = false;
   }
 }
 </script>
