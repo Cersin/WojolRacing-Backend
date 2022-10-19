@@ -1,5 +1,5 @@
 <template>
-  <LoadingWrapper :loading="pending">
+  <LoadingWrapper :loading="pending || loading">
   <div class="table_wrapper">
       <table>
         <thead>
@@ -30,7 +30,7 @@
         <tr v-if="crud">
           <td style="text-align: right" :colspan="columns.length">
             <IconPlusCircle @click="addRow" class="icon icon--xxxl icon--primary"/>
-            <IconCheckCircle @click="emit('accept', arrayKey ? fetched?.data[arrayKey] : fetched?.data)" class="icon icon--xxxl icon--success"/>
+            <IconCheckCircle @click="emit('accept', fetched?.data)" class="icon icon--xxxl icon--success"/>
           </td>
         </tr>
 
@@ -49,9 +49,7 @@
 
 import {useFetch, useRuntimeConfig} from "nuxt/app";
 import {getNestedObject, removeFalsy, splitString} from "../../utils/helpers";
-import BaseLoading from "./BaseLoading";
-import {computed, watch} from "vue";
-import {isEmpty, isObjectLike} from "lodash";
+import {watch} from "vue";
 import LoadingWrapper from "../Wrappers/LoadingWrapper";
 import BaseInput from "./form/BaseInput";
 import { IconPlusCircle, IconCheckCircle } from "@iconify-prerendered/vue-mdi"
@@ -78,6 +76,10 @@ const props = defineProps({
   crud: {
     type: Boolean,
     default: false
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -92,7 +94,6 @@ const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
 
 function addRow() {
   props.arrayKey ? fetched.value?.data[props.arrayKey].push({}) : fetched.value?.data.push({});
-  // fetched?.data[arrayKey] : fetched?.data
 }
 
 watch(props.params, () => {

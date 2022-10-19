@@ -36,6 +36,7 @@
 
       <BaseTable
         ref="results"
+        :loading="loading"
         :columns="raceColumn"
         :params="params"
         endpoint="race"
@@ -119,8 +120,13 @@ import Circuit from "../../../components/tracks/circuit";
 import NavHeader from "../../../components/layout/NavHeader";
 import {useFetch, useRuntimeConfig} from "nuxt/app";
 import BaseTableOptions from "../../../components/shared/BaseTableOptions";
+import {useMyFetch} from "../../../composables/useMyFetch";
+import {useToast} from "vue-toastification";
+
 
 const config = useRuntimeConfig()
+const { myFetch, loading } = useMyFetch();
+const toast = useToast();
 
 const raceColumn = [
   {
@@ -194,8 +200,17 @@ function deletePlayer(row) {
   data.results = data.results.filter(el => el !== row);
 }
 
-function accept(data) {
-  console.log(data);
+async function accept(data) {
+  try {
+    loading.value = true;
+    await myFetch(`/race/${data._id}`, {
+      method: 'PATCH',
+      body: data
+    }, false);
+    toast.success('Wyścig został zedytowany');
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 

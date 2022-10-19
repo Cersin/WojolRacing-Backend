@@ -133,6 +133,8 @@ import {isObject} from "lodash";
 import {useToast} from "vue-toastification";
 import BaseTableOptions from "../../components/shared/BaseTableOptions";
 
+const { myFetch } = useMyFetch();
+
 const playerColumns = [
   {
     title: 'Imię Nazwisko',
@@ -185,7 +187,7 @@ async function send() {
   if (valid) {
     try {
       loading.value = true;
-      const res = await useMyFetch(model.value._id ? `/players/${model.value._id}` : '/players', {
+      const res = await myFetch(model.value._id ? `/players/${model.value._id}` : '/players', {
         method: model.value._id ? 'PATCH' : 'POST',
         body: {
           ...model.value
@@ -207,7 +209,7 @@ async function send() {
 async function deletePlayer({_id: id}) {
   try {
     loading.value = true;
-    await useMyFetch(`/players/${id}`, {
+    await myFetch(`/players/${id}`, {
       method: 'DELETE'
     });
     playersRef.value.refresh();
