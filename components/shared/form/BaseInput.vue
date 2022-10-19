@@ -33,7 +33,7 @@ const props = defineProps({
     default: 'text'
   },
   modelValue: {
-    type: [String, Array, Object, Boolean],
+    type: [String, Array, Object, Boolean, Number],
     default: null
   }
 })

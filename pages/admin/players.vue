@@ -15,8 +15,14 @@
         {{ columnData === 0 ? 'Rezerwa' : columnData }}
       </template>
       <template #Opcje="{ rowData }">
-        <IconEdit class="icon icon--xl icon--primary" @click="openDialog(rowData)"></IconEdit>
-        <IconTrashAlt class="icon icon--xl icon--warning margin-left--sm" @click="deletePlayer(rowData)"></IconTrashAlt>
+        <BaseTableOptions
+         :buttons="{
+          edit: true,
+          delete: true
+         }"
+         @delete="deletePlayer(rowData)"
+         @edit="openDialog(rowData)"
+        />
       </template>
     </BaseTable>
     </div>
@@ -121,11 +127,11 @@ import split from "../../data/split";
 import team from "../../data/team";
 import BaseInput from "../../components/shared/form/BaseInput";
 import {useMyFetch} from "../../composables/useMyFetch";
-import { IconEdit, IconTrashAlt } from "@iconify-prerendered/vue-fa-regular"
 import ValidationWrapper from "../../components/Wrappers/ValidationWrapper";
 import LoadingWrapper from "../../components/Wrappers/LoadingWrapper";
 import {isObject} from "lodash";
 import {useToast} from "vue-toastification";
+import BaseTableOptions from "../../components/shared/BaseTableOptions";
 
 const playerColumns = [
   {

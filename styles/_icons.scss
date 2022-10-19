@@ -5,6 +5,11 @@
     color: $color-primary;
   }
 
+  &--success {
+    color: $color-success;
+  }
+
+
   &--primary-light {
     color: $color-primary--light;
   }
@@ -43,5 +48,9 @@
 
   &--xxl {
     font-size: 3rem;
+  }
+
+  &--xxxl {
+    font-size: 4rem;
   }
 }

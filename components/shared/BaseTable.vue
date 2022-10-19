@@ -1,6 +1,5 @@
 <template>
   <LoadingWrapper :loading="pending">
-
   <div class="table_wrapper">
       <table>
         <thead>
@@ -13,7 +12,13 @@
           <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data" :key="data._id">
             <td v-for="({ name, title }, index) in columns" :key="index">
               <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="data" :columnData="getNestedObject(data, splitString(name, '.'))">
-                {{ getNestedObject(data, splitString(name, '.')) }}
+                <div v-if="props.crud">
+                  <BaseInput v-model="data[name]"/>
+                </div>
+
+                <div v-else>
+                  {{ getNestedObject(data, splitString(name, '.')) }}
+                </div>
               </slot>
             </td>
           </tr>
@@ -21,6 +26,13 @@
           <tr v-if="arrayKey ? !fetched?.data[arrayKey] : fetched?.data.length === 0">
             <td :rowspan="columns.length">Brak znalezionych danych</td>
           </tr>
+
+        <tr v-if="crud">
+          <td style="text-align: right" :colspan="columns.length">
+            <IconPlusCircle @click="addRow" class="icon icon--xxxl icon--primary"/>
+            <IconCheckCircle @click="emit('accept', arrayKey ? fetched?.data[arrayKey] : fetched?.data)" class="icon icon--xxxl icon--success"/>
+          </td>
+        </tr>
 
         </tbody>
       </table>
@@ -41,6 +53,8 @@ import BaseLoading from "./BaseLoading";
 import {computed, watch} from "vue";
 import {isEmpty, isObjectLike} from "lodash";
 import LoadingWrapper from "../Wrappers/LoadingWrapper";
+import BaseInput from "./form/BaseInput";
+import { IconPlusCircle, IconCheckCircle } from "@iconify-prerendered/vue-mdi"
 
 const config = useRuntimeConfig()
 
@@ -60,8 +74,14 @@ const props = defineProps({
   params: {
     type: Object,
     default: () => {}
+  },
+  crud: {
+    type: Boolean,
+    default: false
   }
 });
+
+const emit = defineEmits(['accept']);
 
 const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
   params: props.params,
@@ -69,6 +89,12 @@ const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
   server: false,
   initialCache: false
 });
+
+function addRow() {
+  props.arrayKey ? fetched.value?.data[props.arrayKey].push({}) : fetched.value?.data.push({});
+  // fetched?.data[arrayKey] : fetched?.data
+}
+
 watch(props.params, () => {
   refresh();
 })
@@ -88,6 +114,7 @@ defineExpose({
   width: 100%;
   max-height: 600px;
   overflow: scroll;
+
 }
 
 .table_header {
@@ -111,6 +138,7 @@ table {
 thead {
   position: sticky;
   top: 0;
+  z-index: 999;
 }
 
 th {

@@ -4,7 +4,9 @@
             :class="{ 'selector--dark': dark, 'selector--form': form}"
     >
         {{ model && displayValue ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
-      <IconArrowDownCircle class="arrow"/>
+      <div class="arrow">
+        <IconArrowDownCircle/>
+      </div>
     </button>
 
     <div v-if="visible" class="selector__options">
@@ -137,11 +139,14 @@ function selected(data, index) {
     background-color: $color-grey-dark;
     color: white;
     top: 95%;
+    left: 0;
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 60;
     transition: all .5s;
+    max-height: 200px;
+    overflow: auto;
 
     &-value {
       padding: .7rem;
@@ -160,7 +165,8 @@ function selected(data, index) {
 
 .arrow {
   margin-left: .5rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  display: flex;
 }
 
 </style>

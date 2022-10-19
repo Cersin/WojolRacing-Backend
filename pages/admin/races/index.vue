@@ -1,0 +1,231 @@
+<template>
+  <div class="layout">
+    <MainHeader/>
+    <div class="formula">
+      <BaseHeader title="Wyniki wyścigów"/>
+
+      <div class="row hidden-lg">
+        <BaseSelects
+          class="col-12 md-col-4"
+          label="Wyścig"
+          :data="response?.data.tracks"
+          v-model="selectedTrack"
+          @selected="selectTrack"
+        />
+
+        <BaseSelects
+          class="col-6 md-col-4"
+          label="Sezon"
+          display-value
+          additionalLabel="Sezon "
+          :data="seasons"
+          v-model="params.season"
+        />
+
+        <BaseSelects
+          class="col-6 md-col-4"
+          label="Split"
+          display-value
+          display-label="label"
+          additionalLabel="Split "
+          :data="split"
+          v-model="selectedSplit"
+          @update:model-value="selectSplit"
+        />
+      </div>
+
+      <BaseTable
+        ref="results"
+        :columns="raceColumn"
+        :params="params"
+        endpoint="race"
+        crud
+        arrayKey="results"
+        @accept="accept"
+      >
+        <template #DRIVER="{rowData, rowIndex}">
+<!--          {{ // rowData.playerDetails }}-->
+          <BaseSelects
+            display-label="name"
+            label="Zawodnik"
+            display-value
+            v-model="rowData.playerDetails"
+            :data="fetched?.data?.players"
+          />
+        </template>
+
+        <template #Opcje="{ rowData }">
+          <BaseTableOptions
+            :buttons="{
+          delete: true
+         }"
+            @delete="deletePlayer(rowData)"
+          />
+        </template>
+      </BaseTable>
+    </div>
+
+    <div class="aside">
+      <NavHeader aside/>
+      <div class="row hidden-md">
+        <BaseSelects
+          class="col-12 md-col-4 margin-top"
+          label="Wyścig"
+          dark
+          :data="response?.data.tracks"
+          v-model="selectedTrack"
+          @selected="selectTrack"
+        />
+
+        <BaseSelects
+          class="col-6 md-col-4"
+          label="Sezon"
+          dark
+          display-value
+          additionalLabel="Sezon "
+          :data="seasons"
+          v-model="params.season"
+        />
+
+        <BaseSelects
+          class="col-6 md-col-4"
+          label="Split"
+          dark
+          display-value
+          display-label="label"
+          additionalLabel="Split "
+          :data="split"
+          v-model="selectedSplit"
+          @update:model-value="selectSplit"
+        />
+      </div>
+
+      <div class="margin-top circuit">
+        <Circuit :date="response?.data?.date" :track="selectedTrack || response?.data?.track"/>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import {computed, ref} from "vue";
+import BaseTable from "../../../components/shared/BaseTable";
+import BaseHeader from "../../../components/shared/BaseHeader";
+import BaseSelects from "../../../components/shared/BaseSelects";
+import seasons from "../../../data/seasons";
+import split from "../../../data/split";
+import MainHeader from "../../../components/layout/MainHeader";
+import Circuit from "../../../components/tracks/circuit";
+import NavHeader from "../../../components/layout/NavHeader";
+import {useFetch, useRuntimeConfig} from "nuxt/app";
+import BaseTableOptions from "../../../components/shared/BaseTableOptions";
+
+const config = useRuntimeConfig()
+
+const raceColumn = [
+  {
+    title: 'POS',
+    name: 'position'
+  },
+  {
+    title: 'DRIVER',
+    name: 'playerDetails.name'
+  },
+  {
+    title: 'TEAM',
+    name: 'team'
+  },
+  {
+    title: 'GRID',
+    name: 'grid'
+  },
+  {
+    title: 'STOPS',
+    name: 'pitStops'
+  },
+  {
+    title: 'BEST',
+    name: 'bestLap'
+  },
+  {
+    title: 'GAP',
+    name: 'gap'
+  },
+  {
+    title: 'PTS',
+    name: 'points'
+  },
+  {
+    title: 'Opcje',
+    name: 'options'
+  }
+]
+
+const {data: fetched, pending, refresh} = await useFetch('players', {
+  baseURL: config.API_BASE_URL,
+  server: false,
+  initialCache: true
+});
+
+const params = ref({
+  split: 1,
+  season: 1,
+  number: 1
+});
+
+const results = ref();
+const selectedTrack = ref();
+const selectedSplit = ref(split["1"]);
+
+const response = computed(() => {
+  return results?.value?.data;
+})
+
+function selectTrack({index}) {
+  params.value.number = index;
+}
+
+function selectSplit({value}) {
+  params.value.split = value;
+}
+
+function deletePlayer(row) {
+  const { data } = results.value.data;
+  data.results = data.results.filter(el => el !== row);
+}
+
+function accept(data) {
+  console.log(data);
+}
+</script>
+
+<style scoped lang="scss">
+.formula {
+  padding: $default-padding;
+  background-color: black;
+  grid-area: main;
+
+
+  h1 {
+    font-size: 6rem;
+  }
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circuit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.bestLap {
+  color: $color-primary;
+}
+</style>
