@@ -1,10 +1,11 @@
 <template>
-  <div class="layout">
-    <MainHeader/>
+  <div class="">
+    <MainHeader :breakpoints="false"/>
     <div class="formula">
       <BaseHeader title="Wyniki wyścigów"/>
+      <BaseButton class="margin-bottom" @click="raceDialog = true">Nowy wyścig</BaseButton>
 
-      <div class="row hidden-lg">
+      <div class="row">
         <BaseSelects
           class="col-12 md-col-4"
           label="Wyścig"
@@ -34,6 +35,13 @@
         />
       </div>
 
+
+      <div class="margin-top">
+        <div style="font-size: 2rem; display: flex; justify-content: center; align-items: center">
+          {{ selectedTrack || response?.data?.track }}
+        </div>
+      </div>
+
       <BaseTable
         ref="results"
         :loading="loading"
@@ -52,6 +60,15 @@
             display-value
             v-model="rowData.playerDetails"
             :data="fetched?.data?.players"
+            @selected="(e) => rowData.player = e.data._id"
+          />
+        </template>
+
+        <template #TEAM="{rowData, rowIndex}">
+          <BaseSelects
+            v-model="rowData.team"
+            display-value
+            :data="team"
           />
         </template>
 
@@ -64,47 +81,18 @@
           />
         </template>
       </BaseTable>
+
     </div>
 
-    <div class="aside">
-      <NavHeader aside/>
-      <div class="row hidden-md">
-        <BaseSelects
-          class="col-12 md-col-4 margin-top"
-          label="Wyścig"
-          dark
-          :data="response?.data.tracks"
-          v-model="selectedTrack"
-          @selected="selectTrack"
-        />
 
-        <BaseSelects
-          class="col-6 md-col-4"
-          label="Sezon"
-          dark
-          display-value
-          additionalLabel="Sezon "
-          :data="seasons"
-          v-model="params.season"
-        />
+    <BaseDialog v-model:open="raceDialog" @show="model = {}">
+      <template #header>
+        {{ 'Dodaj nowy wyścig' }}
+      </template>
 
-        <BaseSelects
-          class="col-6 md-col-4"
-          label="Split"
-          dark
-          display-value
-          display-label="label"
-          additionalLabel="Split "
-          :data="split"
-          v-model="selectedSplit"
-          @update:model-value="selectSplit"
-        />
-      </div>
+      <NewRaceWrapper v-model="model"/>
+    </BaseDialog>
 
-      <div class="margin-top circuit">
-        <Circuit :date="response?.data?.date" :track="selectedTrack || response?.data?.track"/>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -122,7 +110,10 @@ import {useFetch, useRuntimeConfig} from "nuxt/app";
 import BaseTableOptions from "../../../components/shared/BaseTableOptions";
 import {useMyFetch} from "../../../composables/useMyFetch";
 import {useToast} from "vue-toastification";
-
+import BaseDialog from "../../../components/shared/BaseDialog";
+import BaseButton from "../../../components/shared/BaseButton";
+import NewRaceWrapper from "../../../components/modules/admin/NewRaceWrapper";
+import team from "../../../data/team";
 
 const config = useRuntimeConfig()
 const { myFetch, loading } = useMyFetch();
@@ -182,6 +173,8 @@ const params = ref({
 const results = ref();
 const selectedTrack = ref();
 const selectedSplit = ref(split["1"]);
+const raceDialog = ref(false);
+const model = ref({});
 
 const response = computed(() => {
   return results?.value?.data;
@@ -200,8 +193,13 @@ function deletePlayer(row) {
   data.results = data.results.filter(el => el !== row);
 }
 
+function selectedPlayer(event) {
+  console.log(event.data._id);
+}
+
 async function accept(data) {
   try {
+    console.log(data);
     loading.value = true;
     await myFetch(`/race/${data._id}`, {
       method: 'PATCH',

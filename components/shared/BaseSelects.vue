@@ -113,7 +113,7 @@ function selected(data, index) {
   border: none;
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
   padding: 1rem 0rem 1rem 1.2rem;
-  z-index: 50;
+  z-index: $index-selector;
   width: 100%;
 
   &--form {
@@ -143,7 +143,7 @@ function selected(data, index) {
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 60;
+    z-index: $index-selector--options;
     transition: all .5s;
     max-height: 200px;
     overflow: auto;
@@ -151,11 +151,11 @@ function selected(data, index) {
     &-value {
       padding: .7rem;
       cursor: pointer;
-      z-index: 60;
+      z-index: $index-selector--options;
 
       &:hover {
         background-color: lighten($color-grey-dark, 15%);
-        z-index: 60;
+        z-index: $index-selector--options;
 
       }
     }

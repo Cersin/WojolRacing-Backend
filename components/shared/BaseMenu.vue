@@ -46,7 +46,7 @@ defineProps({
   position: relative;
   height: 4rem;
   transition: transform 700ms cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: 200;
+  z-index: $index-menu;
 }
 .menu--active {
   transform: rotate(270deg);
@@ -99,7 +99,7 @@ defineProps({
   background-color: transparentize(black, .1);
   height: 100%;
   width: 100%;
-  z-index: 100;
+  z-index: $index-menu-overlay;
 
   display: flex;
   flex-direction: column;

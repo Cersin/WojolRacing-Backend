@@ -1,11 +1,15 @@
 <template>
   <div class="header">
-<!--    <div class="header__img"></div>-->
     <img @click="navigateTo('/')" class="header__img" src="/logo_wojol.png" alt="Wojol Racing">
     <div class="right_side">
-      <button v-if="!authState.logged" @click="navigateTo('login')" class="button button--outline ripple hidden-md">ZALOGUJ</button>
+      <button
+        v-if="!authState.logged"
+        class="button button--outline ripple"
+        :class="{'hidden-md': breakpoints}"
+        @click="navigateTo('login')"
+        >ZALOGUJ</button>
 
-      <NavHeader  class="hidden-lg"/>
+      <NavHeader :class="{'hidden-lg': breakpoints}" />
     </div>
   </div>
 </template>
@@ -17,6 +21,12 @@ import {useAuthComposable} from "../../composables/auth-composable";
 
 const {authState} = useAuthComposable();
 
+defineProps({
+  breakpoints: {
+    type: Boolean,
+    default: true
+  }
+})
 
 </script>
 

@@ -139,7 +139,7 @@ table {
 thead {
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: $index-tbody;
 }
 
 th {
