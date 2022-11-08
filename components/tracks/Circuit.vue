@@ -3,6 +3,11 @@
     <div class="circuit__header">
       {{ track }}
     </div>
+
+    <div class="circuit__date">
+      {{ convertDate(date) }}
+    </div>
+
     <div class="circuit--track">
       <div v-html="tracks[track]?.svg"/>
 
@@ -26,6 +31,7 @@
 import anime from "animejs";
 import {onMounted, watch, ref, onBeforeUnmount} from "vue";
 import { tracks } from "../../data/tracks";
+import { convertDate } from "../../utils/dates";
 
 const props = defineProps({
   track: {
@@ -94,6 +100,13 @@ function startAnimation() {
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: bold;
+  }
+
+  &__date {
+    margin: 0;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 }
 </style>

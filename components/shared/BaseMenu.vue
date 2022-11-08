@@ -9,7 +9,8 @@
         <NuxtLink exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
         <div class="navigation__block">
           <h2>Formuła 1</h2>
-          <NuxtLink exact-active-class="active-route" to="/formula">Klasyfikacje generalne</NuxtLink>
+          <NuxtLink exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
+          <NuxtLink exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
         </div>
       </div>

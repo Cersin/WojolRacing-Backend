@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import svgLoader from "vite-svg-loader"
 
  // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -14,7 +13,7 @@ export default defineNuxtConfig({
     ],
     plugins: ["~/plugins/vee-validate", "~/plugins/vee-validate-components"],
     build: {
-        transpile: ['vee-validate']
+        transpile: ['vee-validate', '@vuepic/vue-datepicker']
     },
     modules: [
       '@vueuse/nuxt'

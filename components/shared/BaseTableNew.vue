@@ -1,5 +1,5 @@
 <template>
-  <LoadingWrapper :loading="pending || loading">
+  <LoadingWrapper :loading="loading">
   <div class="table_wrapper">
       <table>
         <thead>
@@ -9,28 +9,23 @@
         </thead>
 
         <tbody>
-          <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data" :key="data._id">
+          <tr v-for="(data, rowIndex) in model" :key="rowIndex">
             <td v-for="({ name, title }, index) in columns" :key="index">
               <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="data" :columnData="getNestedObject(data, splitString(name, '.'))">
-                <div v-if="props.crud">
+                <div>
                   <BaseInput v-model="data[name]"/>
-                </div>
-
-                <div v-else>
-                  {{ getNestedObject(data, splitString(name, '.')) }}
                 </div>
               </slot>
             </td>
           </tr>
 
-          <tr v-if="arrayKey ? !fetched?.data[arrayKey] : fetched?.data.length === 0">
-            <td :rowspan="columns.length">Brak znalezionych danych</td>
+          <tr v-if="!model.length">
+            <td :rowspan="columns.length">Brak danych</td>
           </tr>
 
-        <tr v-if="crud">
+        <tr>
           <td style="text-align: right" :colspan="columns.length">
             <IconPlusCircle @click="addRow" class="icon icon--xxxl icon--primary"/>
-            <IconCheckCircle @click="emit('accept', fetched?.data)" class="icon icon--xxxl icon--success"/>
           </td>
         </tr>
 
@@ -49,7 +44,7 @@
 
 import {useFetch, useRuntimeConfig} from "nuxt/app";
 import {getNestedObject, removeFalsy, splitString} from "../../utils/helpers";
-import {watch} from "vue";
+import {computed, watch} from "vue";
 import LoadingWrapper from "../Wrappers/LoadingWrapper";
 import BaseInput from "./form/BaseInput";
 import { IconPlusCircle, IconCheckCircle } from "@iconify-prerendered/vue-mdi"
@@ -61,49 +56,26 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  endpoint: {
-    type: String,
-    required: true
-  },
-  arrayKey: {
-    type: String,
-    default: null
-  },
-  params: {
-    type: Object,
-    default: () => {}
-  },
-  crud: {
-    type: Boolean,
-    default: false
-  },
   loading: {
     type: Boolean,
     default: false
+  },
+  modelValue: {
+    type: [Object, Array],
+    default: () => []
   }
 });
 
-const emit = defineEmits(['accept']);
+const emit = defineEmits(['accept', 'update:modelValue']);
 
-const {data: fetched, pending, refresh} = await useFetch(props.endpoint, {
-  params: props.params,
-  baseURL: config.API_BASE_URL,
-  server: false,
-  initialCache: false
+const model = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
 });
 
 function addRow() {
-  props.arrayKey ? fetched.value?.data[props.arrayKey].push({}) : fetched.value?.data.push({});
+  model.value.push({});
 }
-
-watch(props.params, () => {
-  refresh();
-})
-
-defineExpose({
-  data: fetched,
-  refresh
-});
 </script>
 
 <style scoped lang="scss">

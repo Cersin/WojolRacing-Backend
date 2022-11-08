@@ -15,7 +15,7 @@ const {authState} = useAuthComposable();
 const {data} = await useFetch('/users/verify', {
   baseURL: config.API_BASE_URL,
 });
-authState.logged = data.value.logged;
+authState.logged = data.value?.logged;
 </script>
 
 <style scoped>

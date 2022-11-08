@@ -140,7 +140,7 @@ const raceColumn = [
 const params = ref({
   split: 1,
   season: 1,
-  number: 1
+  number: 0
 });
 
 const results = ref();

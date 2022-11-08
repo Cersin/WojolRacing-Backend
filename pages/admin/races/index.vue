@@ -33,6 +33,11 @@
           v-model="selectedSplit"
           @update:model-value="selectSplit"
         />
+
+        <div v-if="response?.data?.date" class="col-6 md-col-4" style="display: flex; flex-direction: column">
+          Data wyścigu
+          <Datepicker v-model="response.data.date" format="dd MM yyyy HH:mm" locale="pl" />
+        </div>
       </div>
 
 
@@ -68,8 +73,16 @@
           <BaseSelects
             v-model="rowData.team"
             display-value
-            :data="team"
+            :data="teamOptions"
           />
+        </template>
+
+        <template #fastestLap?="{rowData, rowIndex}">
+          <input type="checkbox" v-model="rowData.fastestLap">
+        </template>
+
+        <template #dnf?="{rowData, rowIndex}">
+          <input type="checkbox" v-model="rowData.dnf">
         </template>
 
         <template #Opcje="{ rowData }">
@@ -81,7 +94,6 @@
           />
         </template>
       </BaseTable>
-
     </div>
 
 
@@ -90,7 +102,7 @@
         {{ 'Dodaj nowy wyścig' }}
       </template>
 
-      <NewRaceWrapper v-model="model"/>
+      <NewRaceWrapper @added="raceAdded"/>
     </BaseDialog>
 
   </div>
@@ -114,6 +126,8 @@ import BaseDialog from "../../../components/shared/BaseDialog";
 import BaseButton from "../../../components/shared/BaseButton";
 import NewRaceWrapper from "../../../components/modules/admin/NewRaceWrapper";
 import team from "../../../data/team";
+import BaseInput from "../../../components/shared/form/BaseInput";
+import Datepicker from '@vuepic/vue-datepicker';
 
 const config = useRuntimeConfig()
 const { myFetch, loading } = useMyFetch();
@@ -153,10 +167,20 @@ const raceColumn = [
     name: 'points'
   },
   {
+    title: 'fastestLap?',
+    name: 'fastestLap'
+  },
+  {
+    title: 'dnf?',
+    name: 'dnf'
+  },
+  {
     title: 'Opcje',
     name: 'options'
   }
 ]
+
+const teamOptions = ['Rezerwa', ...team];
 
 const {data: fetched, pending, refresh} = await useFetch('players', {
   baseURL: config.API_BASE_URL,
@@ -167,14 +191,13 @@ const {data: fetched, pending, refresh} = await useFetch('players', {
 const params = ref({
   split: 1,
   season: 1,
-  number: 1
+  number: 0
 });
 
 const results = ref();
 const selectedTrack = ref();
 const selectedSplit = ref(split["1"]);
 const raceDialog = ref(false);
-const model = ref({});
 
 const response = computed(() => {
   return results?.value?.data;
@@ -199,7 +222,6 @@ function selectedPlayer(event) {
 
 async function accept(data) {
   try {
-    console.log(data);
     loading.value = true;
     await myFetch(`/race/${data._id}`, {
       method: 'PATCH',
@@ -209,6 +231,11 @@ async function accept(data) {
   } finally {
     loading.value = false;
   }
+}
+
+function raceAdded() {
+  refresh();
+  raceDialog.value = false;
 }
 </script>
 

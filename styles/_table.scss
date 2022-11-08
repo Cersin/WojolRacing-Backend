@@ -1,0 +1,48 @@
+.table_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 1rem 0;
+  width: 100%;
+  max-height: 600px;
+  overflow: scroll;
+
+}
+
+.table_header {
+  color: black;
+  background-color: $color-primary;
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+tr {
+  border-radius: 15px;
+}
+
+table {
+  font-size: 1.3rem;
+  text-align: center;
+  border-spacing: 0 2rem;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: $index-tbody;
+}
+
+th {
+  padding: .8rem;
+}
+
+td {
+  border-bottom: 3px solid rgba(200, 200, 200, 0.28);
+  padding: 0 .8rem;
+}
+
+
+
+tr:nth-child(even) {
+}

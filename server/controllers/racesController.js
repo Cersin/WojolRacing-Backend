@@ -267,8 +267,18 @@ const constructorsPoints = catchAsync(async (req, res) => {
             {"$unwind": "$results"},
             {
                 "$group": {
-                    _id: "$results.team",
-                    points: {$sum: "$results.points"}
+                    _id: {$cond: {
+                            if: {$eq: ["$results.team", 'Rezerwa']},
+                            then: null,
+                            else: "$results.team"
+                        }},
+                    points: {$sum: {
+                            $cond: {
+                                if: {$eq: ["$results.team", 'Rezerwa']},
+                                then: 0,
+                                else: "$results.points"
+                            }
+                        }}
                 }
             },
             {
@@ -278,10 +288,12 @@ const constructorsPoints = catchAsync(async (req, res) => {
             }
         ])
 
+        const response = constructors.filter((el => el._id !== null));
+
         res.status(200).json({
             status: 'success',
-            constructors,
-            length: constructors.length
+            data: response,
+            length: response.length
         })
 })
 

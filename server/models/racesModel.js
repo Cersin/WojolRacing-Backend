@@ -35,7 +35,8 @@ const racesSchema = new mongoose.Schema({
         },
         dnf: {
             type: Boolean,
-            required: true
+            required: false,
+            default: false
         },
         team: {
             type: String,
@@ -51,7 +52,8 @@ const racesSchema = new mongoose.Schema({
         },
         fastestLap: {
             type: Boolean,
-            required: true
+            required: false,
+            default: false
         },
         bestLap: {
             type: String,
