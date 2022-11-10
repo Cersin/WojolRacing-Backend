@@ -103,7 +103,7 @@
                 form
                 dark
                 display-value
-                :data="team"
+                :data="teamOptions"
               />
             </ValidationWrapper>
           </div>
@@ -134,6 +134,12 @@ import {useToast} from "vue-toastification";
 import BaseTableOptions from "../../components/shared/BaseTableOptions";
 
 const { myFetch } = useMyFetch();
+
+definePageMeta({
+  middleware: 'auth'
+})
+
+const teamOptions = ['Rezerwa', ...team];
 
 const playerColumns = [
   {

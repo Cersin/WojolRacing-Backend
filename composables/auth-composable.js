@@ -1,6 +1,9 @@
 import {reactive} from 'vue';
 import {useRuntimeConfig} from "nuxt/app";
 import {navigateTo} from "nuxt/app";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 const authState = reactive({
     logged: false
@@ -25,23 +28,24 @@ export const useAuthComposable = () => {
                 throw new Error(message);
             } else {
                 authState.logged = true;
+                toast.success('Zalogowano');
                 navigateTo('/');
-
             }
         } catch (e) {
-            console.log(e);
+            toast.error(e?.data?.message || 'Error');
         }
     }
 
     const auth = async () => {
         try {
             const res = await $fetch(`/users/verify`, {
-                method: 'POST',
+                method: 'GET',
                 baseURL: config.API_BASE_URL,
             });
             authState.logged = !!res.logged;
+            return res.logged;
         } catch (e) {
-            return e;
+            return false;
         }
     }
 

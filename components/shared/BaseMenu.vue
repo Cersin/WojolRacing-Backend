@@ -6,12 +6,18 @@
   <Transition>
     <div v-if="active" class="menu_overlay">
       <div class="navigation">
-        <NuxtLink exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
+        <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
         <div class="navigation__block">
           <h2>Formuła 1</h2>
-          <NuxtLink exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
-          <NuxtLink exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
-          <NuxtLink exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
+        </div>
+
+        <div v-if="authState.logged" class="navigation__block">
+          <h2>Admin F1</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/players">Zawodnicy</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/races">Wyniki</NuxtLink>
         </div>
       </div>
     </div>
@@ -23,7 +29,11 @@
 <script setup>
 import { IconLogin } from "@iconify-prerendered/vue-mdi"
 import {useRoute} from "nuxt/app";
+import {useAuthComposable} from "../../composables/auth-composable";
+
 const route = useRoute();
+const {authState} = useAuthComposable();
+
 
 defineProps({
   active: {

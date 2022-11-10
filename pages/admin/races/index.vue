@@ -129,6 +129,10 @@ import team from "../../../data/team";
 import BaseInput from "../../../components/shared/form/BaseInput";
 import Datepicker from '@vuepic/vue-datepicker';
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const config = useRuntimeConfig()
 const { myFetch, loading } = useMyFetch();
 const toast = useToast();

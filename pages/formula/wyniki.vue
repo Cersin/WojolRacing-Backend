@@ -102,6 +102,10 @@ import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
 import NavHeader from "../../components/layout/NavHeader";
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const raceColumn = [
   {
     title: 'POS',
