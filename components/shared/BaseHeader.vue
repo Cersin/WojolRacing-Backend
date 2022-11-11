@@ -1,5 +1,5 @@
 <template>
-  <div class="header margin-bottom--sm margin-top--sm">
+  <div class="header margin-bottom--sm margin-top--sm" :class="{'header--black': black}">
     <span>{{ splitTitle[0] }}</span> {{ splitTitle[1] }}
   </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    black: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -35,6 +39,12 @@ export default {
 
   span {
     color: $color-primary;
+  }
+}
+
+.header--black {
+  span {
+    color: black;
   }
 }
 

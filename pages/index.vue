@@ -24,7 +24,8 @@
 
     <div class="aside">
       <NavHeader aside/>
-      <h1>Wkrótce więcej</h1>
+      <BaseHeader black title="Aktualności."/>
+      <h2>Wkrótce więcej</h2>
     </div>
   </div>
 
@@ -38,6 +39,7 @@ import AsideWrapper from "../components/Wrappers/AsideWrapper";
 import BaseCard from "../components/container/BaseCard";
 import MainHeader from "../components/layout/MainHeader";
 import NavHeader from "../components/layout/NavHeader";
+import BaseHeader from "../components/shared/BaseHeader";
 </script>
 
 <style scoped lang="scss">
@@ -51,12 +53,11 @@ import NavHeader from "../components/layout/NavHeader";
 .gallery {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
   grid-gap: 10rem 10rem;
   justify-content: center;
-  padding: 6rem;
 
   @include big-desktop() {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
     margin-top: 15rem;
   }
 }

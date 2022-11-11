@@ -107,7 +107,7 @@ defineProps({
   left: 0;
   top: 0;
   overflow-x: hidden;
-  background-color: transparentize(black, .1);
+  background-color: transparentize(black, .06);
   height: 100%;
   width: 100%;
   z-index: $index-menu-overlay;

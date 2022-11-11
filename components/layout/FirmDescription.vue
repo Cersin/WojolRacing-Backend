@@ -13,7 +13,11 @@ export default {
 
 <style scoped lang="scss">
 .firmDescription {
-  font-size: 2rem;
+  font-size: 1.5rem;
+
+  @include big-desktop() {
+    font-size: 2rem;
+  }
 
   @include mobileAndUp {
     max-width: 100%;
