@@ -4,7 +4,7 @@
             :class="{ 'selector--dark': dark, 'selector--form': form}"
     >
         {{ model && displayValue ? (displayLabel ? `${additionalLabel} ${model[displayLabel]}` : `${additionalLabel}${model}`) : label }}
-      <div class="arrow">
+      <div @click="toggleVisibility()" class="arrow">
         <IconArrowDownCircle/>
       </div>
     </button>
