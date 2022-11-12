@@ -3,6 +3,7 @@ import Player from "~/server/models/playersModel";
 import mongoose from "mongoose";
 import catchAsync from "~/server/utils/catchAsync";
 import AppError from "~/server/utils/appError";
+import round from 'mongo-round';
 
 const createRace = catchAsync(async (req, res) => {
     const newRace = await Races.create(req.body);
@@ -243,6 +244,29 @@ const playerStatistics = catchAsync(async (req, res) => {
                     as: "player"
                 }
             },
+            {"$unwind": "$player"},
+            {
+              $project: {
+                  _id: '$_id' ,
+                  points: '$points',
+                  player: '$player',
+                  team: '$team',
+                  firstPlaces: '$firstPlaces',
+                  podiums: '$podiums',
+                  top10: '$top10',
+                  DNFs: '$DNFs',
+                  fastestLaps: '$fastestLaps',
+                  avgPosition : round('$avgPosition', 2),
+                  avgStartGrid : round('$avgStartGrid', 2),
+                  percentageFinished : round('$percentageFinished', 2),
+                  avgPits : round('$avgPits', 2),
+                  top1Grid: '$top1Grid',
+                  top3Grid: '$top3Grid',
+                  top10Grid: '$top10Grid',
+                  races: '$races',
+                  gain : round('$gain', 2),
+              }
+            },
             {
                 "$sort": {
                     points: -1
@@ -251,7 +275,7 @@ const playerStatistics = catchAsync(async (req, res) => {
         ])
         res.status(200).json({
             status: 'success',
-            users,
+            data: users,
             length: users.length
         })
 });

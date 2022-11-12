@@ -1,6 +1,6 @@
 <template>
   <div class="firmDescription">
-    Jesteśmy ligą oraz zespołem esportowych, biorącym udział w różnych ligach np. Assetto Corsa czy Formuła 1.
+    Jesteśmy ligą oraz zespołem esportowym, biorącym udział w różnych ligach np. Assetto Corsa czy Formuła 1.
     <p>Strona w rozwoju. Wersja wczesna.</p>
   </div>
 </template>

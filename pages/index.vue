@@ -20,12 +20,16 @@
           route-path="/assetto"
         />
       </div>
+
+      <a class="madeby" href="https://frontszymon.pl">Strona wykonana przez FRONTSZYMON.pl</a>
     </div>
 
     <div class="aside">
       <NavHeader aside/>
-      <BaseHeader black title="Aktualności."/>
-      <h2>Wkrótce więcej</h2>
+      <div style="display: flex; flex-direction: column; align-items: center;;">
+        <BaseHeader black title="Aktualności"/>
+        <h2>Wkrótce więcej</h2>
+      </div>
     </div>
   </div>
 
@@ -48,6 +52,7 @@ import BaseHeader from "../components/shared/BaseHeader";
   padding: $default-padding;
   grid-area: main;
   background-color: black;
+  position: relative;
 }
 
 .gallery {
@@ -59,6 +64,18 @@ import BaseHeader from "../components/shared/BaseHeader";
   @include big-desktop() {
     grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
     margin-top: 15rem;
+  }
+}
+
+.madeby {
+  text-decoration: none;
+  color: $color-primary;
+  font-size: 1.1rem;
+  position: absolute;
+  bottom: 0;
+
+  &:hover {
+    color: white;
   }
 }
 </style>

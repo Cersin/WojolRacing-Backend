@@ -101,7 +101,7 @@ const raceColumn = [
   }
 ]
 
-const selectedSplit = ref();
+const selectedSplit = ref(split["1"]);
 
 const params = ref({
   split: 1,

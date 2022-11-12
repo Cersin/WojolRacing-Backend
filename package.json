@@ -38,6 +38,7 @@
     "fecha": "^4.2.3",
     "hpp": "^0.2.3",
     "lodash": "^4.17.21",
+    "mongo-round": "^1.0.0",
     "mongoose": "^6.3.5",
     "sass": "^1.52.1",
     "sass-loader": "^13.0.0",

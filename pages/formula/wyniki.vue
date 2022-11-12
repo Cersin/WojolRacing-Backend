@@ -9,7 +9,7 @@
             class="col-12 md-col-4"
             label="Wyścig"
             :data="response?.data.tracks"
-            v-model="selectedTrack"
+            :value="selectedTrack"
             @selected="selectTrack"
         />
 
@@ -56,6 +56,7 @@
           class="col-12 md-col-4 margin-top"
           label="Wyścig"
           dark
+          display-value
           :data="response?.data.tracks"
           v-model="selectedTrack"
           @selected="selectTrack"
@@ -92,7 +93,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import BaseTable from "../../components/shared/BaseTable";
 import BaseHeader from "../../components/shared/BaseHeader";
 import BaseSelects from "../../components/shared/BaseSelects";
@@ -153,6 +154,10 @@ const selectedSplit = ref(split["1"]);
 
 const response = computed(() => {
   return results?.value?.data;
+})
+
+watch(() => response.value, value => {
+  selectedTrack.value = value?.data?.track;
 })
 
 function selectTrack({index}) {

@@ -2,11 +2,18 @@ import { defineNuxtConfig } from 'nuxt'
 
  // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-    head: {
-        title: 'Wojol Racing',
-        htmlAttrs: {
-            lang: 'pl'
-        }
+    app: {
+        head: {
+            title: 'Wojol Racing',
+            htmlAttrs: {
+                lang: 'pl'
+            },
+            meta: [
+                { name: 'description', content: 'Strona ligowa Wojol Racing' }
+            ],
+            link: [
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }    ]
+        },
     },
     serverMiddleware: [
         {path: '/api', handler: '~/server/index.js'}
