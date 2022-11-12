@@ -28,7 +28,7 @@
           </tr>
 
         <tr v-if="crud">
-          <td style="text-align: right" :colspan="columns.length">
+          <td style="text-align: left" :colspan="columns.length">
             <IconPlusCircle @click="addRow" class="icon icon--xxxl icon--primary"/>
             <IconCheckCircle @click="emit('accept', fetched?.data)" class="icon icon--xxxl icon--success"/>
           </td>

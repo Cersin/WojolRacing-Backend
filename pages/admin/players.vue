@@ -169,7 +169,8 @@ const toast = useToast();
 const params = ref({
   split: '',
   team: '',
-  active: true
+  active: true,
+  sort: 'team'
 });
 
 const model = ref({});
