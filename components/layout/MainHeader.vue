@@ -4,8 +4,7 @@
     <div class="right_side">
       <button
         v-if="!authState.logged"
-        class="button button--outline ripple"
-        :class="{'hidden-md': breakpoints}"
+        class="button button--outline ripple hidden-md"
         @click="navigateTo('login')"
         >ZALOGUJ</button>
 

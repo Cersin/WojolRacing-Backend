@@ -78,10 +78,6 @@ import split from "../../data/split";
 import BaseSelects from "../../components/shared/BaseSelects";
 import NavHeader from "../../components/layout/NavHeader";
 
-definePageMeta({
-  middleware: 'auth'
-})
-
 const raceColumn = [
     {
       title: 'POS',
