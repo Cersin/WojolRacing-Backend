@@ -14,8 +14,8 @@ const signToken = id => {
 const createTokenCookie = (token, res) => {
     res.cookie('jwt', token, {
         expires: new Date(Date.now() + config.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-        secure: true, // true to https // TODO
-        httpOnly: true
+        secure: true,
+        httpOnly: false,
     });
 }
 

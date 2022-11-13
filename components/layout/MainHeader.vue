@@ -5,7 +5,9 @@
       <button
         v-if="!authState.logged"
         class="button button--outline ripple hidden-md"
-        @click="navigateTo('login')"
+        @click="navigateTo({
+        name: 'login'
+        })"
         >ZALOGUJ</button>
 
       <NavHeader :class="{'hidden-lg': breakpoints}" />
