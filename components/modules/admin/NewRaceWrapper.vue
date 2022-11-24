@@ -59,7 +59,7 @@
           v-model="rowData.team"
           label="Zespół"
           display-value
-          :data="teamOptions"
+          :data="Object.keys(teamOptions)"
         />
       </template>
 
@@ -104,7 +104,12 @@ const toast = useToast();
 const { myFetch, loading } = useMyFetch();
 const config = useRuntimeConfig()
 
-const teamOptions = ['Rezerwa', ...team];
+const teamOptions = {
+  ...team,
+  'Rezerwa': {
+    value: 'Rezerwa'
+  },
+}
 
 const props = defineProps({
   modelValue: {

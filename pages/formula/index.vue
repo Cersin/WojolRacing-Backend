@@ -29,11 +29,16 @@
       <BaseTable
         ref="classification"
         :columns="raceColumn"
+        podium
         :params="params"
         endpoint="race/playerPoints"
       >
         <template #POS="{rowIndex}">
           {{ +rowIndex + 1 }}
+        </template>
+
+        <template #LOGO="{rowData, columnData}">
+          <img v-if="team[rowData.team].img" style="width: 35px; height: auto;" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
         </template>
       </BaseTable>
     </div>
@@ -77,6 +82,7 @@ import seasons from "../../data/seasons";
 import split from "../../data/split";
 import BaseSelects from "../../components/shared/BaseSelects";
 import NavHeader from "../../components/layout/NavHeader";
+import team from "../../data/team";
 
 const raceColumn = [
     {
@@ -91,10 +97,14 @@ const raceColumn = [
       title: 'TEAM',
       name: 'team'
     },
-  {
-    title: 'Points',
-    name: 'points'
-  }
+    {
+      title: 'LOGO',
+      name: 'logo'
+    },
+    {
+      title: 'Points',
+      name: 'points'
+    }
 ]
 
 const selectedSplit = ref(split["1"]);

@@ -14,8 +14,9 @@ const signToken = id => {
 const createTokenCookie = (token, res) => {
     res.cookie('jwt', token, {
         expires: new Date(Date.now() + config.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-        secure: true,
-        httpOnly: false,
+        secure: true, // true to https // TODO
+        httpOnly: true,
+        sameSite: 'none'
     });
 }
 
@@ -59,52 +60,52 @@ export const protect = (async (req, res, next) => {
 });
 
 export const verify = catchAsync(async (req, res) => {
-        let token;
-        if (req.cookies.jwt) {
-            token = req.cookies.jwt;
-        }
-        if (!token) {
-            throw new Error('Nie jesteś zalogowany. Zaloguj się!');
-        }
-        const decoded = await jwt.verify(token, config.JWT_SECRET);
+    let token;
+    if (req.cookies.jwt) {
+        token = req.cookies.jwt;
+    }
+    if (!token) {
+        throw new Error('Nie jesteś zalogowany. Zaloguj się!');
+    }
+    const decoded = await jwt.verify(token, config.JWT_SECRET);
 
-        const freshUser = await User.findById(decoded.id);
-        if (!freshUser) {
-            throw new Error('Nie ma takiego użytkownika. Zaloguj się ponownie!');
-        }
-        res.status(200).json({
-            status: 'success',
-            logged: true
-        })
+    const freshUser = await User.findById(decoded.id);
+    if (!freshUser) {
+        throw new Error('Nie ma takiego użytkownika. Zaloguj się ponownie!');
+    }
+    res.status(200).json({
+        status: 'success',
+        logged: true
+    })
 });
 
 export const logIn = catchAsync(async (req, res, next) => {
-        const {name, password} = req.body;
+    const {name, password} = req.body;
 
-        // if name nad password exist
-        if (!name || !password) {
-            return next(new AppError('Musisz podać login i hasło', 403));
-        }
+    // if name nad password exist
+    if (!name || !password) {
+        return next(new AppError('Musisz podać login i hasło', 403));
+    }
 
-        // check if user exist and password is correct
-        const user = await User.findOne({name}).select('+password');
+    // check if user exist and password is correct
+    const user = await User.findOne({name}).select('+password');
 
-        if (!user || !(await user.correctPassword(password, user.password))) {
-            deleteTokenCookie(res);
-            return next(new AppError('Złe hasło', 403));
-        }
+    if (!user || !(await user.correctPassword(password, user.password))) {
+        deleteTokenCookie(res);
+        return next(new AppError('Złe hasło', 403));
+    }
 
-        // if everything ok, send token to client
-        const token = await signToken(user._id);
+    // if everything ok, send token to client
+    const token = await signToken(user._id);
 
-        createTokenCookie(token, res);
+    createTokenCookie(token, res);
 
-        user.password = undefined;
+    user.password = undefined;
 
-        res.status(200).json({
-            status: 'success',
-            token
-        });
+    res.status(200).json({
+        status: 'success',
+        token
+    });
 });
 
 export const restrictTo = (...roles) => {

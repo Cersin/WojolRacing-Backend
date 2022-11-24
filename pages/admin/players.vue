@@ -49,7 +49,7 @@
           label="Zespół"
           dark
           display-value
-          :data="team"
+          :data="Object.entries(team)"
         />
         <BaseButton class="col-12" @click="openDialog" secondary>Dodaj zawodnika</BaseButton>
       </div>
@@ -103,7 +103,7 @@
                 form
                 dark
                 display-value
-                :data="teamOptions"
+                :data="Object.keys(teamOptions)"
               />
             </ValidationWrapper>
           </div>
@@ -139,7 +139,12 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const teamOptions = ['Rezerwa', ...team];
+const teamOptions = {
+  ...team,
+  'Rezerwa': {
+    value: 'Rezerwa'
+  },
+}
 
 const playerColumns = [
   {

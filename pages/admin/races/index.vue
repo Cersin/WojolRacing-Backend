@@ -73,7 +73,7 @@
           <BaseSelects
             v-model="rowData.team"
             display-value
-            :data="teamOptions"
+            :data="Object.keys(teamOptions)"
           />
         </template>
 
@@ -184,7 +184,12 @@ const raceColumn = [
   }
 ]
 
-const teamOptions = ['Rezerwa', ...team];
+const teamOptions = {
+  ...team,
+  'Rezerwa': {
+    value: 'Rezerwa'
+  },
+}
 
 const {data: fetched, pending, refresh} = await useFetch('players', {
   baseURL: config.API_BASE_URL,

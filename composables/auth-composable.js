@@ -17,6 +17,9 @@ export const useAuthComposable = () => {
             const res = await $fetch(`/users/login`, {
                 method: 'POST',
                 baseURL: config.API_BASE_URL,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: {
                     name: username,
                     password: password
@@ -32,6 +35,7 @@ export const useAuthComposable = () => {
                 navigateTo('/');
             }
         } catch (e) {
+            console.log(e);
             toast.error(e?.data?.message || 'Error');
         }
     }

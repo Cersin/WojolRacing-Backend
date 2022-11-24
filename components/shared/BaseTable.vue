@@ -9,7 +9,9 @@
         </thead>
 
         <tbody>
-          <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data" :key="data._id">
+          <tr v-for="(data, rowIndex) in arrayKey ? fetched?.data[arrayKey] : fetched?.data"
+              :key="data._id"
+              :class="{'podium': podium}">
             <td v-for="({ name, title }, index) in columns" :key="index">
               <slot :name="title" :rowIndex="rowIndex" :columnIndex="index" :rowData="data" :columnData="getNestedObject(data, splitString(name, '.'))">
                 <div v-if="props.crud">
@@ -78,6 +80,10 @@ const props = defineProps({
     default: false
   },
   loading: {
+    type: Boolean,
+    default: false
+  },
+  podium: {
     type: Boolean,
     default: false
   }

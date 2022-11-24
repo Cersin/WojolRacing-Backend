@@ -21,6 +21,7 @@ process.on('uncaughtException', err => {
 })
 
 const app = express();
+app.enable("trust proxy");
 
 const db = config.DATABASE_GLOBAL;
 

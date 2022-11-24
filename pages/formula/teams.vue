@@ -28,12 +28,17 @@
 
       <BaseTable
         ref="classification"
+        podium
         :columns="raceColumn"
         :params="params"
         endpoint="race/constructorPoints"
       >
         <template #POS="{rowIndex}">
           {{ +rowIndex + 1 }}
+        </template>
+
+        <template #LOGO="{rowData, columnData}">
+          <img v-if="team[rowData._id].img" style="width: 35px; height: auto;" :src="`/teams/${team[rowData._id].img}`" alt="team logo">
         </template>
       </BaseTable>
     </div>
@@ -77,6 +82,7 @@ import seasons from "../../data/seasons";
 import split from "../../data/split";
 import BaseSelects from "../../components/shared/BaseSelects";
 import NavHeader from "../../components/layout/NavHeader";
+import team from "../../data/team";
 
 const raceColumn = [
     {
@@ -86,6 +92,10 @@ const raceColumn = [
     {
       title: 'TEAM',
       name: '_id'
+    },
+    {
+      title: 'LOGO',
+      name: 'logo'
     },
     {
       title: 'POINTS',

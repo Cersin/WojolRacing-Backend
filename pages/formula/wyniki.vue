@@ -39,12 +39,17 @@
           :columns="raceColumn"
           :params="params"
           endpoint="race"
+          podium
           arrayKey="results"
       >
         <template #BEST="{rowData, columnData}">
           <div :class="{bestLap: rowData?.fastestLap}">
             {{ columnData }}
           </div>
+        </template>
+
+        <template #LOGO="{rowData, columnData}">
+            <img v-if="team[rowData.team].img" style="width: 35px; height: auto;" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
         </template>
       </BaseTable>
     </div>
@@ -102,6 +107,7 @@ import split from "../../data/split";
 import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
 import NavHeader from "../../components/layout/NavHeader";
+import team from "../../data/team";
 
 const raceColumn = [
   {
@@ -115,6 +121,10 @@ const raceColumn = [
   {
     title: 'TEAM',
     name: 'team'
+  },
+  {
+    title: 'LOGO',
+    name: 'logo'
   },
   {
     title: 'GRID',
@@ -191,6 +201,6 @@ function selectSplit({value}) {
 }
 
 .bestLap {
-  color: $color-primary;
+  color: $color-best-lap;
 }
 </style>

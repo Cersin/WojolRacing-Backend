@@ -11,10 +11,28 @@
 
 .table_header {
   color: black;
-  background-color: $color-primary;
+  background-color: $color-primary !important;
   letter-spacing: 2px;
   font-weight: 800;
   font-size: 1.4rem;
+}
+
+.podium {
+  &:first-child {
+    background-color: #FFD700;
+    color: black;
+  }
+
+  &:nth-child(2) {
+    background-color: #C0C0C0;
+    color: black;
+
+  }
+
+  &:nth-child(3) {
+    background-color: #CD7F32;
+    color: black;
+  }
 }
 
 tr {
@@ -24,7 +42,7 @@ tr {
 table {
   font-size: 1.3rem;
   text-align: center;
-  border-spacing: 0 2rem;
+  //border-spacing: 0 1.4rem;
 }
 
 thead {
@@ -39,7 +57,8 @@ th {
 
 td {
   border-bottom: 3px solid rgba(200, 200, 200, 0.28);
-  padding: 0 .8rem;
+  //padding: 0 .8rem;
+  padding: .5rem
 }
 
 
