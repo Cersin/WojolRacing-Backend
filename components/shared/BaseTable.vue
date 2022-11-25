@@ -1,7 +1,7 @@
 <template>
   <LoadingWrapper :loading="pending || loading">
   <div class="table_wrapper">
-      <table>
+      <table  id="table">
         <thead>
         <tr class="table_header">
           <th v-for="({ title }, index) in columns" :key="index">{{ title }}</th>

@@ -49,9 +49,14 @@
         </template>
 
         <template #LOGO="{rowData, columnData}">
-            <img v-if="team[rowData.team].img" style="width: 35px; height: auto;" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
+            <img v-if="team[rowData.team].img" class="logo" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
         </template>
       </BaseTable>
+
+      <button class="button button--outline ripple margin-bottom"
+              @click="saveImage('table', `${response.data.track}-split${params.split}-season${params.season}`)">
+        Zapisz zdjęcie tabelki
+      </button>
     </div>
 
     <div class="aside">
@@ -108,6 +113,10 @@ import MainHeader from "../../components/layout/MainHeader";
 import Circuit from "../../components/tracks/circuit";
 import NavHeader from "../../components/layout/NavHeader";
 import team from "../../data/team";
+import useImage from "../../hooks/useImage";
+
+
+const {saveImage} = useImage();
 
 const raceColumn = [
   {

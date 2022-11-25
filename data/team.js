@@ -1,35 +1,35 @@
 export default {
     'Mercedes': {
         value: 'Mercedes',
-        img: 'Mercedes.png'
+        img: 'merc.png'
     },
     'Red Bull': {
         value: 'Red Bull',
-        img: 'RedBull.png'
+        img: 'RB.png'
     },
     'Ferrari': {
         value: 'Ferrari',
-        img: 'Ferrari.png'
+        img: 'fer.png'
     },
     'McLaren': {
         value: 'McLaren',
-        img: 'McLaren.png'
+        img: 'MCL.png'
     },
     'Alpine': {
         value: 'Alpine',
-        img: 'Alpine.png'
+        img: 'alpine.png'
     },
     'AlphaTauri': {
         value: 'AlphaTauri',
-        img: 'AlphaTauri.png'
+        img: 'at.png'
     },
     'Aston Martin': {
         value: 'Aston Martin',
-        img: 'AstonMartin.webp'
+        img: 'at.png'
     },
     'Alfa Romeo': {
         value: 'Alfa Romeo',
-        img: 'AlfaRomeo.png'
+        img: 'orlen.png'
     },
     'Haas': {
         value: 'Haas',
@@ -37,10 +37,11 @@ export default {
     },
     'Williams': {
         value: 'Williams',
-        img: 'Williams.webp'
+        img: 'Williams.png'
     },
     'Rezerwa': {
         value: 'Rezerwa',
+        img: 'wojol.png'
     },
 }
 

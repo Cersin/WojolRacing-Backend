@@ -38,13 +38,18 @@
         </template>
 
         <template #LOGO="{rowData, columnData}">
-          <img v-if="team[rowData.team].img" style="width: 35px; height: auto;" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
+          <img v-if="team[rowData.team].img" class="logo" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
         </template>
 
         <template #Finished="{columnData}">
           {{ +columnData * 100 }} %
         </template>
       </BaseTable>
+
+      <button class="button button--outline ripple margin-bottom"
+              @click="saveImage('table', `statystyki-split${params.split}-season${params.season}`)">
+        Zapisz zdjęcie tabelki
+      </button>
     </div>
   </div>
 
@@ -59,6 +64,9 @@ import seasons from "../../data/seasons";
 import split from "../../data/split";
 import BaseSelects from "../../components/shared/BaseSelects";
 import team from "../../data/team";
+import useImage from "../../hooks/useImage";
+
+const {saveImage} = useImage();
 
 const raceColumn = [
   {
@@ -139,7 +147,7 @@ const raceColumn = [
   },
 ]
 
-const selectedSplit = ref();
+const selectedSplit = ref(split["1"]);
 
 const params = ref({
   split: 1,
