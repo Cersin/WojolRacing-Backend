@@ -22,6 +22,8 @@
       </div>
 
       <a class="madeby" href="https://frontszymon.pl">v.1.1 Strona wykonana przez FRONTSZYMON.pl</a>
+
+      <Sponsors/>
     </div>
 
     <div class="aside">
@@ -44,6 +46,7 @@ import BaseCard from "../components/container/BaseCard";
 import MainHeader from "../components/layout/MainHeader";
 import NavHeader from "../components/layout/NavHeader";
 import BaseHeader from "../components/shared/BaseHeader";
+import Sponsors from "../components/layout/Sponsors";
 </script>
 
 <style scoped lang="scss">
@@ -53,6 +56,7 @@ import BaseHeader from "../components/shared/BaseHeader";
   grid-area: main;
   background-color: black;
   position: relative;
+  margin-bottom: 5rem;
 }
 
 .gallery {
