@@ -25,7 +25,7 @@ export default {
     },
     'Aston Martin': {
         value: 'Aston Martin',
-        img: 'at.png'
+        img: 'aston.png'
     },
     'Alfa Romeo': {
         value: 'Alfa Romeo',

@@ -3,7 +3,7 @@ module.exports = {
         {
             name: 'Wojol Racing',
             exec_mode: 'cluster',
-            instances: '4',
+            instances: '3',
             script: './.output/server/index.mjs'
         }
     ]
