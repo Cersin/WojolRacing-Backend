@@ -36,6 +36,16 @@ const images = [
     src: 'racetracks_biale.png',
     link: 'https://racetracks.pl/'
   },
+  {
+    name: 'SimShop',
+    src: 'simshop_logo.png',
+    link: 'https://simshop.pl/'
+  },
+  {
+    name: 'Exerion',
+    src: 'exerion_logo.png',
+    link: 'https://exerion.pl/'
+  },
 ]
 </script>
 
@@ -46,7 +56,7 @@ const images = [
   right: 0;
   left: 0;
   margin: 3rem 2rem;
-  max-width: 500px;
+  max-width: 800px;
   overflow: hidden;
   padding: 0 3rem;
 

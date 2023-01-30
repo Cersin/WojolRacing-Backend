@@ -42,7 +42,7 @@
         </template>
 
         <template #Finished="{columnData}">
-          {{ +columnData * 100 }} %
+          {{ (+columnData * 100).toFixed(0) }} %
         </template>
       </BaseTable>
 

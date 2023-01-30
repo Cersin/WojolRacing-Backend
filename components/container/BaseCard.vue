@@ -106,6 +106,7 @@ function redirect() {
       position: relative;
       z-index: 11;
       filter: saturate(15%);
+      border-radius: 30px;
     }
 
     &:after {
