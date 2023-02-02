@@ -222,7 +222,7 @@ function selectSplit({value}) {
 
 function deletePlayer(row) {
   const { data } = results.value.data;
-  data.results = data.results.filter(el => el !== row);
+  refresh();
 }
 
 function selectedPlayer(event) {

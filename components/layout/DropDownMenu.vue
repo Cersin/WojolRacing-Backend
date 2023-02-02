@@ -37,6 +37,18 @@
         ]"/>
 
       <DropDownMenuItem title="Discord" link to="https://discord.com/invite/6MSNv53ekR"/>
+
+      <DropDownMenuItem v-if="authState.logged" title="Admin" :dropdown="[
+          {
+            title: 'Admin Wyścigi',
+            to: 'admin/races'
+          },
+           {
+            title: 'Admin Zawodnicy',
+            to: 'admin/players'
+          },
+        ]"/>
+
     </div>
 
 
@@ -45,14 +57,13 @@
 
 </template>
 
-<script>
+<script setup>
 import DropDownMenuItem from "~/components/layout/DropDownMenuItem.vue";
 import Socials from "~/components/shared/Socials.vue";
+import {useAuthComposable} from "~/composables/auth-composable";
 
-export default {
-  name: "DropDownMenu",
-  components: {Socials, DropDownMenuItem}
-}
+const {authState} = useAuthComposable();
+
 </script>
 
 <style scoped>

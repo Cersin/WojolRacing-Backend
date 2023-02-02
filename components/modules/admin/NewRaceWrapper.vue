@@ -129,6 +129,10 @@ const emit = defineEmits(['update:modelValue', 'added']);
 const {data: fetched, pending, refresh} = await useFetch('players', {
   baseURL: config.API_BASE_URL,
   server: false,
+  params: {
+    active: true,
+    sort: 'team'
+  },
   initialCache: true
 });
 
