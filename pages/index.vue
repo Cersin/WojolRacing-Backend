@@ -65,7 +65,7 @@ import Sponsors from "../components/layout/Sponsors";
   grid-gap: 10rem 10rem;
   justify-content: center;
 
-  @include big-desktop() {
+  @include desktop() {
     grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
     margin-top: 15rem;
   }

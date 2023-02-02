@@ -6,6 +6,7 @@
 @import "icons";
 @import "table";
 @import "teams";
+@import "dropdown";
 @import '@vuepic/vue-datepicker/dist/main.css';
 
 :root {
@@ -55,7 +56,7 @@ body {
     grid-template-areas:
                       "head aside"
                       "main aside";
-    grid-template-columns: .70fr .30fr;
+    grid-template-columns: 1fr .30fr;
     grid-template-rows: 80px 1fr;
   }
 }

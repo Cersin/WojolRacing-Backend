@@ -1,26 +1,18 @@
 <template>
   <div class="header" :class="{'hidden-md': aside}">
-      <div class="socials">
-        <IconFacebook @click="navigateToSocial('https://www.facebook.com/wojolracing')"/>
-        <IconTwitch @click="navigateToSocial('https://www.twitch.tv/wojolracing')"/>
-        <IconDiscord @click="navigateToSocial('https://discord.com/invite/6MSNv53ekR')"/>
-        <IconTiktok @click="navigateToSocial('https://www.tiktok.com/@wojolracing')"/>
-        <IconYoutube @click="navigateToSocial('https://www.youtube.com/channel/UC73euqkfm_O-S_jsCQk7Kxg')"/>
-      </div>
+    <Socials></Socials>
 
+    <div class="hidden-lg">
       <BaseMenu :aside="aside" :active="active"/>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {navigateTo} from "nuxt/app";
 import BaseMenu from "../shared/BaseMenu";
 import {ref} from "vue";
-import { IconDiscord } from "@iconify-prerendered/vue-fa6-brands"
-import { IconTwitch } from "@iconify-prerendered/vue-fa6-brands"
-import { IconFacebook } from "@iconify-prerendered/vue-fa6-brands"
-import { IconYoutube } from "@iconify-prerendered/vue-fa6-brands"
-import { IconTiktok } from "@iconify-prerendered/vue-fa6-brands"
+import Socials from "~/components/shared/Socials.vue";
+
 
 defineProps({
   aside: {
@@ -31,9 +23,7 @@ defineProps({
 
 const active = ref(false);
 
-function navigateToSocial(link) {
-  window.open(link);
-}
+
 </script>
 
 <style scoped lang="scss">
@@ -46,14 +36,6 @@ function navigateToSocial(link) {
   align-items: center;
 }
 
-.socials {
-  display: flex;
-  gap: 1rem;
-  font-size: 2rem;
 
-  svg {
-    cursor: pointer;
-  }
-}
 
 </style>

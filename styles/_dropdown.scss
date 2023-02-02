@@ -1,0 +1,64 @@
+@import "variables";
+
+.dropdown {
+  padding: 1rem;
+  font-size: 1.7rem;
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999998;
+  color: white;
+  text-decoration: none;
+
+  &:hover > &__menu {
+    display: flex;
+  }
+
+  &__menu {
+    z-index: 999999;
+    position: absolute;
+    background-color: transparentize(black, .5);
+    padding: .5rem;
+    //display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin-top: .5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: none;
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center;
+    perspective: 1000px;
+
+    &--link {
+      background-color: $color-primary;
+      color: black;
+      text-decoration: none;
+      padding: .2rem;
+      font-size: 1.4rem;
+      border-radius: 10px;
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: darken($color-primary, 15%);
+      }
+    }
+  }
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0)
+  }
+  80% {
+    transform: scaleY(1.1)
+  }
+  100% {
+    transform: scaleY(1)
+  }
+}

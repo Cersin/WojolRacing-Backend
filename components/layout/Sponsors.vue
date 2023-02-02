@@ -56,7 +56,6 @@ const images = [
   right: 0;
   left: 0;
   margin: 3rem 2rem;
-  max-width: 800px;
   overflow: hidden;
   padding: 0 3rem;
 
@@ -71,7 +70,7 @@ const images = [
 
 .image__wrapper {
   animation-name: move;
-  animation-duration: 9s;
+  animation-duration: 8s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: linear;
@@ -81,8 +80,13 @@ const images = [
   0%   {
     transform: translate(0);
   }
+
+  50% {
+    transform: translate(-200px);
+  }
+
   100% {
-    transform: translate(-600px);
+    transform: translate(200px);
   }
 
 }

@@ -1,11 +1,13 @@
 <template>
   <div class="assetto">
+    <MainHeader />
     <h1>Coming Soon...</h1>
   </div>
 </template>
 
 <script setup>
 
+import MainHeader from "~/components/layout/MainHeader.vue";
 </script>
 
 <style scoped lang="scss">

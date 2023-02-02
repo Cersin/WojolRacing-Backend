@@ -2,15 +2,21 @@
   <div class="header">
     <img @click="navigateTo('/')" class="header__img" src="/logo_wojol.png" alt="Wojol Racing">
     <div class="right_side">
-      <button
-        v-if="!authState.logged"
-        class="button button--outline ripple hidden-md"
-        @click="navigateTo({
-        name: 'login'
-        })"
-        >ZALOGUJ</button>
+      <Socials class="hidden-sm-and-up"></Socials>
 
-      <NavHeader :class="{'hidden-lg': breakpoints}" />
+      <DropDownMenu />
+
+<!--      <button-->
+<!--        v-if="!authState.logged"-->
+<!--        class="button button&#45;&#45;outline ripple hidden-md"-->
+<!--        @click="navigateTo({-->
+<!--        name: 'login'-->
+<!--        })"-->
+<!--        >ZALOGUJ</button>-->
+      <div class="hidden-lg">
+        <BaseMenu />
+      </div>
+
     </div>
   </div>
 </template>
@@ -19,6 +25,9 @@
 import {navigateTo} from "nuxt/app";
 import NavHeader from "./NavHeader";
 import {useAuthComposable} from "../../composables/auth-composable";
+import Socials from "~/components/shared/Socials.vue";
+import BaseMenu from "~/components/shared/BaseMenu.vue";
+import DropDownMenu from "~/components/layout/DropDownMenu.vue";
 
 const {authState} = useAuthComposable();
 

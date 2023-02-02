@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <MainHeader :breakpoints="false"/>
+    <MainHeader />
     <div class="formula">
       <BaseHeader title="Statystyki"/>
 
@@ -151,7 +151,7 @@ const selectedSplit = ref(split["1"]);
 
 const params = ref({
   split: 1,
-  season: 1,
+  season: 2,
 });
 
 const classification = ref();
