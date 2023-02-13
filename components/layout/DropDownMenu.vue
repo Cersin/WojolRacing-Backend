@@ -41,11 +41,11 @@
       <DropDownMenuItem v-if="authState.logged" title="Admin" :dropdown="[
           {
             title: 'Admin Wyścigi',
-            to: 'admin/races'
+            to: '/admin/races'
           },
            {
             title: 'Admin Zawodnicy',
-            to: 'admin/players'
+            to: '/admin/players'
           },
         ]"/>
 
