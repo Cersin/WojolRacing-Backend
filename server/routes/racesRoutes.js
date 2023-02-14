@@ -27,6 +27,7 @@ router
 
 router
     .route('/:id')
+    .get(racesController.getRace)
     .patch(protect, restrictTo('admin'), racesController.editRace)
     .delete(protect, restrictTo('admin'), racesController.deleteRace)
 

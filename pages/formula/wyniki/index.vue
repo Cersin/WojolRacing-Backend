@@ -53,10 +53,18 @@
         </template>
       </BaseTable>
 
-      <button class="button button--outline ripple margin-bottom"
-              @click="saveImage('table', `${response.data.track}-split${params.split}-season${params.season}`)">
-        Zapisz zdjęcie tabelki
-      </button>
+      <div v-if="response?.data?.length" style="display: flex; gap: 1rem;">
+        <button class="button button--outline ripple margin-bottom"
+                @click="openRace">
+          Otwórz w osobnym linku
+        </button>
+
+        <button class="button button--outline ripple margin-bottom"
+                @click="saveImage('table', `${response.data.track}-split${params.split}-season${params.season}`)">
+          Zapisz zdjęcie tabelki
+        </button>
+      </div>
+
     </div>
 
     <div class="aside">
@@ -104,19 +112,20 @@
 
 <script setup>
 import {computed, ref, watch} from "vue";
-import BaseTable from "../../components/shared/BaseTable";
-import BaseHeader from "../../components/shared/BaseHeader";
-import BaseSelects from "../../components/shared/BaseSelects";
-import seasons from "../../data/seasons";
-import split from "../../data/split";
-import MainHeader from "../../components/layout/MainHeader";
-import Circuit from "../../components/tracks/circuit";
-import NavHeader from "../../components/layout/NavHeader";
-import team from "../../data/team";
-import useImage from "../../hooks/useImage";
+import BaseTable from "../../../components/shared/BaseTable";
+import BaseHeader from "../../../components/shared/BaseHeader";
+import BaseSelects from "../../../components/shared/BaseSelects";
+import seasons from "../../../data/seasons";
+import split from "../../../data/split";
+import MainHeader from "../../../components/layout/MainHeader";
+import Circuit from "../../../components/tracks/circuit";
+import NavHeader from "../../../components/layout/NavHeader";
+import team from "../../../data/team";
+import useImage from "../../../hooks/useImage";
 
 
 const {saveImage} = useImage();
+const router = useRouter();
 
 const raceColumn = [
   {
@@ -181,6 +190,10 @@ function selectTrack({index}) {
 
 function selectSplit({value}) {
   params.value.split = value;
+}
+
+function openRace() {
+  router.push(`/formula/wyniki/${response.value?.data?._id}`);
 }
 </script>
 

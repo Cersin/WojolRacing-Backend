@@ -13,6 +13,28 @@
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
+        </div>
+
+        <div class="navigation__block">
+          <h2>Powtórki</h2>
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi')">
+            Sezon 1 F1
+          </a>
+
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-')">
+            Sezon 1 F2
+          </a>
+
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk3r7cpbhUiOD5R6obpDaZ2_')">
+            Sezon 2 F1
+          </a>
+
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk0be_A_Uo3m2pi51dvyal86')">
+            Sezon 2 F2
+          </a>
         </div>
 
         <div v-if="authState.logged" class="navigation__block">
@@ -35,6 +57,9 @@ import {useAuthComposable} from "../../composables/auth-composable";
 const route = useRoute();
 const {authState} = useAuthComposable();
 
+function navigateToSocial(link) {
+  window.open(link);
+}
 
 defineProps({
   active: {

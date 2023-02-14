@@ -34,6 +34,16 @@
             to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-',
             link: true
           },
+          {
+            title: 'Sezon 2 F1',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3r7cpbhUiOD5R6obpDaZ2_',
+            link: true
+          },
+          {
+            title: 'Sezon 2 F2',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk0be_A_Uo3m2pi51dvyal86',
+            link: true
+          },
         ]"/>
 
       <DropDownMenuItem title="Discord" link to="https://discord.com/invite/6MSNv53ekR"/>

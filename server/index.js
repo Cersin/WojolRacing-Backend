@@ -23,7 +23,8 @@ process.on('uncaughtException', err => {
 const app = express();
 app.enable("trust proxy");
 
-const db = config.DATABASE_GLOBAL;
+const db = config.DATABASE_LOCAL;
+// const db = config.DATABASE_GLOBAL;
 
 mongoose.connect(db).then(() => {
     console.log('Połączono z bazą danych');

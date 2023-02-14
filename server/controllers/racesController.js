@@ -5,12 +5,54 @@ import catchAsync from "~/server/utils/catchAsync";
 import AppError from "~/server/utils/appError";
 import round from 'mongo-round';
 
+const ObjectId = mongoose.Types.ObjectId;
+
 const createRace = catchAsync(async (req, res) => {
     const newRace = await Races.create(req.body);
 
     res.status(201).json({
         status: 'success',
         race: newRace
+    })
+});
+
+const getRace = catchAsync(async (req, res) => {
+    let races = await Races.aggregate([
+        {
+            "$match": {
+                "_id": new ObjectId(req.params.id),
+            }
+        },
+        {"$unwind": "$results"},
+        {"$sort": {'results.position': 1}},
+        {
+            "$lookup": {
+                from: "players",
+                localField: "results.player",
+                foreignField: "_id",
+                as: "results.playerDetails"
+            },
+        },
+        {"$unwind": "$results.playerDetails"},
+        {
+            "$group": {
+                _id: '$_id',
+                track: {"$first": '$track'},
+                season: {"$first": '$season'},
+                split: {"$first": '$split'},
+                date: {"$first": '$date'},
+                points: {$sum: "$results.points"},
+                results: {"$push": '$results'},
+            }
+        },
+        {
+            "$sort": {'date': -1},
+        },
+    ]);
+
+    res.status(200).json({
+        status: 'success',
+        data: races[0]
     })
 });
 
@@ -347,5 +389,5 @@ const deleteRace = catchAsync(async (req, res, next) => {
 });
 
 export default {
-    createRace, findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, formatData
+    createRace, findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData
 }
