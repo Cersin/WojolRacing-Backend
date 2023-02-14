@@ -13,6 +13,9 @@ router
     .route('/playerPoints')
     .get(racesController.userPoints);
 
+router
+    .route('/detailsPoints')
+    .get(racesController.userDetailsPoints);
 // router
 //     .route('/formatData')
 //     .get(racesController.formatData);

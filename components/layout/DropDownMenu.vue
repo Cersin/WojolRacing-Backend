@@ -5,9 +5,13 @@
       <DropDownMenuItem title="Assetto Corsa" to="/assetto"/>
 
       <DropDownMenuItem title="Formuła 1" :dropdown="[
-            {
+          {
             title: 'Wyniki',
             to: '/formula/wyniki',
+          },
+          {
+            title: 'Wyniki zbiorcze',
+            to: '/formula/wyniki-zbiorcze',
           },
           {
             title: 'Klasyfikacja generalna',
