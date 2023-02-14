@@ -12,7 +12,7 @@
 .table_header {
   color: black;
   background-color: $color-primary !important;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 800;
   font-size: 1.4rem;
 }
@@ -53,13 +53,13 @@ thead {
 }
 
 th {
-  padding: .8rem;
+  padding: .8rem .3rem;
 }
 
 td {
   border-bottom: 3px solid rgba(200, 200, 200, 0.28);
   //padding: 0 .8rem;
-  padding: .5rem
+  padding: .5rem 0rem
 }
 
 
