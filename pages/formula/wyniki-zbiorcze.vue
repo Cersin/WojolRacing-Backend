@@ -51,7 +51,7 @@
           <img v-if="team[rowData.team].img" class="logo" :src="`/teams/${team[rowData.team].img}`" alt="team logo">
         </template>
 
-        <template v-for="(track, index) in tracks" :key="index" #[track]="{rowData, columnData}">
+        <template v-for="(track, index) in tracks" :key="index" #[track.track]="{rowData, columnData}">
           <div class="points_wrapper">
             <div :class="{bestLap: findAndReturnFastestLap(track, rowData.races), firstPlace: findAndReturnPosition(track, rowData.races) === 1, secondPlace: findAndReturnPosition(track, rowData.races) === 2, thirdPlace: findAndReturnPosition(track, rowData.races) === 3}">
               {{ findAndReturn(track, rowData.races) }}
@@ -116,8 +116,8 @@ const raceColumns = computed(() => {
   if(classification?.value?.data?.tracks) {
     const tracks = classification?.value?.data?.tracks.map((el) => {
       return {
-        name: el,
-        title: el
+        name: el.track,
+        title: el.track
       }
     })
 
@@ -160,17 +160,17 @@ function selectSplit({value}) {
 }
 
 function findAndReturn(el, searchingArray = []) {
-  const findTrack = searchingArray.find(element => element.track === el);
+  const findTrack = searchingArray.find(element => element.track === el.track);
   return findTrack?.points || 0;
 }
 
 function findAndReturnFastestLap(el, searchingArray = []) {
-  const findTrack = searchingArray.find(element => element.track === el);
+  const findTrack = searchingArray.find(element => element.track === el.track);
   return findTrack?.fastestLap || false;
 }
 
 function findAndReturnPosition(el, searchingArray = []) {
-  const findTrack = searchingArray.find(element => element.track === el);
+  const findTrack = searchingArray.find(element => element.track === el.track);
   return findTrack?.position || 0;
 }
 </script>

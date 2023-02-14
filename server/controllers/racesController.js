@@ -190,10 +190,16 @@ const userPoints = catchAsync(async (req, res) => {
 
 const userDetailsPoints = catchAsync(async (req, res) => {
 
-    const tracks = await Races.find({
-        split: +req.query.split,
-        season: +req.query.season,
-    }).distinct('track');
+    let tracks = await Races.aggregate([
+        {
+            $match: {
+                "split": +req.query.split,
+                "season": +req.query.season
+            }
+        },
+        {$sort: { date: 1}},
+        {$project:{"track": "$track"}},
+    ]);
 
     const users = await Races.aggregate([
         {
