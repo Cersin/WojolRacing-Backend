@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <MainHeader/>
-    <div class="formula">
+    <div class="formula-aggregate">
       <BaseHeader title="Wyniki zbiorcze"/>
 
       <div class="row">
@@ -29,7 +29,6 @@
       <BaseTable
         ref="classification"
         :columns="raceColumns"
-        podium
         :params="params"
         endpoint="race/detailsPoints"
       >
@@ -53,9 +52,12 @@
         </template>
 
         <template v-for="(track, index) in tracks" :key="index" #[track]="{rowData, columnData}">
-          <div :class="{bestLap: findAndReturnFastestLap(track, rowData.races)}">
-            {{ findAndReturn(track, rowData.races) }}
+          <div class="points_wrapper">
+            <div :class="{bestLap: findAndReturnFastestLap(track, rowData.races), firstPlace: findAndReturnPosition(track, rowData.races) === 1, secondPlace: findAndReturnPosition(track, rowData.races) === 2, thirdPlace: findAndReturnPosition(track, rowData.races) === 3}">
+              {{ findAndReturn(track, rowData.races) }}
+            </div>
           </div>
+
         </template>
 
       </BaseTable>
@@ -166,10 +168,15 @@ function findAndReturnFastestLap(el, searchingArray = []) {
   const findTrack = searchingArray.find(element => element.track === el);
   return findTrack?.fastestLap || false;
 }
+
+function findAndReturnPosition(el, searchingArray = []) {
+  const findTrack = searchingArray.find(element => element.track === el);
+  return findTrack?.position || 0;
+}
 </script>
 
 <style scoped lang="scss">
-.formula {
+.formula-aggregate {
   padding: $default-padding;
   background-color: black;
   grid-area: main;
@@ -180,13 +187,39 @@ function findAndReturnFastestLap(el, searchingArray = []) {
 }
 
 .bestLap {
-  color: rgb(103, 78, 146);
-  font-weight: 600;
-  font-size: 1.5rem;
+  border-bottom: 4px solid rgb(138, 106, 192);
 }
 
 .summary_points {
-  font-weight: 600;
+  font-weight: 800;
   font-size: 1.6rem;
+}
+
+.points_wrapper {
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstPlace {
+  background-color: #FFD700;
+  color: black;
+  padding: .2rem .5rem;
+  border-radius: 15px;
+}
+
+.secondPlace {
+  background-color: #C0C0C0;
+  color: black;
+  padding: .3rem;
+  border-radius: 15px;
+}
+
+.thirdPlace {
+  background-color: #CD7F32;
+  color: black;
+  padding: .3rem;
+  border-radius: 15px;
 }
 </style>

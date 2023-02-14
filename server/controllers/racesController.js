@@ -211,6 +211,7 @@ const userDetailsPoints = catchAsync(async (req, res) => {
                 races: {$push: {
                         points: "$results.points",
                         fastestLap: "$results.fastestLap",
+                        position: "$results.position",
                         track: "$track"
                     }},
             }

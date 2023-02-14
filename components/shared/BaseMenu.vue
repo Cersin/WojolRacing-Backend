@@ -12,6 +12,7 @@
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki-zbiorcze">Wyniki zbiorcze</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
         </div>
 
