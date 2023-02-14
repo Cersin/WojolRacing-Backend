@@ -2,8 +2,7 @@
   <div class="layout">
     <MainHeader/>
     <div class="formula">
-      <BaseHeader title="Wyniki wyścigów"/>
-
+      <BaseHeader :title="`Wyniki ${response?.data?.track} S${response?.data?.season}/F${response?.data?.split}`"/>
       <BaseTable
         ref="results"
         :columns="raceColumn"
@@ -24,7 +23,7 @@
 
       <div v-if="response?.data?.length" style="display: flex; gap: 1rem;">
         <button class="button button--outline ripple margin-bottom"
-                @click="saveImage('table', `${response.data.track}-split${params.split}-season${params.season}`)">
+                @click="saveImage('table', `${response.data.track}`)">
           Zapisz zdjęcie tabelki
         </button>
       </div>

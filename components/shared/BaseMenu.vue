@@ -13,9 +13,6 @@
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
-          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
-          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
-          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
         </div>
 
         <div class="navigation__block">

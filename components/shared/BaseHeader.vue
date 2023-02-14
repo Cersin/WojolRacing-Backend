@@ -1,6 +1,8 @@
 <template>
   <div class="header margin-bottom--sm margin-top--sm" :class="{'header--black': black}">
-    <span>{{ splitTitle[0] }}</span> {{ splitTitle[1] }}
+    <span v-for="(el, index) in splitTitle" :key="index">{{ el + ' ' }}</span>
+
+    <!--    <span>{{ splitTitle[0] }}</span> {{ splitTitle[1] }}-->
   </div>
 </template>
 
@@ -38,13 +40,17 @@ export default {
   }
 
   span {
-    color: $color-primary;
+    &:first-child {
+      color: $color-primary;
+    }
   }
 }
 
 .header--black {
   span {
-    color: black;
+    &:first-child {
+      color: black;
+    }
   }
 }
 
