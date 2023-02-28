@@ -161,7 +161,10 @@ function selectSplit({value}) {
 
 function findAndReturn(el, searchingArray = []) {
   const findTrack = searchingArray.find(element => element.track === el.track);
-  return findTrack?.points || 0;
+  const points =  findTrack?.points;
+  const dnf = findTrack?.dnf;
+  if (dnf) return 'DNF';
+  return points === undefined || null ? 'DNS' : points;
 }
 
 function findAndReturnFastestLap(el, searchingArray = []) {
