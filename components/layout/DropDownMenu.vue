@@ -2,8 +2,6 @@
   <div class="hidden-xs-only" style="display: flex; flex-direction: column;">
     <div style="display: flex;">
 
-      <DropDownMenuItem title="Assetto Corsa" to="/assetto"/>
-
       <DropDownMenuItem title="Formuła 1" :dropdown="[
           {
             title: 'Wyniki',
@@ -24,6 +22,25 @@
           {
             title: 'Statystyki',
             to: '/formula/statystyki',
+          }
+        ]"/>
+
+      <DropDownMenuItem title="Assetto" :dropdown="[
+          {
+            title: 'Wyniki',
+            to: '/assetto/wyniki',
+          },
+          {
+            title: 'Wyniki zbiorcze',
+            to: '/assetto/wyniki-zbiorcze',
+          },
+          {
+            title: 'Klasyfikacja generalna',
+            to: '/assetto',
+          },
+          {
+            title: 'Statystyki',
+            to: '/assetto/statystyki',
           }
         ]"/>
 
@@ -52,7 +69,7 @@
 
       <DropDownMenuItem title="Discord" link to="https://discord.com/invite/6MSNv53ekR"/>
 
-      <DropDownMenuItem v-if="authState.logged" title="Admin" :dropdown="[
+      <DropDownMenuItem v-if="authState.logged && authState.role === 'admin'" title="Admin" :dropdown="[
           {
             title: 'Admin Wyścigi',
             to: '/admin/races'
@@ -60,6 +77,17 @@
            {
             title: 'Admin Zawodnicy',
             to: '/admin/players'
+          },
+        ]"/>
+
+      <DropDownMenuItem v-if="authState.logged && authState.role === 'admin-assetto'" title="Admin Assetto" :dropdown="[
+          {
+            title: 'Admin Wyścigi',
+            to: '/admin/assetto/races'
+          },
+           {
+            title: 'Admin Zawodnicy',
+            to: '/admin/assetto/players'
           },
         ]"/>
 

@@ -1,6 +1,6 @@
 <template>
   <LoadingWrapper :loading="loading">
-  <div class="table_wrapper">
+  <div style="min-height: 400px" class="table_wrapper">
       <table>
         <thead>
         <tr class="table_header">

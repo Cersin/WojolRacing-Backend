@@ -6,7 +6,8 @@ import {useToast} from "vue-toastification";
 const toast = useToast();
 
 const authState = reactive({
-    logged: false
+    logged: false,
+    role: ''
 });
 
 export const useAuthComposable = () => {
@@ -25,12 +26,15 @@ export const useAuthComposable = () => {
                     password: password
                 }
             });
-            const {message, status} = res;
+
+            const {message, status, role} = res;
             if (status !== 'success') {
                 authState.logged = false;
+                authState.role = '';
                 throw new Error(message);
             } else {
                 authState.logged = true;
+                authState.role = role;
                 toast.success('Zalogowano');
                 navigateTo('/');
             }
@@ -46,8 +50,13 @@ export const useAuthComposable = () => {
                 method: 'GET',
                 baseURL: config.API_BASE_URL,
             });
+
             authState.logged = !!res.logged;
-            return res.logged;
+            authState.role = res?.role;
+            return {
+                logged: res.logged,
+                role: res?.role
+            }
         } catch (e) {
             return false;
         }

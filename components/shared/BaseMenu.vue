@@ -17,6 +17,14 @@
         </div>
 
         <div class="navigation__block">
+          <h2>Assetto Corsa</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto">Klasyfikacja zawodników</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/wyniki">Wyniki</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/wyniki-zbiorcze">Wyniki zbiorcze</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/statystyki">Statystyki</NuxtLink>
+        </div>
+
+        <div class="navigation__block">
           <h2>Powtórki</h2>
           <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi')">
             Sezon 1 F1
@@ -35,10 +43,16 @@
           </a>
         </div>
 
-        <div v-if="authState.logged" class="navigation__block">
+        <div v-if="authState.logged && authState.role === 'admin'" class="navigation__block">
           <h2>Admin F1</h2>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/players">Zawodnicy</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/races">Wyniki</NuxtLink>
+        </div>
+
+        <div v-if="authState.logged && authState.role === 'admin-assetto'" class="navigation__block">
+          <h2>Admin Assetto</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/assetto/players">Zawodnicy</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/assetto/races">Wyniki</NuxtLink>
         </div>
       </div>
     </div>

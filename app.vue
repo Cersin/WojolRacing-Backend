@@ -16,6 +16,7 @@ const {data} = await useFetch('/users/verify', {
   baseURL: config.API_BASE_URL,
 });
 authState.logged = data.value?.logged;
+authState.role = data.value?.role;
 </script>
 
 <style scoped>

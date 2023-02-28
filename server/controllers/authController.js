@@ -75,7 +75,8 @@ export const verify = catchAsync(async (req, res) => {
     }
     res.status(200).json({
         status: 'success',
-        logged: true
+        logged: true,
+        role: freshUser.role
     })
 });
 
@@ -104,13 +105,13 @@ export const logIn = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        token
+        token,
+        role: user.role
     });
 });
 
 export const restrictTo = (...roles) => {
     return (req, res, next) => {
-        // roles ['admin', '...']
         if (!roles.includes(req.user.role)) {
             return next(new AppError('Brak uprawnień', 401));
         }

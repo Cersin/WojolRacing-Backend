@@ -2,12 +2,12 @@ import express from 'express';
 
 const router = express.Router();
 import {protect, restrictTo} from "~/server/controllers/authController";
-import racesController from "~/server/controllers/racesController";
+import racesController from "~/server/controllers/assettoRacesController";
 
 router
     .route('/')
     .get(racesController.findRaces)
-    .post(protect, restrictTo('admin'), racesController.createRace);
+    .post(protect, restrictTo('admin-assetto'), racesController.createRace);
 
 router
     .route('/playerPoints')
@@ -28,7 +28,7 @@ router
 router
     .route('/:id')
     .get(racesController.getRace)
-    .patch(protect, restrictTo('admin'), racesController.editRace)
-    .delete(protect, restrictTo('admin'), racesController.deleteRace)
+    .patch(protect, restrictTo('admin-assetto'), racesController.editRace)
+    .delete(protect, restrictTo('admin-assetto'), racesController.deleteRace)
 
 export default router

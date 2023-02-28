@@ -12,6 +12,8 @@ import { config } from "~/server/config-server";
 import userRoutes from "~/server/routes/userRoutes";
 import playersRoutes from "~/server/routes/playersRoutes";
 import racesRoutes from "~/server/routes/racesRoutes";
+import assettoRacesRoutes from "~/server/routes/assettoRacesRoutes";
+import assettoPlayersRoutes from "~/server/routes/assettoPlayersRoutes";
 import calendarRoutes from "~/server/routes/calendarRoutes";
 
 process.on('uncaughtException', err => {
@@ -41,6 +43,8 @@ app.use(cookieParser());
 app.use('/users', userRoutes);
 app.use('/players', playersRoutes);
 app.use('/race', racesRoutes);
+app.use('/assetto-players', assettoPlayersRoutes);
+app.use('/assetto-race', assettoRacesRoutes);
 app.use('/calendar', calendarRoutes);
 
 app.all('*', (req,res,next) => {
