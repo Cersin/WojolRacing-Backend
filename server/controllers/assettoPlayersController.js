@@ -18,7 +18,6 @@ const getPlayers = catchAsync(async (req, res, next) => {
         .limitFields()
         .paginate();
     const players = await features.query;
-    console.log(players);
     const count = await Players.countDocuments();
     let pagination = {};
     if (req.query.limit && req.query.page) {

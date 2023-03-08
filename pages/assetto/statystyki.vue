@@ -64,7 +64,7 @@ const raceColumn = [
   },
   {
     title: 'TEAM',
-    name: 'team'
+    name: 'player.team'
   },
   {
     title: 'PTS',

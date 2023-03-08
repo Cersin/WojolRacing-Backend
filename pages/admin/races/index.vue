@@ -194,7 +194,11 @@ const teamOptions = {
 const {data: fetched, pending, refresh} = await useFetch('players', {
   baseURL: config.API_BASE_URL,
   server: false,
-  initialCache: true
+  initialCache: true,
+  params: {
+    active: true,
+    sort: 'name'
+  }
 });
 
 const params = ref({

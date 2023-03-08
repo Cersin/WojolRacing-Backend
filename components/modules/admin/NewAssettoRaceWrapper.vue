@@ -111,6 +111,7 @@ const {data: fetched, pending, refresh} = await useFetch('assetto-players', {
   server: false,
   params: {
     active: true,
+    sort: 'name'
   },
   initialCache: true
 });
@@ -134,7 +135,7 @@ const raceColumn = [
     name: 'bestLap'
   },
   {
-    title: 'GAP',
+    title: 'TOTAL TIME',
     name: 'gap'
   },
   {

@@ -71,7 +71,7 @@ const raceColumn = [
     name: 'bestLap'
   },
   {
-    title: 'GAP',
+    title: 'TOTAL TIME',
     name: 'gap'
   },
   {

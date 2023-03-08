@@ -46,6 +46,11 @@ const images = [
     src: 'exerion_logo.png',
     link: 'https://exerion.pl/'
   },
+  {
+    name: 'Drive Squad',
+    src: 'drive_squad.png',
+    link: 'https://drivesquad.pl/'
+  },
 ]
 </script>
 

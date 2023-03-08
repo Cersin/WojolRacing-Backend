@@ -36,6 +36,15 @@
         </div>
       </div>
 
+      <BaseInput
+        v-if="response?.data?.track"
+        v-model="response.data.track"
+        class="col-6 md-col-4"
+        label="Nazwa toru"
+        name="track"
+        rules="required"
+      />
+
       <BaseTable
         ref="results"
         :loading="loading"
@@ -107,6 +116,7 @@ import team from "../../../../data/team";
 import Datepicker from '@vuepic/vue-datepicker';
 import assettoSeasons from "~/data/assettoSeasons";
 import NewAssettoRaceWrapper from "~/components/modules/admin/NewAssettoRaceWrapper.vue";
+import BaseInput from "~/components/shared/form/BaseInput.vue";
 
 definePageMeta({
   middleware: 'auth-assetto'
@@ -134,7 +144,7 @@ const raceColumn = [
     name: 'bestLap'
   },
   {
-    title: 'GAP',
+    title: 'TOTAL TIME',
     name: 'gap'
   },
   {
@@ -165,7 +175,11 @@ const teamOptions = {
 const {data: fetched, pending, refresh} = await useFetch('assetto-players', {
   baseURL: config.API_BASE_URL,
   server: false,
-  initialCache: true
+  initialCache: true,
+  params: {
+    active: true,
+    sort: 'name'
+  },
 });
 
 const params = ref({
