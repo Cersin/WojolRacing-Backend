@@ -87,6 +87,8 @@
 
       <DropDownMenuItem title="Discord" link to="https://discord.com/invite/6MSNv53ekR"/>
 
+      <DropDownMenuItem title="Sponsorzy" to="/sponsors"/>
+
       <DropDownMenuItem v-if="authState.logged && authState.role === 'admin'" title="Admin" :dropdown="[
           {
             title: 'Admin Wyścigi',
