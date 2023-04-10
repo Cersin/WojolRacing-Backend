@@ -9,19 +9,27 @@
         <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
         <div class="navigation__block">
           <h2>Formuła 1</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/informacje">Informacje</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki-zbiorcze">Wyniki zbiorcze</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/statystyki">Statystyki</NuxtLink>
+          <a @click="navigateToSocial('https://docs.google.com/document/d/144Cz2NoK3jNjq9yb7R7lS2hv1ZqUG3JMJW2QMuRy7Mw/edit?usp=sharing')">
+            Regulamin
+          </a>
         </div>
 
         <div class="navigation__block">
           <h2>Assetto Corsa</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/informacje">Informacje</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto">Klasyfikacja zawodników</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/wyniki">Wyniki</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/wyniki-zbiorcze">Wyniki zbiorcze</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/assetto/statystyki">Statystyki</NuxtLink>
+          <a @click="navigateToSocial('https://docs.google.com/document/d/1yxKQGI7HsjYWDIANEx3WnD6RExaN5ZJXhTtU7M9JWEs/edit?usp=sharing')">
+            Regulamin
+          </a>
         </div>
 
         <div class="navigation__block">

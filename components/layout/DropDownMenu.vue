@@ -4,6 +4,10 @@
 
       <DropDownMenuItem title="Formuła 1" :dropdown="[
           {
+            title: 'Informacje',
+            to: '/formula/informacje',
+          },
+          {
             title: 'Wyniki',
             to: '/formula/wyniki',
           },
@@ -22,10 +26,19 @@
           {
             title: 'Statystyki',
             to: '/formula/statystyki',
-          }
+          },
+          {
+            title: 'Regulamin',
+            to: 'https://docs.google.com/document/d/144Cz2NoK3jNjq9yb7R7lS2hv1ZqUG3JMJW2QMuRy7Mw/edit?usp=sharing',
+            link: true
+          },
         ]"/>
 
       <DropDownMenuItem title="Assetto" :dropdown="[
+          {
+            title: 'Informacje',
+            to: '/assetto/informacje',
+          },
           {
             title: 'Wyniki',
             to: '/assetto/wyniki',
@@ -41,7 +54,12 @@
           {
             title: 'Statystyki',
             to: '/assetto/statystyki',
-          }
+          },
+          {
+            title: 'Regulamin',
+            to: 'https://docs.google.com/document/d/1yxKQGI7HsjYWDIANEx3WnD6RExaN5ZJXhTtU7M9JWEs/edit?usp=sharing',
+            link: true
+          },
         ]"/>
 
       <DropDownMenuItem title="Powtórki" :dropdown="[

@@ -51,20 +51,26 @@ const images = [
     src: 'drive_squad.png',
     link: 'https://drivesquad.pl/'
   },
+  {
+    name: 'Auto-KIWI',
+    src: 'kiwi.png',
+    link: 'https://kiwiautocentrum.pl/'
+  },
 ]
 </script>
 
 <style scoped lang="scss">
 .sponsors {
-  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
-  margin: 3rem 2rem;
+  margin-top: 10rem;
   overflow: hidden;
   padding: 0 3rem;
 
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 4rem;
 
   img {
@@ -83,15 +89,12 @@ const images = [
 
 @keyframes move {
   0%   {
-    transform: translate(0);
   }
 
   50% {
-    transform: translate(-200px);
   }
 
   100% {
-    transform: translate(200px);
   }
 
 }

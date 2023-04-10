@@ -66,8 +66,8 @@ import Sponsors from "../components/layout/Sponsors";
   justify-content: center;
 
   @include desktop() {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 300px));
-    margin-top: 15rem;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 300px));
+    margin-top: 6rem;
   }
 }
 
