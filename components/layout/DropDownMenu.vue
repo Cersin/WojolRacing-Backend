@@ -1,6 +1,7 @@
 <template>
   <div class="hidden-xs-only" style="display: flex; flex-direction: column;">
     <div style="display: flex;">
+      <DropDownMenuItem title="Endurance"  to="/endurance"/>
 
       <DropDownMenuItem title="Formuła 1" :dropdown="[
           {

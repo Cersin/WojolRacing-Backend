@@ -7,6 +7,7 @@
     <div v-if="active" class="menu_overlay">
       <div class="navigation">
         <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
+        <NuxtLink @click="active = false" exact-active-class="active-route" to="/endurance">Endurance</NuxtLink>
         <div class="navigation__block">
           <h2>Formuła 1</h2>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/informacje">Informacje</NuxtLink>

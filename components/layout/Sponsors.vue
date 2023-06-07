@@ -37,16 +37,6 @@ const images = [
     link: 'https://racetracks.pl/'
   },
   {
-    name: 'SimShop',
-    src: 'simshop_logo.png',
-    link: 'https://simshop.pl/'
-  },
-  {
-    name: 'Exerion',
-    src: 'exerion_logo.png',
-    link: 'https://exerion.pl/'
-  },
-  {
     name: 'Drive Squad',
     src: 'drive_squad.png',
     link: 'https://drivesquad.pl/'

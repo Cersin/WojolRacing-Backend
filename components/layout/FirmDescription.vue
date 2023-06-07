@@ -1,7 +1,6 @@
 <template>
   <div class="firmDescription">
-    Jesteśmy ligą oraz zespołem esportowym, biorącym udział w różnych ligach np. Assetto Corsa czy Formuła 1.
-    <p>Strona w rozwoju. Wersja wczesna.</p>
+    Jesteśmy ligą oraz zespołem esportowym. Wojol Racing to nie tylko simracing. Wojol Racing to grupa miłośników motosportu, dobrej zabawy i zdrowej rywalizacji.
   </div>
 </template>
 

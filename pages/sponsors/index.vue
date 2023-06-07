@@ -16,10 +16,6 @@ import BaseSponsor from "../../components/shared/BaseSponsor";
 
 const sponsorList = [
   {
-    imgSrc: '/partners/exerion_logo.png',
-    description: 'Wszystko czego potrzebujesz do Simracingu. https://exerion.pl/'
-  },
-  {
     imgSrc: '/partners/drive_squad.png',
     description: 'Budowa, wynajem oraz obsługa samochodów do Motorsportu. Organizator markowego pucharu mini Super S Cup w ramach wyścigowych samochodowych mistrzostw polski. https://drivesquad.pl/'
   },
