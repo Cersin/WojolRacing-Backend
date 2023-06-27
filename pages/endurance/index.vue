@@ -17,6 +17,7 @@
         <img style="width: 400px; height: auto;"  src="/endurance/wojol664.png"/>
         <img style="width: 400px; height: auto;"  src="/endurance/wojol663.png"/>
       </div>
+
   </div>
 </div>
 </template>

@@ -1,8 +1,6 @@
 <template>
   <div class="hidden-xs-only" style="display: flex; flex-direction: column;">
     <div style="display: flex;">
-      <DropDownMenuItem title="Endurance"  to="/endurance"/>
-
       <DropDownMenuItem title="Formuła 1" :dropdown="[
           {
             title: 'Informacje',
@@ -34,6 +32,17 @@
             link: true
           },
         ]"/>
+
+      <DropDownMenuItem title="Endurance"  :dropdown="[
+          {
+            title: 'Informacje',
+            to: '/endurance'
+          },
+          {
+            title: 'Osiągnięcia',
+            to: '/endurance/osiagniecia'
+          },
+      ]"/>
 
       <DropDownMenuItem title="Assetto" :dropdown="[
           {
@@ -89,6 +98,8 @@
       <DropDownMenuItem title="Discord" link to="https://discord.com/invite/6MSNv53ekR"/>
 
       <DropDownMenuItem title="Sponsorzy" to="/sponsors"/>
+
+      <DropDownMenuItem title="Kontakt"  to="/kontakt"/>
 
       <DropDownMenuItem v-if="authState.logged && authState.role === 'admin'" title="Admin" :dropdown="[
           {

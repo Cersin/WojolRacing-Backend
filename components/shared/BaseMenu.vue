@@ -6,8 +6,11 @@
   <Transition>
     <div v-if="active" class="menu_overlay">
       <div class="navigation">
-        <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
-        <NuxtLink @click="active = false" exact-active-class="active-route" to="/endurance">Endurance</NuxtLink>
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/kontakt">Kontakt</NuxtLink>
+        </div>
+
         <div class="navigation__block">
           <h2>Formuła 1</h2>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/informacje">Informacje</NuxtLink>
@@ -19,6 +22,12 @@
           <a @click="navigateToSocial('https://docs.google.com/document/d/144Cz2NoK3jNjq9yb7R7lS2hv1ZqUG3JMJW2QMuRy7Mw/edit?usp=sharing')">
             Regulamin
           </a>
+        </div>
+
+        <div class="navigation__block">
+          <h2>Endurance</h2>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/endurance">Informacje</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/endurance/osiagniecia">Osiągnięcia</NuxtLink>
         </div>
 
         <div class="navigation__block">
