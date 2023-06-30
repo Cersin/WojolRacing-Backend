@@ -26,6 +26,10 @@ router
     .get(racesController.playerStatistics)
 
 router
+    .route('/playerCard')
+    .get(racesController.playerCard)
+
+router
     .route('/:id')
     .get(racesController.getRace)
     .patch(protect, restrictTo('admin'), racesController.editRace)

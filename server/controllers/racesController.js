@@ -380,6 +380,145 @@ const playerStatistics = catchAsync(async (req, res) => {
         })
 });
 
+const playerCard = catchAsync(async (req, res) => {
+    let season1 = await Races.find({
+        "season": 1
+    })
+    let season2 = await Races.find({
+        "season": 2
+    })
+    console.log(season1.length);
+    console.log(season2.length);
+
+
+    const users = await Races.aggregate([
+        {"$unwind": "$results"},
+        {
+            "$group": {
+                _id: "$results.player",
+                points: {$sum: "$results.points"},
+                team: {$last: "$results.team"},
+                firstPlaces: {
+                    "$sum": {
+                        $cond: {if: {$eq: ["$results.position", 1]}, then: 1, else: 0}
+                    }
+                },
+                podiums: {
+                    "$sum": {
+                        $cond: {if: {$lte: ["$results.position", 3]}, then: 1, else: 0}
+                    }
+                },
+                top10: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and: [{$gte: ["$results.position", 1]}, {$lte: ["$results.position", 10]}]},
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                DNFs: {
+                    "$sum": {
+                        $cond: {if: {$eq: ["$results.dnf", true]}, then: 1, else: 0}
+                    }
+                },
+                fastestLaps: {
+                    "$sum": {
+                        $cond: {if: {$eq: ["$results.fastestLap", true]}, then: 1, else: 0}
+                    }
+                },
+                avgPosition: {
+                    "$avg": "$results.position"
+                },
+                avgStartGrid: {
+                    "$avg": "$results.grid"
+                },
+                percentageFinished: {
+                    "$avg": {
+                        $cond: {if: {$eq: ["$results.dnf", false]}, then: 1, else: 0}
+                    }
+                },
+                avgPits: {
+                    "$avg": {
+                        $cond: {if: {$eq: ["$results.dnf", false]}, then: "$results.pitStops", else: null}
+                    }
+                },
+                top1Grid: {
+                    "$sum": {
+                        $cond: {if: {$eq: ["$results.grid", 1]}, then: 1, else: 0}
+                    }
+                },
+                top3Grid: {
+                    "$sum": {
+                        $cond: {if: {$lte: ["$results.grid", 3]}, then: 1, else: 0}
+                    }
+                },
+                top10Grid: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and: [{$gte: ["$results.grid", 1]}, {$lte: ["$results.grid", 10]}]},
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                races: {
+                    "$sum": {
+                        $cond: {if: "$results.position", then: 1, else: 0}
+                    }
+                },
+                gain: {
+                    "$avg": {
+                        $subtract: ["$results.grid", "$results.position"]
+                    }
+                }
+            }
+        },
+        {
+            "$lookup": {
+                from: "players",
+                localField: "_id",
+                foreignField: "_id",
+                as: "player"
+            }
+        },
+        {"$unwind": "$player"},
+        {
+            $project: {
+                _id: '$_id' ,
+                points: '$points',
+                player: '$player',
+                team: '$team',
+                firstPlaces: '$firstPlaces',
+                podiums: '$podiums',
+                top10: '$top10',
+                DNFs: '$DNFs',
+                fastestLaps: '$fastestLaps',
+                totalRaces: '$total_races',
+                avgPosition : round('$avgPosition', 2),
+                avgStartGrid : round('$avgStartGrid', 2),
+                percentageFinished : round('$percentageFinished', 2),
+                avgPits : round('$avgPits', 2),
+                top1Grid: '$top1Grid',
+                top3Grid: '$top3Grid',
+                top10Grid: '$top10Grid',
+                races: '$races',
+                gain : round('$gain', 2),
+            }
+        },
+        {
+            "$sort": {
+                points: -1
+            }
+        }
+    ])
+    res.status(200).json({
+        status: 'success',
+        data: users,
+        length: users.length
+    })
+});
+
 const constructorsPoints = catchAsync(async (req, res) => {
         const constructors = await Races.aggregate([
             {
@@ -447,5 +586,5 @@ const deleteRace = catchAsync(async (req, res, next) => {
 });
 
 export default {
-    createRace, findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints
+    createRace, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
 }
