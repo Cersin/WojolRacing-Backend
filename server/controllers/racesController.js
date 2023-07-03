@@ -381,15 +381,11 @@ const playerStatistics = catchAsync(async (req, res) => {
 });
 
 const playerCard = catchAsync(async (req, res) => {
-    let season1 = await Races.find({
-        "season": 1
-    })
-    let season2 = await Races.find({
-        "season": 2
-    })
-    console.log(season1.length);
-    console.log(season2.length);
+    const season1Length = 15;
+    const season2Length = 14;
 
+
+    const sumSeasons = season1Length + season2Length;
 
     const users = await Races.aggregate([
         {"$unwind": "$results"},
@@ -397,81 +393,118 @@ const playerCard = catchAsync(async (req, res) => {
             "$group": {
                 _id: "$results.player",
                 points: {$sum: "$results.points"},
-                team: {$last: "$results.team"},
-                firstPlaces: {
-                    "$sum": {
-                        $cond: {if: {$eq: ["$results.position", 1]}, then: 1, else: 0}
-                    }
-                },
-                podiums: {
-                    "$sum": {
-                        $cond: {if: {$lte: ["$results.position", 3]}, then: 1, else: 0}
-                    }
-                },
-                top10: {
-                    "$sum": {
-                        $cond: {
-                            if: {$and: [{$gte: ["$results.position", 1]}, {$lte: ["$results.position", 10]}]},
-                            then: 1,
-                            else: 0
-                        }
-                    }
-                },
-                DNFs: {
-                    "$sum": {
-                        $cond: {if: {$eq: ["$results.dnf", true]}, then: 1, else: 0}
-                    }
-                },
-                fastestLaps: {
-                    "$sum": {
-                        $cond: {if: {$eq: ["$results.fastestLap", true]}, then: 1, else: 0}
-                    }
-                },
-                avgPosition: {
-                    "$avg": "$results.position"
-                },
-                avgStartGrid: {
-                    "$avg": "$results.grid"
-                },
-                percentageFinished: {
-                    "$avg": {
-                        $cond: {if: {$eq: ["$results.dnf", false]}, then: 1, else: 0}
-                    }
-                },
-                avgPits: {
-                    "$avg": {
-                        $cond: {if: {$eq: ["$results.dnf", false]}, then: "$results.pitStops", else: null}
-                    }
-                },
-                top1Grid: {
-                    "$sum": {
-                        $cond: {if: {$eq: ["$results.grid", 1]}, then: 1, else: 0}
-                    }
-                },
-                top3Grid: {
-                    "$sum": {
-                        $cond: {if: {$lte: ["$results.grid", 3]}, then: 1, else: 0}
-                    }
-                },
-                top10Grid: {
-                    "$sum": {
-                        $cond: {
-                            if: {$and: [{$gte: ["$results.grid", 1]}, {$lte: ["$results.grid", 10]}]},
-                            then: 1,
-                            else: 0
-                        }
-                    }
-                },
+                split: {$last: "$results.split"},
                 races: {
                     "$sum": {
                         $cond: {if: "$results.position", then: 1, else: 0}
                     }
                 },
-                gain: {
-                    "$avg": {
-                        $subtract: ["$results.grid", "$results.position"]
+                season1Finished: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        {
+                                            $eq: ["$season", 1]
+                                        },
+                                        {
+                                            $eq: ["$results.dnf", false]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
                     }
-                }
+                },
+                season2Finished: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        {
+                                            $eq: ["$season", 2]
+                                        },
+                                        {
+                                            $eq: ["$results.dnf", false]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                fullAttendanceS1: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        '$results.position',
+                                        {
+                                            $eq: ["$season", 1]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                fullAttendanceS2: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        '$results.position',
+                                        {
+                                            $eq: ["$season", 2]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                season1Attendance: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                [
+                                    '$results.position',
+                                    {
+                                      $eq: ["$season", 1]
+                                    },
+                                    {
+                                      $ne: ["$results.team", 'Rezerwa']
+                                    }
+                                ],
+                                },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                season2Attendance: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        '$results.position',
+                                        {
+                                            $eq: ["$season", 2]
+                                        },
+                                        {
+                                            $ne: ["$results.team", 'Rezerwa']
+                                        }
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
             }
         },
         {
@@ -488,22 +521,61 @@ const playerCard = catchAsync(async (req, res) => {
                 _id: '$_id' ,
                 points: '$points',
                 player: '$player',
-                team: '$team',
-                firstPlaces: '$firstPlaces',
-                podiums: '$podiums',
-                top10: '$top10',
-                DNFs: '$DNFs',
-                fastestLaps: '$fastestLaps',
-                totalRaces: '$total_races',
-                avgPosition : round('$avgPosition', 2),
-                avgStartGrid : round('$avgStartGrid', 2),
-                percentageFinished : round('$percentageFinished', 2),
-                avgPits : round('$avgPits', 2),
-                top1Grid: '$top1Grid',
-                top3Grid: '$top3Grid',
-                top10Grid: '$top10Grid',
-                races: '$races',
-                gain : round('$gain', 2),
+                experience: {
+                    $function: {
+                        body: function (season1Attendance, season2Attendance, split, s1Length, s2Length, sumS)
+                        {
+                            if(!split) return null;
+                            const sumAttendance = season1Attendance + season2Attendance;
+                            const min = 30;
+                            const max = split === 1 ? 99 : 80;
+                            if (sumAttendance === 1) return 30;
+                            if (sumAttendance ===  sumS && split === 1) return 99;
+                            if (sumAttendance ===  sumS && split === 2) return 80;
+
+                            const pointMeasureS1 = (max-min) / (s1Length);
+                            const pointMeasureS2 = (max-min) / (s2Length);
+
+                            const ratingS1 = 0.3;
+                            const ratingS2 = 0.7;
+
+                            const pointsS1 = min + (season1Attendance * pointMeasureS1);
+                            const pointsS2 = min + (season2Attendance * pointMeasureS2);
+
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                        },
+                        args: ["$season1Attendance", "$season2Attendance", "$player.split", season1Length, season2Length, sumSeasons ],
+                        lang: "js"
+                    }
+                },
+                awareness: {
+                    $function: {
+                        body: function (season1Finished, season2Finished, split, fullAttendanceS1, fullAttendanceS2)
+                        {
+                            if(!split) return null;
+                            const sumFinished = season1Finished + season2Finished;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const min = 30;
+                            const max = split === 1 ? 99 : 90;
+                            if (sumFinished === 0) return 30;
+                            if (sumFinished ===  sumAttendance && split === 1) return 99;
+                            if (sumFinished ===  sumAttendance && split === 2) return 80;
+
+                            const pointMeasureS1 = (max-min) / (fullAttendanceS1);
+                            const pointMeasureS2 = (max-min) / (fullAttendanceS2);
+
+                            const ratingS1 = 0.3;
+                            const ratingS2 = 0.7;
+
+                            const pointsS1 = min + (season1Finished * pointMeasureS1);
+                            const pointsS2 = min + (season2Finished * pointMeasureS2);
+
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                        },
+                        args: ["$season1Finished", "$season2Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        lang: "js"
+                    }
+                },
             }
         },
         {
