@@ -532,10 +532,10 @@ const playerCard = catchAsync(async (req, res) => {
                             if(!split) return null;
                             const sumAttendance = season1Attendance + season2Attendance;
                             const min = 30;
-                            const max = split === 1 ? 99 : 80;
+                            const max = split === 1 ? 99 : 90;
                             if (sumAttendance === 1) return 30;
                             if (sumAttendance ===  sumS && split === 1) return 99;
-                            if (sumAttendance ===  sumS && split === 2) return 80;
+                            if (sumAttendance ===  sumS && split === 2) return 90;
 
                             const pointMeasureS1 = (max-min) / (s1Length);
                             const pointMeasureS2 = (max-min) / (s2Length);
@@ -560,10 +560,10 @@ const playerCard = catchAsync(async (req, res) => {
                             const sumFinished = season1Finished + season2Finished;
                             const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
                             const min = 30;
-                            const max = split === 1 ? 99 : 90;
+                            const max = split === 1 ? 99 : 99;
                             if (sumFinished === 0) return 30;
                             if (sumFinished ===  sumAttendance && split === 1) return 99;
-                            if (sumFinished ===  sumAttendance && split === 2) return 80;
+                            if (sumFinished ===  sumAttendance && split === 2) return 99;
 
                             const pointMeasureS1 = (max-min) / (fullAttendanceS1);
                             const pointMeasureS2 = (max-min) / (fullAttendanceS2);
