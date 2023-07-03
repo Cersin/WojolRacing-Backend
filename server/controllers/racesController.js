@@ -399,6 +399,10 @@ const playerCard = catchAsync(async (req, res) => {
                         $cond: {if: "$results.position", then: 1, else: 0}
                     }
                 },
+                avgStartGridS1: { $avg: { $cond: {if: {$eq: ["$season", 1]}, then: "$results.grid", else: null} } },
+                avgStartGridS2: { $avg: { $cond: {if: {$eq: ["$season", 2]}, then: "$results.grid", else: null} } },
+                avgPositionS1: { $avg: { $cond: {if: {$eq: ["$season", 1]}, then: "$results.position", else: null} } },
+                avgPositionS2: { $avg: { $cond: {if: {$eq: ["$season", 2]}, then: "$results.position", else: null} } },
                 season1Finished: {
                     "$sum": {
                         $cond: {
@@ -570,9 +574,65 @@ const playerCard = catchAsync(async (req, res) => {
                             const pointsS1 = min + (season1Finished * pointMeasureS1);
                             const pointsS2 = min + (season2Finished * pointMeasureS2);
 
+                            if(!pointsS1) return pointsS2.toFixed();
+                            if(!pointsS2) return pointsS1.toFixed();
                             return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
                         },
                         args: ["$season1Finished", "$season2Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        lang: "js"
+                    }
+                },
+                pace: {
+                    $function: {
+                        body: function (avgGridPositionS1, avgGridPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
+                        {
+                            if(!split) return null;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const min = 30;
+                            const max = split === 1 ? 99 : 80;
+                            if (sumAttendance === 1) return 30;
+
+                            const pointMeasureS1 = (max-min) / 20;
+                            const pointMeasureS2 = (max-min) / 20;
+
+                            const ratingS1 = 0.3;
+                            const ratingS2 = 0.7;
+
+                            const pointsS1 = max - (avgGridPositionS1 * pointMeasureS1);
+                            const pointsS2 = max - (avgGridPositionS2 * pointMeasureS2);
+
+                            if(!pointsS1) return pointsS2.toFixed();
+                            if(!pointsS2) return pointsS1.toFixed();
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                        },
+                        args: ["$avgStartGridS1", "$avgStartGridS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        lang: "js"
+                    }
+                },
+                racePace: {
+                    $function: {
+                        body: function (avgPositionS1, avgPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
+                        {
+                            if(!split) return null;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const min = 30;
+                            const max = split === 1 ? 99 : 80;
+                            if (sumAttendance === 1) return 30;
+
+                            const pointMeasureS1 = (max-min) / 20;
+                            const pointMeasureS2 = (max-min) / 20;
+
+                            const ratingS1 = 0.3;
+                            const ratingS2 = 0.7;
+
+                            const pointsS1 = max - (avgPositionS1 * pointMeasureS1);
+                            const pointsS2 = max - (avgPositionS2 * pointMeasureS2);
+
+                            if(!pointsS1) return pointsS2.toFixed();
+                            if(!pointsS2) return pointsS1.toFixed();
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                        },
+                        args: ["$avgPositionS1", "$avgPositionS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
                         lang: "js"
                     }
                 },
