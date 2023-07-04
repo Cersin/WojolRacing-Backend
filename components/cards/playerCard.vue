@@ -1,13 +1,16 @@
 <template>
-  <div class="personal-card">
+  <div
+    class="personal-card"
+    :class="{'personal-card--best': best }"
+  >
     <div class="personal-card--borders" />
-
     <div class="personal-card--borders-2" />
     <div class="personal-card--borders-3" />
     <div class="personal-card--borders-4" />
 
-
-    <div class="personal-card--container">
+    <div
+      :style="{'background': `linear-gradient(180deg, ${colorFirst} 4%, ${colorSecond} 100%)`}"
+      class="personal-card--container">
       <div class="personal-card--logo"><img src="/logo_wojol.png"/> </div>
       <img src="/personalcard/person_white.png"/>
       <div class="personal-card--team">
@@ -38,12 +41,13 @@
           <div class="personal-card--description">PAC</div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {computed} from "vue";
+
 const props = defineProps({
   name: {
     type: String,
@@ -51,7 +55,7 @@ const props = defineProps({
   },
   team: {
     type: String,
-    required: true,
+    default: 'Rezerwa'
   },
   experience: {
     type: [String, Number],
@@ -73,6 +77,18 @@ const props = defineProps({
     type: [String, Number],
     required: true,
   },
+  colorFirst: {
+    type: String,
+    default: '6e6b02'
+  },
+  colorSecond: {
+    type: String,
+    default: '615204'
+  },
+  best: {
+    type: Boolean,
+    default: false,
+  }
 })
 
 function calculateOverall() {
@@ -97,11 +113,15 @@ function calculateOverall() {
   height: 300px;
   position: relative;
   z-index: 999;
-  -webkit-filter: blur(.5px);
-  -moz-filter: blur(.5px);
-  -o-filter: blur(.5px);
-  -ms-filter: blur(.5px);
-  filter: blur(.5px);
+  //-webkit-filter: blur(.5px);
+  //-moz-filter: blur(.5px);
+  //-o-filter: blur(.5px);
+  //-ms-filter: blur(.5px);
+  //filter: blur(.5px);
+
+  &--best {
+    filter: drop-shadow(8px 8px 20px $color-primary) invert(4%);
+  }
 }
 
 .personal-card--container {
@@ -109,8 +129,7 @@ function calculateOverall() {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(13, 15, 21, 1) 4%, rgba(40, 75, 105, 1) 100%);
-  clip-path: polygon(18.3% 0%, 100% 0%, 100% 12.3%, 100% 87.7%, 100.4% 100%, 0% 100%, 0% 78.8%, 0% 15.1%);
+  //background: linear-gradient(180deg, rgba(13, 15, 21, 1) 4%, rgba(40, 75, 105, 1) 100%);  clip-path: polygon(18.3% 0%, 100% 0%, 100% 12.3%, 100% 87.7%, 100.4% 100%, 0% 100%, 0% 78.8%, 0% 15.1%);
   border-color: white;
   border: solid;
   border-width: 0 0px 3px 3px;
@@ -223,7 +242,6 @@ function calculateOverall() {
 .personal-card--nick {
   text-align: center;
   margin-top: 16px;
-  max-width: 160px;
   font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
