@@ -1,18 +1,19 @@
 <template>
   <div
     class="personal-card"
+    :id="`player-card-${name}`"
     :class="{'personal-card--best': best }"
   >
-    <div class="personal-card--borders" />
-    <div class="personal-card--borders-2" />
-    <div class="personal-card--borders-3" />
-    <div class="personal-card--borders-4" />
+    <div class="personal-card--borders" :class="{'personal-card--borders_black': black }" />
+    <div class="personal-card--borders-2" :class="{'personal-card--borders-2_black': black }" />
+    <div class="personal-card--borders-3" :class="{'personal-card--borders-3_black': black }" />
+    <div class="personal-card--borders-4" :class="{'personal-card--borders-4_black': black }" />
 
     <div
       :style="{'background': `linear-gradient(180deg, ${colorFirst} 4%, ${colorSecond} 100%)`}"
       class="personal-card--container">
       <div class="personal-card--logo"><img src="/logo_wojol.png"/> </div>
-      <img src="/personalcard/person_white.png"/>
+      <img :src="photo ? `/img/players/${photo}` : '/personalcard/person_white.png'"/>
       <div class="personal-card--team">
         <div class="personal-card--number">{{ overall }}</div>
         {{ team }}
@@ -42,11 +43,19 @@
         </div>
       </div>
     </div>
+    <IconContentSave
+      style="font-size: 2rem;"
+      class=" button-hover button--icon"
+      @click="saveImage(`player-card-${name}`, `Karta-${name}`)"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed} from "vue";
+import useImage from "~/hooks/useImage";
+import BaseButton from "~/components/shared/BaseButton.vue";
+const {saveImage} = useImage();
+import {IconClose, IconContentSave} from "@iconify-prerendered/vue-mdi"
 
 const props = defineProps({
   name: {
@@ -56,6 +65,14 @@ const props = defineProps({
   team: {
     type: String,
     default: 'Rezerwa'
+  },
+  black: {
+    type: Boolean,
+    default: false
+  },
+  photo: {
+    type: String,
+    default: null
   },
   experience: {
     type: [String, Number],
@@ -118,6 +135,10 @@ function calculateOverall() {
   //-o-filter: blur(.5px);
   //-ms-filter: blur(.5px);
   //filter: blur(.5px);
+
+  &:hover > .button-hover {
+    display: block;
+  }
 
   &--best {
     filter: drop-shadow(8px 8px 20px $color-primary) invert(4%);
@@ -195,6 +216,18 @@ function calculateOverall() {
   border-width: 8px 0 0 8px;
   clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
   z-index: 900;
+
+  &_black {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0%;
+    left: 3%;
+    border: solid black;
+    border-width: 8px 0 0 8px;
+    clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
+    z-index: 900;
+  }
 }
 
 .personal-card--borders-2 {
@@ -207,6 +240,19 @@ function calculateOverall() {
   border-width: 8px 0 0 8px;
   clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
   z-index: 900;
+
+  &_black {
+    position: absolute;
+    width: 50px;
+    height: 55px;
+    top: -11px;
+    left: -5px;
+    border: solid black;
+    border-width: 8px 0 0 8px;
+    clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
+    z-index: 900;
+
+  }
 }
 
 .personal-card--borders-3 {
@@ -219,6 +265,19 @@ function calculateOverall() {
   border-width: 0 8px 0 0;
   clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
   z-index: 900;
+
+  &_black {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    right: 0;
+    top: -10px;
+    border: solid black;
+    border-width: 0 8px 0 0;
+    clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
+    z-index: 900;
+
+  }
 }
 
 .personal-card--borders-4 {
@@ -231,6 +290,18 @@ function calculateOverall() {
   border-width: 0 8px 0 0;
   clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
   z-index: 900;
+
+  &_black {
+    position: absolute;
+    width: 50px;
+    height: 92%;
+    right: -15px;
+    top: 0;
+    border: solid black;
+    border-width: 0 8px 0 0;
+    clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
+    z-index: 900;
+  }
 }
 
 .personal-card--team {
@@ -295,6 +366,13 @@ function calculateOverall() {
       font-size: 12px;
     }
   }
+}
+
+.button-hover {
+  display: none;
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
 }
 
 </style>

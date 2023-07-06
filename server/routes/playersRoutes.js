@@ -1,5 +1,7 @@
 import express from 'express';
 
+
+
 const router = express.Router();
 import {restrictTo, protect} from "~/server/controllers/authController";
 import playersController from "~/server/controllers/playersController";
@@ -15,7 +17,7 @@ router
 
 router
     .route('/:id')
-    .patch(protect, restrictTo('admin'), playersController.editPlayer)
+    .patch(protect, restrictTo('admin'), playersController.uploadPlayerPhoto, playersController.resizePlayerPhoto, playersController.editPlayer)
     .delete(protect, restrictTo('admin'), playersController.deletePlayer);
 
 export default router

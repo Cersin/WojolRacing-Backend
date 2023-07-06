@@ -19,6 +19,10 @@ const playersModel = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true
+    },
+    photo: {
+        type: String,
+        default: null
     }
 });
 

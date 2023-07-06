@@ -34,6 +34,7 @@ export default {
   letter-spacing: 1px;
   text-transform: uppercase;
   word-wrap: break-word;
+  text-align: center;
 
   @include mobileAndUp() {
     font-size: 4rem;

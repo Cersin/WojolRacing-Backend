@@ -71,6 +71,11 @@
               rules="required"
             />
 
+            <div v-if="model._id" class="col-6 md-col-12" style="display: flex; flex-direction: column; gap: .5rem; font-size: 14px;">
+              <label>ZDJĄTKO</label>
+              <input  class="col-6 md-col-12"  type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
+            </div>
+
             <ValidationWrapper
               class="col-6 md-col-12"
               :value="model.split"
@@ -91,6 +96,7 @@
             </ValidationWrapper>
 
 
+
             <ValidationWrapper
               class="col-6 md-col-12"
               :value="model.team"
@@ -106,6 +112,11 @@
                 :data="Object.keys(teamOptions)"
               />
             </ValidationWrapper>
+          </div>
+
+
+          <div v-if="model.photo && model.photo !== ''">
+            <img style="height: 150px; width: auto;" :src="`/img/players/${model.photo}`"/>
           </div>
 
           <BaseButton @click="send()" class="col-3 md-col-6 margin-top" style="align-self: center" secondary>Wyślij</BaseButton>
@@ -188,6 +199,11 @@ function selectSplit({value}) {
   params.value.split = value;
 }
 
+function uploadImage(e) {
+  const file = e.target.files[0]
+  model.image = file
+}
+
 function openDialog(player = null) {
   player ? editMode.value = true : editMode.value = false;
    player ? model.value = {...player} : model.value = {};
@@ -199,11 +215,24 @@ async function send() {
   if (valid) {
     try {
       loading.value = true;
+
+      let payload = {...model.value};
+      if(model.image) {
+        payload = {
+          ...model.value,
+          photo: model.image,
+        };
+      }
+
+      const formData = new FormData();
+
+      Object.entries(payload).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
       const res = await myFetch(model.value._id ? `/players/${model.value._id}` : '/players', {
         method: model.value._id ? 'PATCH' : 'POST',
-        body: {
-          ...model.value
-        }
+        body: formData
       });
       playersRef.value.refresh();
       playerDialog.value = false;

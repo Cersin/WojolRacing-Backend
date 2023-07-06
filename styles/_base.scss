@@ -39,6 +39,10 @@ body {
   grid-area: aside;
   color: black;
   background-color: $color-primary;
+
+
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .layout {

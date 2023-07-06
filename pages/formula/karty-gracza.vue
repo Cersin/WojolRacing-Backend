@@ -13,12 +13,12 @@
     </div>
 
     <div class="playerCards">
-
         <player-card
           v-for="card in data"
           :key="card.id"
           :name="card.player.name"
           :team="card.player.team"
+          :photo="card.player.photo"
           :experience="card.experience"
           :awareness="card.awareness"
           :pace="card.pace"
@@ -62,7 +62,7 @@ const {data: fetched, pending, refresh} = await useFetch('race/playerCard', {
     })
     const filterByOverall = dataWithOverall.sort((a, b) => +a.overall > +b.overall ? -1 : 1 );
     filterByOverall[0].best = true;
-   return filterByOverall.filter((el) => el.player.active && el.player.team !== "Rezerwa");
+   return filterByOverall;
   }
 });
 

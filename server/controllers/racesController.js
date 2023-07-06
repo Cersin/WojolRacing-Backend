@@ -521,6 +521,12 @@ const playerCard = catchAsync(async (req, res) => {
         },
         {"$unwind": "$player"},
         {
+            "$match": {
+                "races": {$gte: 5},
+                "player.active": {$eq: true},
+            },
+        },
+        {
             $project: {
                 _id: '$_id' ,
                 points: '$points',
@@ -534,7 +540,7 @@ const playerCard = catchAsync(async (req, res) => {
                             const min = 30;
                             const max = split === 1 ? 99 : 90;
                             if (sumAttendance === 1) return 30;
-                            if (sumAttendance ===  sumS && split === 1) return 99;
+                            if (sumAttendance ===  sumS && split === 1 && sumAttendance) return 99;
                             if (sumAttendance ===  sumS && split === 2) return 90;
 
                             const pointMeasureS1 = (max-min) / (s1Length);
@@ -562,8 +568,6 @@ const playerCard = catchAsync(async (req, res) => {
                             const min = 30;
                             const max = split === 1 ? 99 : 99;
                             if (sumFinished === 0) return 30;
-                            if (sumFinished ===  sumAttendance && split === 1) return 99;
-                            if (sumFinished ===  sumAttendance && split === 2) return 99;
 
                             const pointMeasureS1 = (max-min) / (fullAttendanceS1);
                             const pointMeasureS2 = (max-min) / (fullAttendanceS2);
@@ -574,8 +578,8 @@ const playerCard = catchAsync(async (req, res) => {
                             const pointsS1 = min + (season1Finished * pointMeasureS1);
                             const pointsS2 = min + (season2Finished * pointMeasureS2);
 
-                            if(!pointsS1) return pointsS2.toFixed();
-                            if(!pointsS2) return pointsS1.toFixed();
+                            if(!pointsS1) return (pointsS2 - 5).toFixed();
+                            if(!pointsS2) return (pointsS1 - 10).toFixed();
                             return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
                         },
                         args: ["$season1Finished", "$season2Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
@@ -586,24 +590,23 @@ const playerCard = catchAsync(async (req, res) => {
                     $function: {
                         body: function (avgGridPositionS1, avgGridPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
                         {
-                            if(!split) return null;
                             const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
                             const min = 30;
                             const max = split === 1 ? 99 : 80;
                             if (sumAttendance === 1) return 30;
 
-                            const pointMeasureS1 = (max-min) / 20;
-                            const pointMeasureS2 = (max-min) / 20;
+                            const ratingS1 = 1;
+                            const ratingS2 = 1.6;
 
-                            const ratingS1 = 0.3;
-                            const ratingS2 = 0.7;
+                            const sumAvgGridAttendance = ((fullAttendanceS1 * avgGridPositionS1) * ratingS1) + ((fullAttendanceS2 * avgGridPositionS2) * ratingS2);
+                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2);
+                            const sumAvg = sumAvgGridAttendance / wageSum;
 
-                            const pointsS1 = max - (avgGridPositionS1 * pointMeasureS1);
-                            const pointsS2 = max - (avgGridPositionS2 * pointMeasureS2);
+                            const pointMeasure = (max-min) / 20;
 
-                            if(!pointsS1) return pointsS2.toFixed();
-                            if(!pointsS2) return pointsS1.toFixed();
-                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                            const points = max - (sumAvg * pointMeasure);
+
+                            return points.toFixed();
                         },
                         args: ["$avgStartGridS1", "$avgStartGridS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
                         lang: "js"
@@ -613,24 +616,23 @@ const playerCard = catchAsync(async (req, res) => {
                     $function: {
                         body: function (avgPositionS1, avgPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
                         {
-                            if(!split) return null;
                             const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
                             const min = 30;
                             const max = split === 1 ? 99 : 80;
                             if (sumAttendance === 1) return 30;
 
-                            const pointMeasureS1 = (max-min) / 20;
-                            const pointMeasureS2 = (max-min) / 20;
+                            const ratingS1 = 1;
+                            const ratingS2 = 1.6;
 
-                            const ratingS1 = 0.3;
-                            const ratingS2 = 0.7;
+                            const sumAvgPositionAttendance = ((fullAttendanceS1 * avgPositionS1) * ratingS1) + ((fullAttendanceS2 * avgPositionS2) * ratingS2);
+                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2);
+                            const sumAvg = sumAvgPositionAttendance / wageSum;
 
-                            const pointsS1 = max - (avgPositionS1 * pointMeasureS1);
-                            const pointsS2 = max - (avgPositionS2 * pointMeasureS2);
+                            const pointMeasure = (max-min) / 20;
 
-                            if(!pointsS1) return pointsS2.toFixed();
-                            if(!pointsS2) return pointsS1.toFixed();
-                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                            const points = max - (sumAvg * pointMeasure);
+
+                            return points.toFixed();
                         },
                         args: ["$avgPositionS1", "$avgPositionS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
                         lang: "js"

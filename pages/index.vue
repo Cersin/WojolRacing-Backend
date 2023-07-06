@@ -29,8 +29,28 @@
     <div class="aside">
       <NavHeader aside/>
       <div style="display: flex; flex-direction: column; align-items: center;;">
-        <BaseHeader black title="Aktualności"/>
-        <h2>Wkrótce więcej</h2>
+        <BaseHeader black title="KARTY GRACZA"/>
+
+        <div class="playerCards">
+          <player-card
+            v-for="card in fetched"
+            black
+            :key="card.id"
+            :name="card.player.name"
+            :team="card.player.team"
+            :photo="card.player.photo"
+            :experience="card.experience"
+            :awareness="card.awareness"
+            :pace="card.pace"
+            :racePace="card.racePace"
+            :overall="card.overall"
+            :color-first="card.firstColor"
+            :color-second="card.secondColor"
+            :best="card.best"
+          />
+        </div>
+
+        <BaseButton @click="navigateToCards" secondary style="width: 75%; margin: 2rem;">Zobacz więcej</BaseButton>
       </div>
     </div>
   </div>
@@ -47,10 +67,68 @@ import MainHeader from "../components/layout/MainHeader";
 import NavHeader from "../components/layout/NavHeader";
 import BaseHeader from "../components/shared/BaseHeader";
 import Sponsors from "../components/layout/Sponsors";
+import {useFetch, useRuntimeConfig} from "nuxt/app";
+import cardBackgrounds from "~/data/cardBackgrounds";
+import cardBackgroundsSecond from "~/data/cardBackgroundsSecond";
+import PlayerCard from "~/components/cards/playerCard.vue";
+import BaseButton from "~/components/shared/BaseButton.vue";
+
+const config = useRuntimeConfig()
+const router = useRouter();
+
+const {data: fetched, pending, refresh} = await useFetch('race/playerCard', {
+  baseURL: config.API_BASE_URL,
+  server: false,
+  initialCache: false,
+  transform: res => {
+    const dataWithOverall =  res.data.map((el) => {
+      return {
+        ...el,
+        firstColor: cardBackgrounds[el.player.team],
+        best: false,
+        secondColor: cardBackgroundsSecond[el.player.team],
+        overall: calculateOverall(el.racePace, el.pace, el.awareness, el.experience).toFixed()
+      }
+    })
+    const filterByOverall = dataWithOverall.sort((a, b) => +a.overall > +b.overall ? -1 : 1 );
+    filterByOverall[0].best = true;
+    return filterByOverall.slice(0, 3);
+  }
+});
+
+function navigateToCards() {
+  router.push(`/formula/karty-gracza/`);
+}
+
+function calculateOverall(racePace, pace, awareness, experience) {
+  const racePaceRate = 0.4;
+  const paceRate = 0.3;
+  const awarenessRate = 0.15;
+  const experienceRate = 0.15;
+
+  return (racePaceRate * +racePace)
+    + (paceRate * +pace)
+    + (awarenessRate * +awareness)
+    + (experienceRate * +experience);
+}
 </script>
 
 <style scoped lang="scss">
 @import "styles/variables";
+
+.playerCards {
+  display: flex;
+  gap: 3rem 6rem;
+  margin-top: 2rem;
+  color: white;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include tabletAndUp {
+    flex-direction: column;
+  }
+
+}
 
 @keyframes shine{
   10% {

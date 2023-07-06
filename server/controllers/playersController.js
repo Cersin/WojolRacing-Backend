@@ -2,6 +2,50 @@ import Players from '../models/playersModel';
 import catchAsync from "~/server/utils/catchAsync";
 import APIFeatures from "~/server/utils/apiFeatures";
 import AppError from "~/server/utils/appError";
+import multer from 'multer';
+import sharp from 'sharp';
+
+// const multerStorage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'public/img/players')
+//     },
+//     filename: (req, file, cb) => {
+//         const ext = file.mimetype.split('/')[1];
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         cb(null, `player-${uniqueSuffix}.${ext}`);
+//     }
+// })
+
+const multerStorage = multer.memoryStorage();
+
+
+const multerFilter = (req, file, cb) => {
+    if(file.mimetype.startsWith('image')) {
+        cb(null, true);
+    } else {
+        cb(new AppError('To nie obrazek! Przyjmę tylko obrazek', 400), false);
+    }
+}
+
+const upload = multer({
+   storage: multerStorage,
+   fileFilter: multerFilter
+});
+
+const uploadPlayerPhoto = upload.single('photo');
+
+const resizePlayerPhoto = async (req, res, next) => {
+    if (!req.file) return next();
+
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    req.file.filename = `player-${uniqueSuffix}.png`;
+
+    await sharp(req.file.buffer).resize(300, null, {
+        fit: "cover",
+        position: 'top',
+    }).toFormat('png').png({quality: 90}).toFile(`public/img/players/${req.file.filename}`);
+    next();
+}
 
 const createPlayer = catchAsync(async (req, res) => {
     const newPlayer = await Players.create(req.body);
@@ -47,7 +91,10 @@ const getPlayer = catchAsync(async (req, res) => {
 });
 
 const editPlayer = catchAsync(async (req, res) => {
-    const player = await Players.findByIdAndUpdate(req.params.id, req.body, {
+    const body = {...req.body};
+    if (req.file) body.photo = req.file.filename;
+
+    const player = await Players.findByIdAndUpdate(req.params.id, body, {
         new: true,
         runValidators: true
     });
@@ -78,5 +125,7 @@ export default {
     getPlayers,
     getPlayer,
     editPlayer,
-    deletePlayer
+    deletePlayer,
+    uploadPlayerPhoto,
+    resizePlayerPhoto
 }
