@@ -1,4 +1,5 @@
 @import 'layout/_button.scss';
+@import 'layout/_dialog.scss';
 @import "@fontsource/chakra-petch/index.css";
 @import "scrollbar";
 @import "animations";
@@ -56,11 +57,11 @@ body {
   grid-template-rows: 100px auto minmax(100px, auto);
   grid-template-columns: 100%;
 
-  @include tabletAndUp {
+  @include desktop {
     grid-template-areas:
                       "head aside"
                       "main aside";
-    grid-template-columns: 1fr .30fr;
+    grid-template-columns: 1fr .40fr;
     grid-template-rows: 80px 1fr;
   }
 }

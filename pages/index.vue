@@ -21,7 +21,7 @@
         />
       </div>
 
-      <a class="madeby" href="https://frontszymon.pl">v.2.2 Strona wykonana przez FRONTSZYMON.pl</a>
+      <a class="madeby" href="https://frontszymon.pl">v.3.0 Strona wykonana przez FRONTSZYMON.pl</a>
 
       <Sponsors/>
     </div>
@@ -30,6 +30,8 @@
       <NavHeader aside/>
       <div style="display: flex; flex-direction: column; align-items: center;;">
         <BaseHeader black title="KARTY GRACZA"/>
+
+        <BaseButton @click="navigateToCards" secondary style="width: 75%; margin: 2rem;">Zobacz więcej</BaseButton>
 
         <div class="playerCards">
           <player-card
@@ -49,8 +51,6 @@
             :best="card.best"
           />
         </div>
-
-        <BaseButton @click="navigateToCards" secondary style="width: 75%; margin: 2rem;">Zobacz więcej</BaseButton>
       </div>
     </div>
   </div>
@@ -151,6 +151,8 @@ function calculateOverall(racePace, pace, awareness, experience) {
   background-color: black;
   position: relative;
   margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .gallery {

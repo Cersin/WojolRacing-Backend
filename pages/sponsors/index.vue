@@ -16,6 +16,10 @@ import BaseSponsor from "../../components/shared/BaseSponsor";
 
 const sponsorList = [
   {
+    imgSrc: '/partners/truesim.png',
+    description: 'Wysokiej jakości sprzęt simracingowy w dobrej cenie. Shiftery, Button Boxy oraz inne akcesoria specjalnie dla Ciebie. https://www.truesim.pl/'
+  },
+  {
     imgSrc: '/partners/drive_squad.png',
     description: 'Budowa, wynajem oraz obsługa samochodów do Motorsportu. Organizator markowego pucharu mini Super S Cup w ramach wyścigowych samochodowych mistrzostw polski. https://drivesquad.pl/'
   },

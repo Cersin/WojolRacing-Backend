@@ -1,7 +1,7 @@
 <template>
   <transition>
-  <div v-if="dialogOpen" class="dialog">
-    <div class="dialog__box">
+  <div @click.self="dialogOpen = false"  v-if="dialogOpen" class="dialog">
+    <div  class="dialog__box">
       <div class="dialog__box--header">
         <slot name="header"/>
         <IconClose class="button--icon" @click="dialogOpen = false"></IconClose>

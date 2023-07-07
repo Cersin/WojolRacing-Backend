@@ -46,6 +46,11 @@ const images = [
     src: 'kiwi.png',
     link: 'https://kiwiautocentrum.pl/'
   },
+  {
+    name: 'TrueSim',
+    src: 'truesim.png',
+    link: 'https://www.truesim.pl/'
+  },
 ]
 </script>
 
@@ -54,9 +59,9 @@ const images = [
   bottom: 0;
   right: 0;
   left: 0;
-  margin-top: 10rem;
   overflow: hidden;
   padding: 0 3rem;
+  justify-self: flex-end;
 
   display: flex;
   justify-content: center;
