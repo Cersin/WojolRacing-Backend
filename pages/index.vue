@@ -87,7 +87,7 @@ const {data: fetched, pending, refresh} = await useFetch('race/playerCard', {
         firstColor: cardBackgrounds[el.player.team],
         best: false,
         secondColor: cardBackgroundsSecond[el.player.team],
-        overall: calculateOverall(el.racePace, el.pace, el.awareness, el.experience).toFixed()
+        overall: calculateOverall(el.racePace, el.pace, el.awareness, el.experience)
       }
     })
     const filterByOverall = dataWithOverall.sort((a, b) => +a.overall > +b.overall ? -1 : 1 );

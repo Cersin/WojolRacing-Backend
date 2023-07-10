@@ -9,7 +9,7 @@
 
 <style scoped lang="scss">
 .base_container {
-  max-width: 2000px;
+  max-width: 2500px;
   display: flex;
   flex-direction: column;
   left: 50%;

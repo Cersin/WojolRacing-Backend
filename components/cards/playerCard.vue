@@ -13,9 +13,9 @@
       :style="{'background': `linear-gradient(180deg, ${colorFirst} 4%, ${colorSecond} 100%)`}"
       class="personal-card--container">
       <div class="personal-card--logo"><img src="/logo_wojol.png"/> </div>
-      <img :src="photo ? `/img/players/${photo}` : '/personalcard/person_white.png'"/>
+      <img class="personal-card--photo" :src="photo ? `/img/players/${photo}` : '/personalcard/person_white.png'"/>
       <div class="personal-card--team">
-        <div class="personal-card--number">{{ overall }}</div>
+        <div class="personal-card--number">{{ overall.toFixed() }}</div>
         {{ team }}
       </div>
       <div class="personal-card--nick" :title="name">{{ name }}</div>
@@ -180,6 +180,13 @@ function calculateOverall() {
     justify-content: center;
     align-items: center;
   }
+}
+
+.personal-card--photo {
+  height: 130px;
+  width: auto;
+  object-fit: cover;
+  object-position: top;
 }
 
 .personal-card--logo {

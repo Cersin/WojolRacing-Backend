@@ -17,7 +17,7 @@ router
 
 router
     .route('/:id')
-    .patch(protect, restrictTo('admin'), playersController.uploadPlayerPhoto, playersController.resizePlayerPhoto, playersController.editPlayer)
+    .patch(protect, restrictTo('admin'), playersController.uploadPlayerPhoto, playersController.editPlayer)
     .delete(protect, restrictTo('admin'), playersController.deletePlayer);
 
 export default router

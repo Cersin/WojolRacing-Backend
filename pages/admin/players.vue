@@ -48,8 +48,9 @@
           class="col-6"
           label="Zespół"
           dark
+          select-value="value"
           display-value
-          :data="Object.entries(team)"
+          :data="team"
         />
         <BaseButton class="col-12" @click="openDialog" secondary>Dodaj zawodnika</BaseButton>
       </div>
