@@ -8,6 +8,7 @@
       <div class="navigation">
         <div style="display: flex; flex-direction: column; align-items: flex-end;">
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/">Strona Główna</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/o-nas">O nas</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/kontakt">Kontakt</NuxtLink>
         </div>
 

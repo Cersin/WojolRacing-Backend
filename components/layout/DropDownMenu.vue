@@ -99,6 +99,8 @@
 
       <DropDownMenuItem title="Sponsorzy" to="/sponsors"/>
 
+      <DropDownMenuItem title="O nas"  to="/o-nas"/>
+
       <DropDownMenuItem title="Kontakt"  to="/kontakt"/>
 
       <DropDownMenuItem v-if="authState.logged && authState.role === 'admin'" title="Admin" :dropdown="[
