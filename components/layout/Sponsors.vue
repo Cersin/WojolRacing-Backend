@@ -51,6 +51,11 @@ const images = [
     src: 'truesim.png',
     link: 'https://www.truesim.pl/'
   },
+  {
+    name: 'Difficult',
+    src: 'difficult_small.png',
+    link: 'https://www.instagram.com/difficult_js/'
+  },
 ]
 </script>
 

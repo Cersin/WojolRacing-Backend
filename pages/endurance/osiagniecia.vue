@@ -11,7 +11,7 @@
         'P1 #666 - 10 Hours of Road Atlanta ProjectEndurance (Glickenhouse 007) - 11 Grudnia 2022',
         'P2 #666 - 24 Hours of Daytona ProjectEndurance (Glickenhouse 007) - 7 Stycznia 2023',
         'P1 #666 - 8 Hours of Bahrain ProjectEndurance (Glickenhouse 007) - 26 Luty 2023',
-        'P2 #666 - 6 Hours of Silverstone ProjectEndurance (Glickenhouse 007) - 14 Maj 2023'
+        'P1 #666 - 6 Hours of Silverstone ProjectEndurance (Glickenhouse 007) - 14 Maj 2023'
     ]"/>
 
     <BaseInformationList title="LMP2" :list="[

@@ -38,6 +38,10 @@ const sponsorList = [
   {
     imgSrc: '/partners/kiwi.png',
     description: 'Kiwi Auto Centrum - Kompleksowe usługi z zakresu mechaniki pojazdów, likwidacja szkód, samochody zastępcze oraz car detailing. https://www.kiwiautocentrum.pl/'
+  },
+  {
+    imgSrc: '/partners/difficult_big.png',
+    description: 'Jan "DiffiCult" Stróżecki - Dziennikarz oraz komentator sportowy'
   }
 ]
 </script>

@@ -3,11 +3,11 @@
   <MainHeader />
 
   <div class="information">
-    <img class="image_information" src="/wojol_ex-biale.png" alt="Logo Wojol F1"/>
+    <img class="image_information" src="/logo_wojol.png" alt="Logo Wojol F1"/>
 
     <BaseInformationList title="Wyścigi" :list="[
-        'Split F1 - Poniedziałek 19:30',
-        'Split F2 - Czwartek 19:30',
+        'Split F1 - Czwartek 19:30',
+        'Split F2 - Środa 19:30',
         'Platforma: Steam'
     ]"/>
 
@@ -23,20 +23,20 @@
     <BaseInformationList style="font-size: 2rem; margin: 0" title="Nagrody"/>
 
     <BaseInformationList title="Split F1" :list="[
-        '1 Miejsce: PLAYSEAT Challenge + Puchar',
-        '2 Miejsce: Zestaw IRTrack + Puchar',
-        '3 Miejsce: Steam Link + Puchar',
+        'Miejsce 1: Puchar +  Button Box Pro + Shaketrack',
+        'Miejsce 2: Puchar + IRTrack + Gear Indicator',
+        'Miejsce 3: Puchar + IRTrack + Podkładka pod mysz AUKEY KM-P4 120x60',
     ]"/>
 
     <BaseInformationList title="Split F1" :list="[
-        '1 Miejsce: Zestaw IRTrack + Puchar + Statuetka',
-        '2 Miejsce: Puchar + Statuetka',
-        '3 Miejsce: Puchar + Statuetka',
+        'Miejsce 1: Puchar + Statuetka + IRTrack',
+        'Miejsce 2: Puchar + Statuetka + Podkładka pod mysz AUKEY KM-P4 120x60',
+        'Miejsce 3: Puchar + Statuetka',
     ]"/>
 
     <BaseInformationList title="Zapisy" :list="[
-        'Aby zapisać się do sezonu, trzeba dołączyć na naszego discorda, wybrać rangę F1, wtedy pojawią się wszystkie kanały związane z ligą wraz z formularzem zapisów.\n'+
-'    Do zgłoszenia się potrzebujecie swojego czasu z próby czasowej: Meksyk(sucho)',
+        'Aby zapisać się do sezonu, trzeba dołączyć na naszego discorda, wybrać rangę F1, wtedy pojawią się wszystkie kanały związane z ligą wraz z formularzem zapisów.',
+        'https://discord.com/invite/6MSNv53ekR',
     ]"/>
 
   </div>
@@ -60,7 +60,7 @@ import BaseInformationList from "../../components/shared/BaseInformationList";
   display: flex;
   margin-top: 1rem;
   width: auto;
-  height: 200px;
+  height: 300px;
 }
 
 .header_information {
