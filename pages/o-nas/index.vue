@@ -37,19 +37,19 @@ const aboutList = [
     persons: [
       {
         name: 'Krzysiek Wójcik',
-        image: '/assets/ekipa/wojcik k.png',
+        image: '/ekipa/wojcik k.png',
       },
       {
         name: 'Szymon Wójcik',
-        image: '/assets/ekipa/wojcik s.png',
+        image: '/ekipa/wojcik s.png',
       },
       {
         name: 'Rafał Bandura',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       },
       {
         name: 'Piotr Kacperski',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       }
     ]
   },
@@ -58,27 +58,27 @@ const aboutList = [
     persons: [
       {
         name: 'Szymon praczyk',
-        image: '/assets/ekipa/praczyk.png',
+        image: '/ekipa/praczyk.png',
       },
       {
         name: 'Wojciech Kroks',
-        image: '/assets/ekipa/kroks.png',
+        image: '/ekipa/kroks.png',
       },
       {
         name: 'Robert Radaj',
-        image: '/assets/ekipa/radaj.png',
+        image: '/ekipa/radaj.png',
       },
       {
         name: 'Kacper Szafrański',
-        image: '/assets/ekipa/szafranski.png',
+        image: '/ekipa/szafranski.png',
       },
       {
         name: 'Miłosz Sieńko',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       },
       {
         name: 'Jakub Stanek',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       }
     ]
   },
@@ -87,15 +87,15 @@ const aboutList = [
     persons: [
       {
         name: 'Miłosz Matuszyk',
-        image: '/assets/ekipa/matuszyk.png',
+        image: '/ekipa/matuszyk.png',
       },
       {
         name: 'Fabian Kiwak',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       },
       {
         name: 'Karol Sasim',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       },
     ]
   },
@@ -104,15 +104,15 @@ const aboutList = [
     persons: [
       {
         name: 'Kuba Janiczek',
-        image: '/assets/ekipa/janiczek.png',
+        image: '/ekipa/janiczek.png',
       },
       {
         name: 'Antoni Stańczak',
-        image: '/assets/ekipa/default.png',
+        image: '/ekipa/default.png',
       },
       {
         name: 'Mateusz Stalmirski',
-        image: '/assets/ekipa/stalmirski.png',
+        image: '/ekipa/stalmirski.png',
       },
     ]
   },
@@ -121,27 +121,27 @@ const aboutList = [
     persons: [
       {
         name: 'Jan Stróżecki',
-        image: '/assets/ekipa/strozecki.png',
+        image: '/ekipa/strozecki.png',
       },
       {
         name: 'Bartosz Kowalczyk',
-        image: '/assets/ekipa/kowalczyk.png',
+        image: '/ekipa/kowalczyk.png',
       },
       {
         name: 'Bartek Laszkiewicz',
-        image: '/assets/ekipa/laszkiewicz.png',
+        image: '/ekipa/laszkiewicz.png',
       },
       {
         name: 'Szymon Puchyrski',
-        image: '/assets/ekipa/puchyrski.png',
+        image: '/ekipa/puchyrski.png',
       },
       {
         name: 'Adam Kurzak',
-        image: '/assets/ekipa/kurzak.png',
+        image: '/ekipa/kurzak.png',
       },
       {
         name: 'Jakub Pakuła',
-        image: '/assets/ekipa/pakula.png',
+        image: '/ekipa/pakula.png',
       },
     ]
   },
