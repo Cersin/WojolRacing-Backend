@@ -65,6 +65,7 @@
         <div v-if="authState.logged && authState.role === 'admin'" class="navigation__block">
           <h2>Admin F1</h2>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/players">Zawodnicy</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/players-hidden">Ukryci Zawodnicy</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/admin/races">Wyniki</NuxtLink>
         </div>
 

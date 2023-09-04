@@ -78,6 +78,14 @@
          label: 'Emilia Romania',
          svg: null
      },
+     "Las Vegas": {
+         label: 'Las Vegas',
+         svg: null
+     },
+     Katar: {
+         label: 'Katar',
+         svg: null
+     },
      Miami: {
          label: 'Miami',
          svg: null

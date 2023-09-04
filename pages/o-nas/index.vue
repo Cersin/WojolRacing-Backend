@@ -49,7 +49,7 @@ const aboutList = [
       },
       {
         name: 'Piotr Kacperski',
-        image: '/ekipa/default.png',
+        image: '/ekipa/kacperski.png',
       }
     ]
   },
@@ -57,7 +57,7 @@ const aboutList = [
     header: 'Administratorzy, Opiekunowie, Sędziowie F1',
     persons: [
       {
-        name: 'Szymon praczyk',
+        name: 'Szymon Praczyk',
         image: '/ekipa/praczyk.png',
       },
       {
@@ -69,6 +69,14 @@ const aboutList = [
         image: '/ekipa/radaj.png',
       },
       {
+        name: 'Karol Sasim',
+        image: '/ekipa/sasim.png',
+      },
+      {
+        name: 'Antoni Olejniczak',
+        image: '/ekipa/olejniczak.png',
+      },
+      {
         name: 'Kacper Szafrański',
         image: '/ekipa/szafranski.png',
       },
@@ -78,7 +86,7 @@ const aboutList = [
       },
       {
         name: 'Jakub Stanek',
-        image: '/ekipa/default.png',
+        image: '/ekipa/stanek.png',
       }
     ]
   },
@@ -142,6 +150,15 @@ const aboutList = [
       {
         name: 'Jakub Pakuła',
         image: '/ekipa/pakula.png',
+      },
+    ]
+  },
+  {
+    header: 'Social Manager',
+    persons: [
+      {
+        name: 'Michał Skrzypczak',
+        image: '/ekipa/skrzypczak.png',
       },
     ]
   },

@@ -96,8 +96,6 @@
               />
             </ValidationWrapper>
 
-
-
             <ValidationWrapper
               class="col-6 md-col-12"
               :value="model.team"
@@ -195,7 +193,7 @@ const toast = useToast();
 const params = ref({
   split: '',
   team: '',
-  active: true,
+  active: false,
   sort: 'team'
 });
 
@@ -240,7 +238,6 @@ async function send() {
       }
 
       const payloadFalsy = removeEmpty(payload);
-      console.log(payloadFalsy);
 
       const formData = new FormData();
 

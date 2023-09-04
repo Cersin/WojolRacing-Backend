@@ -151,7 +151,7 @@ const selectedSplit = ref(split["1"]);
 
 const params = ref({
   split: 1,
-  season: 2,
+  season: 3,
 });
 
 const classification = ref();

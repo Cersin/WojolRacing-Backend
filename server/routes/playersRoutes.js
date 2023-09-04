@@ -9,7 +9,7 @@ import playersController from "~/server/controllers/playersController";
 router
     .route('/')
     .get(playersController.getPlayers)
-    .post(protect, restrictTo('admin'), playersController.createPlayer);
+    .post(protect, restrictTo('admin'), playersController.uploadPlayerPhoto, playersController.createPlayer);
 
 router
     .route('/:name')

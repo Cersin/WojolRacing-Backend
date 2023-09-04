@@ -112,6 +112,10 @@
             title: 'Admin Zawodnicy',
             to: '/admin/players'
           },
+                     {
+            title: 'Ukryci Zawodnicy',
+            to: '/admin/players-hidden'
+          },
         ]"/>
 
       <DropDownMenuItem v-if="authState.logged && authState.role === 'admin-assetto'" title="Admin Assetto" :dropdown="[

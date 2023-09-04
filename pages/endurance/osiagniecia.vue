@@ -5,6 +5,7 @@
   <div class="information">
 
     <BaseInformationList title="Hypercar" :list="[
+        'Mistrzostwo klasy Hypercar trzeciego sezonu Project Endurance',
         'Mistrzostwo klasy Hypercar drugiego sezonu Project Endurance',
         'P2 #666 - 6 Hours of Interlagos ProjectEndurance (Glickenhouse 007) - 2 Października 2022',
         'P1 #666 - 6 Hours of Road America ProjectEndurance (Glickenhouse 007) - 16 Października 2022',
@@ -20,6 +21,7 @@
     ]"/>
 
     <BaseInformationList title="GTE" :list="[
+        'P1 #666 - 24 Heures Du Mans ProjectEndurance (Porsche 911, Darche EGT 2021) - 6 Sierpnia 2023',
         'P2 #666 w kwalifikacjach 24h La Sarthe - SOL Endurance',
         'P3 #664 - 6 Hours of Interlagos ProjectEndurance (Aston Martin GTE AMR) - 2 Października 2022',
         'P3 #664 - 6 Hours of Road America ProjectEndurance (Aston Martin GTE AMR) - 16 Października 2022',

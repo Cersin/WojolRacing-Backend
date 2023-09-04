@@ -28,7 +28,7 @@
         'Miejsce 3: Puchar + IRTrack + Podkładka pod mysz AUKEY KM-P4 120x60',
     ]"/>
 
-    <BaseInformationList title="Split F1" :list="[
+    <BaseInformationList title="Split F2" :list="[
         'Miejsce 1: Puchar + Statuetka + IRTrack',
         'Miejsce 2: Puchar + Statuetka + Podkładka pod mysz AUKEY KM-P4 120x60',
         'Miejsce 3: Puchar + Statuetka',
