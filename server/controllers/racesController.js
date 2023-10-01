@@ -383,9 +383,13 @@ const playerStatistics = catchAsync(async (req, res) => {
 const playerCard = catchAsync(async (req, res) => {
     const season1Length = 15;
     const season2Length = 14;
+    const sez3 = await Races.find({
+        season: 3,
+        split: 2,
+    });
+    const season3Length = sez3.length;
 
-
-    const sumSeasons = season1Length + season2Length;
+    const sumSeasons = season1Length + season2Length + season3Length;
 
     const users = await Races.aggregate([
         {"$unwind": "$results"},
@@ -401,8 +405,10 @@ const playerCard = catchAsync(async (req, res) => {
                 },
                 avgStartGridS1: { $avg: { $cond: {if: {$eq: ["$season", 1]}, then: "$results.grid", else: null} } },
                 avgStartGridS2: { $avg: { $cond: {if: {$eq: ["$season", 2]}, then: "$results.grid", else: null} } },
+                avgStartGridS3: { $avg: { $cond: {if: {$eq: ["$season", 3]}, then: "$results.grid", else: null} } },
                 avgPositionS1: { $avg: { $cond: {if: {$eq: ["$season", 1]}, then: "$results.position", else: null} } },
                 avgPositionS2: { $avg: { $cond: {if: {$eq: ["$season", 2]}, then: "$results.position", else: null} } },
+                avgPositionS3: { $avg: { $cond: {if: {$eq: ["$season", 3]}, then: "$results.position", else: null} } },
                 split1Sum: {
                     "$sum": {
                         $cond: {
@@ -425,6 +431,21 @@ const playerCard = catchAsync(async (req, res) => {
                                     [
                                         {
                                             $eq: ["$split", 2]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                split3Sum: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        {
+                                            $eq: ["$split", 3]
                                         },
                                     ],
                             },
@@ -469,6 +490,24 @@ const playerCard = catchAsync(async (req, res) => {
                         }
                     }
                 },
+                season3Finished: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        {
+                                            $eq: ["$season", 3]
+                                        },
+                                        {
+                                            $eq: ["$results.dnf", false]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
                 fullAttendanceS1: {
                     "$sum": {
                         $cond: {
@@ -493,6 +532,22 @@ const playerCard = catchAsync(async (req, res) => {
                                         '$results.position',
                                         {
                                             $eq: ["$season", 2]
+                                        },
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
+                fullAttendanceS3: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        '$results.position',
+                                        {
+                                            $eq: ["$season", 3]
                                         },
                                     ],
                             },
@@ -539,6 +594,25 @@ const playerCard = catchAsync(async (req, res) => {
                         }
                     }
                 },
+                season3Attendance: {
+                    "$sum": {
+                        $cond: {
+                            if: {$and:
+                                    [
+                                        '$results.position',
+                                        {
+                                            $eq: ["$season", 3]
+                                        },
+                                        {
+                                            $ne: ["$results.team", 'Rezerwa']
+                                        }
+                                    ],
+                            },
+                            then: 1,
+                            else: 0
+                        }
+                    }
+                },
             }
         },
         {
@@ -563,13 +637,17 @@ const playerCard = catchAsync(async (req, res) => {
                 player: '$player',
                 experience: {
                     $function: {
-                        body: function (split1Sum, split2Sum, season1Attendance, season2Attendance, split, s1Length, s2Length, sumS)
+                        body: function (split1Sum, split2Sum, season1Attendance, season2Attendance, season3Attendance, split, s1Length, s2Length, s3Length, sumS)
                         {
                             if(!split) return null;
                             let mostAttendanceSplit = 2;
                             if(split1Sum > split2Sum) mostAttendanceSplit = 1;
-                            
-                            const sumAttendance = season1Attendance + season2Attendance;
+
+                            if(season1Attendance > s1Length) season1Attendance = s1Length;
+                            if(season2Attendance > s2Length) season2Attendance = s2Length;
+                            if(season1Attendance > s3Length) season3Attendance = s3Length;
+
+                            const sumAttendance = season1Attendance + season2Attendance + season3Attendance;
                             const min = 30;
                             const max = mostAttendanceSplit === 1 ? 99 : 90;
                             if (sumAttendance === 1) return 30;
@@ -578,67 +656,76 @@ const playerCard = catchAsync(async (req, res) => {
 
                             const pointMeasureS1 = (max-min) / (s1Length);
                             const pointMeasureS2 = (max-min) / (s2Length);
+                            const pointMeasureS3 = (max-min) / (s3Length);
 
-                            const ratingS1 = 0.3;
-                            const ratingS2 = 0.7;
+                            const ratingS1 = 0.20;
+                            const ratingS2 = 0.35;
+                            const ratingS3 = 0.45;
 
                             const pointsS1 = min + (season1Attendance * pointMeasureS1);
                             const pointsS2 = min + (season2Attendance * pointMeasureS2);
+                            const pointsS3 = min + (season3Attendance * pointMeasureS3);
 
-                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) + (ratingS3 * pointsS3)).toFixed();
+                            // return pointMeasureS3;
                         },
-                        args: ["$split1Sum", "$split2Sum", "$season1Attendance", "$season2Attendance", "$player.split", season1Length, season2Length, sumSeasons ],
+                        args: ["$split1Sum", "$split2Sum", "$season1Attendance", "$season2Attendance", "$season3Attendance", "$player.split", season1Length, season2Length, season3Length, sumSeasons ],
                         lang: "js"
                     }
                 },
                 awareness: {
                     $function: {
-                        body: function (split1Sum, split2Sum, season1Finished, season2Finished, split, fullAttendanceS1, fullAttendanceS2)
+                        body: function (split1Sum, split2Sum, season1Finished, season2Finished, season3Finished, split, fullAttendanceS1, fullAttendanceS2, fullAttendanceS3)
                         {
                             if(!split) return null;
                             let mostAttendanceSplit = 2;
                             if(split1Sum > split2Sum) mostAttendanceSplit = 1;
 
                             const sumFinished = season1Finished + season2Finished;
-                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2 + fullAttendanceS3;
                             const min = 30;
                             const max = mostAttendanceSplit === 1 ? 99 : 99;
                             if (sumFinished === 0) return 30;
 
                             const pointMeasureS1 = (max-min) / (fullAttendanceS1);
                             const pointMeasureS2 = (max-min) / (fullAttendanceS2);
+                            const pointMeasureS3 = (max-min) / (fullAttendanceS3);
 
-                            const ratingS1 = 0.3;
-                            const ratingS2 = 0.7;
+                            const ratingS1 = 0.20;
+                            const ratingS2 = 0.35;
+                            const ratingS3 = 0.45;
 
                             const pointsS1 = min + (season1Finished * pointMeasureS1);
                             const pointsS2 = min + (season2Finished * pointMeasureS2);
+                            const pointsS3 = min + (season3Finished * pointMeasureS3);
 
                             if(!pointsS1) return (pointsS2 - 5).toFixed();
                             if(!pointsS2) return (pointsS1 - 10).toFixed();
-                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2)).toFixed();
+                            if(!pointsS3) return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) - 10).toFixed();
+                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) + (ratingS3 * pointsS3)).toFixed();
                         },
-                        args: ["$split1Sum", "$split2Sum", "$season1Finished", "$season2Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        args: ["$split1Sum", "$split2Sum", "$season1Finished", "$season2Finished", "$season3Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2", "$fullAttendanceS3" ],
                         lang: "js"
                     }
                 },
                 pace: {
                     $function: {
-                        body: function (split1Sum, split2Sum, avgGridPositionS1, avgGridPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
+                        body: function (split1Sum, split2Sum, avgGridPositionS1, avgGridPositionS2, avgGridPositionS3, split,  fullAttendanceS1, fullAttendanceS2, fullAttendanceS3)
                         {
                             let mostAttendanceSplit = 2;
                             if(split1Sum > split2Sum) mostAttendanceSplit = 1;
 
-                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2 + fullAttendanceS3;
                             const min = 30;
                             const max = mostAttendanceSplit === 1 ? 99 : 80;
                             if (sumAttendance === 1) return 30;
 
                             const ratingS1 = 1;
                             const ratingS2 = 1.6;
+                            const ratingS3 = 2;
 
-                            const sumAvgGridAttendance = ((fullAttendanceS1 * avgGridPositionS1) * ratingS1) + ((fullAttendanceS2 * avgGridPositionS2) * ratingS2);
-                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2);
+                            const sumAvgGridAttendance = ((fullAttendanceS1 * avgGridPositionS1) * ratingS1) + ((fullAttendanceS2 * avgGridPositionS2) * ratingS2) + ((fullAttendanceS3 * avgGridPositionS3) * ratingS3);
+                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2) + (fullAttendanceS3 * ratingS3);
                             const sumAvg = sumAvgGridAttendance / wageSum;
 
                             const pointMeasure = (max-min) / 20;
@@ -647,27 +734,28 @@ const playerCard = catchAsync(async (req, res) => {
 
                             return points.toFixed();
                         },
-                        args: ["$split1Sum", "$split2Sum", "$avgStartGridS1", "$avgStartGridS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        args: ["$split1Sum", "$split2Sum", "$avgStartGridS1", "$avgStartGridS2", "$avgStartGridS3", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2", "$fullAttendanceS3" ],
                         lang: "js"
                     }
                 },
                 racePace: {
                     $function: {
-                        body: function (split1Sum, split2Sum, avgPositionS1, avgPositionS2, split,  fullAttendanceS1, fullAttendanceS2)
+                        body: function (split1Sum, split2Sum, avgPositionS1, avgPositionS2, avgPositionS3, split, fullAttendanceS1, fullAttendanceS2, fullAttendanceS3)
                         {
                             let mostAttendanceSplit = 2;
                             if(split1Sum > split2Sum) mostAttendanceSplit = 1;
 
-                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2;
+                            const sumAttendance = fullAttendanceS1 + fullAttendanceS2 + fullAttendanceS3;
                             const min = 30;
                             const max = mostAttendanceSplit === 1 ? 99 : 80;
                             if (sumAttendance === 1) return 30;
 
                             const ratingS1 = 1;
                             const ratingS2 = 1.6;
+                            const ratingS3 = 2;
 
-                            const sumAvgPositionAttendance = ((fullAttendanceS1 * avgPositionS1) * ratingS1) + ((fullAttendanceS2 * avgPositionS2) * ratingS2);
-                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2);
+                            const sumAvgPositionAttendance = ((fullAttendanceS1 * avgPositionS1) * ratingS1) + ((fullAttendanceS2 * avgPositionS2) * ratingS2) + ((fullAttendanceS3 * avgPositionS3) * ratingS3);
+                            const wageSum = (fullAttendanceS1 * ratingS1) + (fullAttendanceS2 * ratingS2) + (fullAttendanceS3 * ratingS3);
                             const sumAvg = sumAvgPositionAttendance / wageSum;
 
                             const pointMeasure = (max-min) / 20;
@@ -676,7 +764,7 @@ const playerCard = catchAsync(async (req, res) => {
 
                             return points.toFixed();
                         },
-                        args: ["$split1Sum", "$split2Sum", "$avgPositionS1", "$avgPositionS2", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2" ],
+                        args: ["$split1Sum", "$split2Sum", "$avgPositionS1", "$avgPositionS2", "$avgPositionS3", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2", "$fullAttendanceS3" ],
                         lang: "js"
                     }
                 },
