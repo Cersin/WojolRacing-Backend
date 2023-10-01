@@ -45,7 +45,7 @@ const aboutList = [
       },
       {
         name: 'Rafał Bandura',
-        image: '/ekipa/default.png',
+        image: '/ekipa/bandura.png',
       },
       {
         name: 'Piotr Kacperski',
@@ -67,10 +67,6 @@ const aboutList = [
       {
         name: 'Robert Radaj',
         image: '/ekipa/radaj.png',
-      },
-      {
-        name: 'Karol Sasim',
-        image: '/ekipa/sasim.png',
       },
       {
         name: 'Antoni Olejniczak',

@@ -1,4 +1,4 @@
-import html2canvas from 'html2canvas';
+import html2canvas from '@wtto00/html2canvas';
 import { saveAs } from 'file-saver';
 
 export default function useImage() {
