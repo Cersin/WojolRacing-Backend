@@ -12,8 +12,8 @@ export default {
 
 <style scoped lang="scss">
   .aside {
-    grid-area: aside;
-    color: black;
-    background-color: $color-primary;
+    //grid-area: aside;
+    //color: black;
+    //background-color: $color-primary;
   }
 </style>
