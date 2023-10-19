@@ -65,8 +65,12 @@ const aboutList = [
         image: '/ekipa/kroks.png',
       },
       {
-        name: 'Robert Radaj',
-        image: '/ekipa/radaj.png',
+        name: 'Kacper Wójcik',
+        image: '/ekipa/kacperwojcik.png',
+      },
+      {
+        name: 'Aleksander Duniec',
+        image: '/ekipa/duniec.png',
       },
       {
         name: 'Antoni Olejniczak',
@@ -98,7 +102,11 @@ const aboutList = [
         image: '/ekipa/default.png',
       },
       {
-        name: 'Karol Sasim',
+        name: 'Klaudiusz Kowalec',
+        image: '/ekipa/kawalec.png',
+      },
+      {
+        name: 'Krzysztof Helbin',
         image: '/ekipa/default.png',
       },
     ]
@@ -144,8 +152,12 @@ const aboutList = [
         image: '/ekipa/kurzak.png',
       },
       {
-        name: 'Jakub Pakuła',
+        name: 'Michał Petrycki',
         image: '/ekipa/pakula.png',
+      },
+      {
+        name: 'Jakub Pakuła',
+        image: '/ekipa/petrycki.png',
       },
     ]
   },
@@ -155,6 +167,10 @@ const aboutList = [
       {
         name: 'Michał Skrzypczak',
         image: '/ekipa/skrzypczak.png',
+      },
+      {
+        name: 'Robert Radaj',
+        image: '/ekipa/radaj.png',
       },
     ]
   },
