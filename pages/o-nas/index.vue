@@ -44,10 +44,6 @@ const aboutList = [
         image: '/ekipa/wojcik s.png',
       },
       {
-        name: 'Rafał Bandura',
-        image: '/ekipa/bandura.png',
-      },
-      {
         name: 'Piotr Kacperski',
         image: '/ekipa/kacperski.png',
       }

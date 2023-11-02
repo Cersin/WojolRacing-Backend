@@ -1,8 +1,8 @@
 <template>
   <div class="sponsors">
-    <div class="image__wrapper" v-for="(image, key) in images" :key="key">
+    <div class="image__wrapper"  v-for="(image, key) in images" :key="key">
       <a :href="image.link">
-        <img  :alt="image.name" :src="`/partners/${image.src}`">
+        <img :alt="image.name" :src="`/partners/${image.src}`">
       </a>
     </div>
   </div>
@@ -56,6 +56,11 @@ const images = [
     src: 'difficult_small.png',
     link: 'https://www.instagram.com/difficult_js/'
   },
+  {
+    name: 'Plakart Lab',
+    src: 'plakatartlab.png',
+    link: 'https://www.plakartlab.pl/'
+  },
 ]
 </script>
 
@@ -69,13 +74,14 @@ const images = [
   justify-self: flex-end;
 
   display: flex;
+  align-items:center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 4rem;
 
   img {
-    height: 3rem;
-    width: auto;
+    width: 125px;
+    height: auto;
   }
 }
 

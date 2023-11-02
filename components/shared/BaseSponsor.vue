@@ -1,6 +1,8 @@
 <template>
   <div class="sponsor">
-    <img :src="imgSrc" alt="logo_sponsor" :class="{order: imageOrder}">
+    <a :href="imgLink" :class="{order: imageOrder}">
+      <img :src="imgSrc" alt="logo_sponsor">
+    </a>
     <div class="description">
       {{ description }}
     </div>
@@ -12,6 +14,10 @@ import {computed} from "vue";
 
 const props = defineProps({
   imgSrc: {
+    type: String,
+    required: true,
+  },
+  imgLink: {
     type: String,
     required: true,
   },
