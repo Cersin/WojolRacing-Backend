@@ -19,10 +19,6 @@
         </div>
       </div>
     </div>
-
-
-
-
   </div>
 
 </template>
@@ -55,10 +51,6 @@ const aboutList = [
       {
         name: 'Szymon Praczyk',
         image: '/ekipa/praczyk.png',
-      },
-      {
-        name: 'Wojciech Kroks',
-        image: '/ekipa/kroks.png',
       },
       {
         name: 'Kacper Wójcik',
@@ -94,11 +86,7 @@ const aboutList = [
         image: '/ekipa/matuszyk.png',
       },
       {
-        name: 'Fabian Kiwak',
-        image: '/ekipa/default.png',
-      },
-      {
-        name: 'Klaudiusz Kowalec',
+        name: 'Klaudiusz Kawalec',
         image: '/ekipa/kawalec.png',
       },
       {
@@ -148,11 +136,11 @@ const aboutList = [
         image: '/ekipa/kurzak.png',
       },
       {
-        name: 'Michał Petrycki',
+        name: 'Jakub Pakuła',
         image: '/ekipa/pakula.png',
       },
       {
-        name: 'Jakub Pakuła',
+        name: 'Michał Petrycki',
         image: '/ekipa/petrycki.png',
       },
     ]
@@ -161,12 +149,8 @@ const aboutList = [
     header: 'Social Manager',
     persons: [
       {
-        name: 'Michał Skrzypczak',
-        image: '/ekipa/skrzypczak.png',
-      },
-      {
-        name: 'Robert Radaj',
-        image: '/ekipa/radaj.png',
+        name: 'Kamil Sasak',
+        image: '/ekipa/default.png',
       },
     ]
   },

@@ -9,11 +9,14 @@
     <div class="card_image">
       <img :src="imagePath" :alt="title">
     </div>
+
+    <BaseButton style="width: 100px; margin-top: 8px">Sprawdź</BaseButton>
   </div>
 </template>
 
 <script setup>
 import {navigateTo} from "nuxt/app";
+import BaseButton from "~/components/shared/BaseButton.vue";
 
 const router = useRouter();
 

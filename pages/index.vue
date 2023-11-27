@@ -21,9 +21,9 @@
         />
       </div>
 
-      <a class="madeby" href="https://frontszymon.pl">v.3.2 Strona wykonana przez FRONTSZYMON.pl</a>
-
       <Sponsors/>
+
+      <a class="madeby" href="https://frontszymon.pl">v.3.3 Strona wykonana przez FRONTSZYMON.pl</a>
     </div>
 
     <div class="aside">
@@ -152,6 +152,7 @@ function calculateOverall(racePace, pace, awareness, experience) {
   position: relative;
   margin-bottom: 5rem;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
 }
 
@@ -171,8 +172,6 @@ function calculateOverall(racePace, pace, awareness, experience) {
   text-decoration: none;
   color: $color-primary;
   font-size: 1.1rem;
-  position: absolute;
-  bottom: 0;
 
   &:hover {
     color: white;
