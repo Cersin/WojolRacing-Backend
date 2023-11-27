@@ -152,6 +152,10 @@ const aboutList = [
         name: 'Kamil Sasak',
         image: '/ekipa/default.png',
       },
+      {
+        name: 'Robert Radaj',
+        image: '/ekipa/radaj.png',
+      }
     ]
   },
 ]
