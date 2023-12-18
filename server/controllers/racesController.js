@@ -662,9 +662,12 @@ const playerCard = catchAsync(async (req, res) => {
                             const ratingS2 = 0.35;
                             const ratingS3 = 0.45;
 
-                            const pointsS1 = min + (season1Attendance * pointMeasureS1);
-                            const pointsS2 = min + (season2Attendance * pointMeasureS2);
-                            const pointsS3 = min + (season3Attendance * pointMeasureS3);
+                            let pointsS1 = min + (season1Attendance * pointMeasureS1);
+                            if(pointsS1 >= 100) pointsS1 = 99;
+                            let pointsS2 = min + (season2Attendance * pointMeasureS2);
+                            if(pointsS2 >= 100) pointsS2 = 99;
+                            let pointsS3 = min + (season3Attendance * pointMeasureS3);
+                            if(pointsS3 >= 100) pointsS3 = 99;
 
                             return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) + (ratingS3 * pointsS3)).toFixed();
                             // return pointMeasureS3;
@@ -681,7 +684,7 @@ const playerCard = catchAsync(async (req, res) => {
                             let mostAttendanceSplit = 2;
                             if(split1Sum > split2Sum) mostAttendanceSplit = 1;
 
-                            const sumFinished = season1Finished + season2Finished;
+                            const sumFinished = season1Finished + season2Finished + season3Finished;
                             const sumAttendance = fullAttendanceS1 + fullAttendanceS2 + fullAttendanceS3;
                             const min = 30;
                             const max = mostAttendanceSplit === 1 ? 99 : 99;
@@ -699,8 +702,8 @@ const playerCard = catchAsync(async (req, res) => {
                             const pointsS2 = min + (season2Finished * pointMeasureS2);
                             const pointsS3 = min + (season3Finished * pointMeasureS3);
 
-                            if(!pointsS1) return (pointsS2 - 5).toFixed();
-                            if(!pointsS2) return (pointsS1 - 10).toFixed();
+                            if(!pointsS1 && !pointsS2 && !pointsS3) return 0;
+                            if(!pointsS1 && !pointsS2) return (pointsS3 - 5).toFixed();
                             if(!pointsS3) return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) - 10).toFixed();
                             return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) + (ratingS3 * pointsS3)).toFixed();
                         },
@@ -850,5 +853,5 @@ const deleteRace = catchAsync(async (req, res, next) => {
 });
 
 export default {
-    createRace, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
+    createRace, findLastRaces, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
 }
