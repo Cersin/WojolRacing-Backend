@@ -705,7 +705,8 @@ const playerCard = catchAsync(async (req, res) => {
                             if(!pointsS1 && !pointsS2 && !pointsS3) return 0;
                             if(!pointsS1 && !pointsS2) return (pointsS3 - 5).toFixed();
                             if(!pointsS3) return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) - 10).toFixed();
-                            return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) + (ratingS3 * pointsS3)).toFixed();
+                            return (((ratingS1 * pointsS1) || 0) + ((ratingS2 * pointsS2) || 0) + ((ratingS3 * pointsS3)) || 0).toFixed();
+
                         },
                         args: ["$split1Sum", "$split2Sum", "$season1Finished", "$season2Finished", "$season3Finished", "$player.split", "$fullAttendanceS1", "$fullAttendanceS2", "$fullAttendanceS3" ],
                         lang: "js"
@@ -853,5 +854,5 @@ const deleteRace = catchAsync(async (req, res, next) => {
 });
 
 export default {
-    createRace, findLastRaces, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
+    createRace, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
 }
