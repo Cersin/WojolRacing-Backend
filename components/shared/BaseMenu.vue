@@ -45,12 +45,12 @@
 
         <div class="navigation__block">
           <h2>Powtórki</h2>
-          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi')">
-            Sezon 1 F1
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk0EI6Musr3ChVFoeLOnbXOP')">
+            Sezon 3 F1
           </a>
 
-          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-')">
-            Sezon 1 F2
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk2WCNgdWvx5fUo8PyDd2Yvm')">
+            Sezon 3 F2
           </a>
 
           <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk3r7cpbhUiOD5R6obpDaZ2_')">
@@ -59,6 +59,14 @@
 
           <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk0be_A_Uo3m2pi51dvyal86')">
             Sezon 2 F2
+          </a>
+
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi')">
+            Sezon 1 F1
+          </a>
+
+          <a @click="navigateToSocial('https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-')">
+            Sezon 1 F2
           </a>
         </div>
 

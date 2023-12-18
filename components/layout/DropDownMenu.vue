@@ -74,13 +74,13 @@
 
       <DropDownMenuItem title="Powtórki" :dropdown="[
           {
-            title: 'Sezon 1 F1',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi',
+            title: 'Sezon 3 F1',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk0EI6Musr3ChVFoeLOnbXOP',
             link: true
           },
-           {
-            title: 'Sezon 1 F2',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-',
+          {
+            title: 'Sezon 3 F2',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk2WCNgdWvx5fUo8PyDd2Yvm',
             link: true
           },
           {
@@ -91,6 +91,16 @@
           {
             title: 'Sezon 2 F2',
             to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk0be_A_Uo3m2pi51dvyal86',
+            link: true
+          },
+          {
+            title: 'Sezon 1 F1',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi',
+            link: true
+          },
+           {
+            title: 'Sezon 1 F2',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-',
             link: true
           },
         ]"/>
