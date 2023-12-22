@@ -14,6 +14,7 @@
       class="personal-card--container">
       <div class="personal-card--logo"><img src="/logo_wojol.png"/> </div>
       <img class="personal-card--photo" :src="photo ? `/img/players/${photo}` : '/personalcard/person_white.png'"/>
+<!--      <img class="personal-card&#45;&#45;photo" src="/test2.png"/>-->
       <div class="personal-card--team">
         <div class="personal-card--number">{{ overall.toFixed() }}</div>
         {{ team }}
@@ -126,8 +127,8 @@ function calculateOverall() {
 @import "styles/variables";
 
 .personal-card {
-  width: 225px;
-  height: 300px;
+  width: 900px;
+  height: 1200px;
   position: relative;
   z-index: 999;
   //-webkit-filter: blur(.5px);
@@ -168,12 +169,12 @@ function calculateOverall() {
 
   .personal-card--number {
     position: absolute;
-    bottom: 44%;
-    right: 25%;
+    bottom: 30%;
+    right: 30%;
     padding: 4px 11px;
     border-radius: 14px;
     background-color: $color-primary;
-    font-size: 24px;
+    font-size: 96px;
     color: black;
     opacity: 0.7;
     display: flex;
@@ -183,7 +184,7 @@ function calculateOverall() {
 }
 
 .personal-card--photo {
-  height: 130px;
+  height: 800px;
   width: auto;
   object-fit: cover;
   object-position: top;
@@ -192,8 +193,8 @@ function calculateOverall() {
 .personal-card--logo {
   position: absolute;
   top: 0;
-  right: 3%;
-  width: 75px;
+  right: 6%;
+  width: 125px;
 
   img {
     height: 100%;
@@ -215,23 +216,23 @@ function calculateOverall() {
 
 .personal-card--borders {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 0%;
+  width: 150px;
+  height: 150px;
+  top: 2%;
   left: 3%;
   border: solid $color-primary;
-  border-width: 8px 0 0 8px;
-  clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
+  border-width: 24px 0 0 24px;
+  clip-path: polygon(0 0, 100% 0%, 100% 0%, 0 100%);
   z-index: 900;
 
   &_black {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
     top: 0%;
-    left: 3%;
+    left: 5%;
     border: solid black;
-    border-width: 8px 0 0 8px;
+    border-width: 24px 0 0 24px;
     clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
     z-index: 900;
   }
@@ -239,23 +240,23 @@ function calculateOverall() {
 
 .personal-card--borders-2 {
   position: absolute;
-  width: 50px;
-  height: 55px;
+  width: 150px;
+  height: 165px;
   top: -11px;
   left: -5px;
   border: solid $color-primary;
-  border-width: 8px 0 0 8px;
+  border-width: 24px 0 0 24px;
   clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
   z-index: 900;
 
   &_black {
     position: absolute;
-    width: 50px;
-    height: 55px;
+    width: 150;
+    height: 165px;
     top: -11px;
     left: -5px;
     border: solid black;
-    border-width: 8px 0 0 8px;
+    border-width: 24px 0 0 24px;
     clip-path: polygon(0 0, 100% 0%, 100% 5%, 0 100%);
     z-index: 900;
 
@@ -264,23 +265,23 @@ function calculateOverall() {
 
 .personal-card--borders-3 {
   position: absolute;
-  width: 50px;
+  width: 150px;
   height: 100%;
-  right: 0;
+  right: -18px;
   top: -10px;
   border: solid $color-primary;
-  border-width: 0 8px 0 0;
+  border-width: 0 24px 0 0;
   clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
   z-index: 900;
 
   &_black {
     position: absolute;
-    width: 50px;
+    width: 150px;
     height: 100%;
     right: 0;
     top: -10px;
     border: solid black;
-    border-width: 0 8px 0 0;
+    border-width: 0 24px 0 0;
     clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
     z-index: 900;
 
@@ -289,12 +290,12 @@ function calculateOverall() {
 
 .personal-card--borders-4 {
   position: absolute;
-  width: 50px;
+  width: 150px;
   height: 92%;
-  right: -15px;
-  top: 0;
+  right: -50px;
+  top: 2%;
   border: solid $color-primary;
-  border-width: 0 8px 0 0;
+  border-width: 0 24px 0 0;
   clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
   z-index: 900;
 
@@ -305,7 +306,7 @@ function calculateOverall() {
     right: -15px;
     top: 0;
     border: solid black;
-    border-width: 0 8px 0 0;
+    border-width: 0 24px 0 0;
     clip-path: polygon(82% 0, 100% 3%, 100% 85%, 0 100%, 0 0);
     z-index: 900;
   }
@@ -313,14 +314,14 @@ function calculateOverall() {
 
 .personal-card--team {
   margin-top: 16px;
-  font-size: 11px;
+  font-size: 33px;
   font-weight: 400px;
 }
 
 .personal-card--nick {
   text-align: center;
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 48px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -338,23 +339,23 @@ function calculateOverall() {
 
   .personal-card--arrow {
     position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 12px;
-    height: 12px;
+    bottom: -6px;
+    right: -6px;
+    width: 36px;
+    height: 36px;
     border: $color-primary solid;
-    border-width: 2.7px 2.7px 0 0;
+    border-width: 8.1px 8.1px 0 0;
     transform: rotate(90deg);
   }
 
   .personal-card--arrow-2 {
     position: absolute;
-    bottom: -7px;
-    right: -7px;
-    width: 12px;
-    height: 12px;
+    bottom: -20px;
+    right: -20px;
+    width: 36px;
+    height: 36px;
     border: $color-primary solid;
-    border-width: 2.7px 2.7px 0 0;
+    border-width: 8.1px 8.1px 0 0;
     transform: rotate(90deg);
   }
 
@@ -366,11 +367,11 @@ function calculateOverall() {
     opacity: 0.8;
 
     .personal-card--rate {
-      font-size: 22px;
+      font-size: 66px;
     }
 
     .personal-card--description {
-      font-size: 12px;
+      font-size: 36px;
     }
   }
 }
