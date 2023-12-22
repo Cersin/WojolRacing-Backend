@@ -16,6 +16,16 @@ const calendarSchema = new mongoose.Schema({
     }
 })
 
+calendarSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+calendarSchema.set('toJSON', {
+    virtuals: true
+});
+
+
 const Calendar = mongoose.model("Calendar", calendarSchema);
 
 export default Calendar

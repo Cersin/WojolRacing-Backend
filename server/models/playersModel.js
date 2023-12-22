@@ -26,6 +26,15 @@ const playersModel = new mongoose.Schema({
     }
 });
 
+playersModel.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+playersModel.set('toJSON', {
+    virtuals: true
+});
+
 const Players = mongoose.model('Players', playersModel);
 
 export default Players

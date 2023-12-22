@@ -10,6 +10,10 @@ router
     .post(protect, restrictTo('admin'), racesController.createRace);
 
 router
+    .route('/findLastRaces')
+    .get(racesController.findLastRaces)
+
+router
     .route('/playerPoints')
     .get(racesController.userPoints);
 

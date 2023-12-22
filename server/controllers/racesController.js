@@ -38,6 +38,7 @@ const getRace = catchAsync(async (req, res) => {
             "$group": {
                 _id: '$_id',
                 track: {"$first": '$track'},
+                id: {"$first": '$_id'},
                 season: {"$first": '$season'},
                 split: {"$first": '$split'},
                 date: {"$first": '$date'},
@@ -55,6 +56,50 @@ const getRace = catchAsync(async (req, res) => {
         data: races[0]
     })
 });
+
+const findLastRaces = catchAsync(async (req, res) => {
+    let races = await Races.aggregate([
+        {"$unwind": "$results"},
+        {"$sort": {'results.position': 1}},
+        {
+            "$lookup": {
+                from: "players",
+                localField: "results.player",
+                foreignField: "_id",
+                as: "results.playerDetails"
+            },
+        },
+        {"$unwind": "$results.playerDetails"},
+        {
+            "$group": {
+                _id: '$_id',
+                id: {"$first": '$_id'},
+                track: {"$first": '$track'},
+                season: {"$first": '$season'},
+                split: {"$first": '$split'},
+                date: {"$first": '$date'},
+                points: {$sum: "$results.points"},
+                results: {"$push": '$results'},
+            }
+        },
+        {
+            "$sort": {'date': -1},
+        },
+    ]).limit(1)
+
+    const tracks = races.map(race => race.track);
+
+    if (req.query.number) {
+        races = {...races[req.query.number], length: races.length}
+    }
+
+    res.status(200).json({
+        status: 'success',
+        length: races.length,
+        data: races
+    })
+});
+
 
 const findRaces = catchAsync(async (req, res) => {
         let races = await Races.aggregate([
@@ -78,6 +123,7 @@ const findRaces = catchAsync(async (req, res) => {
             {
                 "$group": {
                     _id: '$_id',
+                    id: {"$first": '$_id'},
                     track: {"$first": '$track'},
                     season: {"$first": '$season'},
                     split: {"$first": '$split'},
@@ -162,6 +208,7 @@ const userPoints = catchAsync(async (req, res) => {
             {
                 "$group": {
                     _id: "$results.player",
+                    id: {"$first": '$_id'},
                     points: {$sum: "$results.points"},
                     team: {$last: "$results.team"}
                 }
@@ -212,6 +259,7 @@ const userDetailsPoints = catchAsync(async (req, res) => {
         {
             "$group": {
                 _id: "$results.player",
+                id: {"$first": '$_id'},
                 points: {$sum: "$results.points"},
                 team: {$last: "$results.team"},
                 races: {$push: {
@@ -258,6 +306,7 @@ const playerStatistics = catchAsync(async (req, res) => {
             {
                 "$group": {
                     _id: "$results.player",
+                    id: {"$first": '$_id'},
                     points: {$sum: "$results.points"},
                     team: {$last: "$results.team"},
                     firstPlaces: {
@@ -396,6 +445,7 @@ const playerCard = catchAsync(async (req, res) => {
         {
             "$group": {
                 _id: "$results.player",
+                id: {"$first": '$_id'},
                 points: {$sum: "$results.points"},
                 split: {$last: "$results.split"},
                 races: {
@@ -854,5 +904,5 @@ const deleteRace = catchAsync(async (req, res, next) => {
 });
 
 export default {
-    createRace, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
+    createRace,  findLastRaces, playerCard,  findRaces, userPoints, constructorsPoints, editRace, deleteRace, playerStatistics, getRace, formatData, userDetailsPoints,
 }

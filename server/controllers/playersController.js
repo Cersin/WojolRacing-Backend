@@ -93,7 +93,7 @@ const editPlayer = catchAsync(async (req, res) => {
 });
 
 const deletePlayer = catchAsync(async (req, res) => {
-    const player = await Players.findByIdAndUpdate(req.params.id, {
+    const player = await Players.findByIdAndDelete(req.params.id, {
         active: false
     });
     if (!player) throw new Error('Nie ma zawodnika o takim id');

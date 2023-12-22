@@ -15,6 +15,8 @@ import racesRoutes from "~/server/routes/racesRoutes";
 import assettoRacesRoutes from "~/server/routes/assettoRacesRoutes";
 import assettoPlayersRoutes from "~/server/routes/assettoPlayersRoutes";
 import calendarRoutes from "~/server/routes/calendarRoutes";
+import seasonRoutes from "~/server/routes/seasonRoutes";
+import splitRoutes from "~/server/routes/splitRoutes";
 
 process.on('uncaughtException', err => {
     console.log(err.name, err.message);
@@ -46,6 +48,8 @@ app.use('/race', racesRoutes);
 app.use('/assetto-players', assettoPlayersRoutes);
 app.use('/assetto-race', assettoRacesRoutes);
 app.use('/calendar', calendarRoutes);
+app.use('/seasons', seasonRoutes);
+app.use('/splits', splitRoutes);
 
 app.all('*', (req,res,next) => {
     next(new AppError(`Nie mogę znaleźć ${req.originalUrl} na tym serwerze!`, 404));

@@ -66,6 +66,15 @@ const racesSchema = new mongoose.Schema({
     }]
 });
 
+racesSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+racesSchema.set('toJSON', {
+    virtuals: true
+});
+
 const Races = mongoose.model('Races', racesSchema);
 
 export default Races

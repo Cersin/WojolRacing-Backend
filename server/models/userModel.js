@@ -38,6 +38,15 @@ const userSchema = new mongoose.Schema({
     },
 });
 
+userSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+userSchema.set('toJSON', {
+    virtuals: true
+});
+
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
 
