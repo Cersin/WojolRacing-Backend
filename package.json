@@ -1,38 +1,19 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "start": "nodemon index.js"
   },
   "devDependencies": {
-    "@vueuse/core": "^9.1.1",
-    "@vueuse/nuxt": "^9.1.1",
     "cookie-parser": "^1.4.6",
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
-    "nuxt": "3.0.0-rc.7",
-    "vite-svg-loader": "^3.6.0",
     "xss-clean": "^0.1.1"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.0.6",
-    "@fontsource/chakra-petch": "^4.5.8",
-    "@iconfu/svg-inject": "^1.2.3",
-    "@iconify-prerendered/vue-fa-regular": "^0.12.1656181869",
-    "@iconify-prerendered/vue-fa6-brands": "^0.12.1662097805",
-    "@iconify-prerendered/vue-mdi": "^0.12.1663305505",
-    "@vee-validate/i18n": "^4.6.7",
-    "@vee-validate/rules": "^4.6.7",
-    "@vuepic/vue-datepicker": "^3.5.3",
-    "@vueuse/components": "^9.1.1",
-    "@wtto00/html2canvas": "^1.4.3",
-    "animejs": "^3.2.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "css-ripple-effect": "^1.0.5",
-    "element-plus": "^2.2.12",
+    "dotenv": "^16.3.1",
     "express": "^4.18.1",
     "express-mongo-sanitize": "^2.2.0",
     "express-session": "^1.17.3",
@@ -44,11 +25,8 @@
     "mongo-round": "^1.0.0",
     "mongoose": "^6.3.5",
     "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.2",
     "path": "^0.12.7",
-    "sass": "^1.52.1",
-    "sass-loader": "^13.0.0",
-    "validator": "^13.7.0",
-    "vee-validate": "^4.6.9",
-    "vue-toastification": "^2.0.0-rc.5"
+    "validator": "^13.7.0"
   }
 }
