@@ -704,6 +704,9 @@ const playerCard = catchAsync(async (req, res) => {
 
                             if(!pointsS1 && !pointsS2 && !pointsS3) return 0;
                             if(!pointsS1 && !pointsS2) return (pointsS3 - 5).toFixed();
+                            if(!pointsS1 && !pointsS3) return (pointsS2 - 5).toFixed();
+                            if(!pointsS2 && !pointsS3) return (pointsS1 - 5).toFixed();
+                            if(!pointsS1) return ((ratingS2 * pointsS2) + (ratingS3 * pointsS3) - 10).toFixed();
                             if(!pointsS3) return ((ratingS1 * pointsS1) + (ratingS2 * pointsS2) - 10).toFixed();
                             return (((ratingS1 * pointsS1) || 0) + ((ratingS2 * pointsS2) || 0) + ((ratingS3 * pointsS3)) || 0).toFixed();
 
