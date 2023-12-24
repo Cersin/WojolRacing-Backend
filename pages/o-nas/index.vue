@@ -75,6 +75,14 @@ const aboutList = [
       {
         name: 'Jakub Stanek',
         image: '/ekipa/stanek.png',
+      },
+      {
+        name: 'Mateusz Onik',
+        image: '/ekipa/onik.png',
+      },
+      {
+        name: 'Jakub Pres',
+        image: '/ekipa/pres.png',
       }
     ]
   },
@@ -91,7 +99,7 @@ const aboutList = [
       },
       {
         name: 'Krzysztof Helbin',
-        image: '/ekipa/default.png',
+        image: '/ekipa/helbin.png',
       },
     ]
   },
@@ -124,10 +132,6 @@ const aboutList = [
         image: '/ekipa/kowalczyk.png',
       },
       {
-        name: 'Bartek Laszkiewicz',
-        image: '/ekipa/laszkiewicz.png',
-      },
-      {
         name: 'Szymon Puchyrski',
         image: '/ekipa/puchyrski.png',
       },
@@ -143,6 +147,10 @@ const aboutList = [
         name: 'Michał Petrycki',
         image: '/ekipa/petrycki.png',
       },
+      {
+        name: 'Bartek Kamać ',
+        image: '/ekipa/kamac.png',
+      },
     ]
   },
   {
@@ -150,7 +158,7 @@ const aboutList = [
     persons: [
       {
         name: 'Kamil Sasak',
-        image: '/ekipa/default.png',
+        image: '/ekipa/sasak.png',
       },
       {
         name: 'Robert Radaj',

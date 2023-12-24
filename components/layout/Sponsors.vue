@@ -42,16 +42,6 @@ const images = [
     link: 'https://drivesquad.pl/'
   },
   {
-    name: 'Auto-KIWI',
-    src: 'kiwi.png',
-    link: 'https://kiwiautocentrum.pl/'
-  },
-  {
-    name: 'TrueSim',
-    src: 'truesim.png',
-    link: 'https://www.truesim.pl/'
-  },
-  {
     name: 'Difficult',
     src: 'difficult_small.png',
     link: 'https://www.instagram.com/difficult_js/'
@@ -61,6 +51,26 @@ const images = [
     src: 'plakatartlab.png',
     link: 'https://www.plakartlab.pl/'
   },
+  {
+    name: 'Simracing Centre',
+    src: 'simracing_centre.png',
+    link: 'https://simracing-centre.com/',
+  },
+  {
+    name: 'P1 Racing Models',
+    src: 'p1_logo_white.png',
+    link: 'https://p1racingmodels.pl/',
+  },
+  {
+    name: 'Sim Masters',
+    src: 'sim_masters.png',
+    link: 'https://www.simmasters.pl/',
+  },
+  {
+    name: 'Simfun',
+    src: 'simfun_biale_transparent.png',
+    link: 'https://simfun.pl/',
+  }
 ]
 </script>
 

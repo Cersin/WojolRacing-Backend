@@ -17,11 +17,6 @@ import BaseSponsor from "../../components/shared/BaseSponsor";
 
 const sponsorList = [
   {
-    imgSrc: '/partners/truesim.png',
-    link: 'https://www.truesim.pl/',
-    description: 'Wysokiej jakości sprzęt simracingowy w dobrej cenie. Shiftery, Button Boxy oraz inne akcesoria specjalnie dla Ciebie. https://www.truesim.pl/'
-  },
-  {
     imgSrc: '/partners/plakatartlab.png',
     link: 'https://www.plakartlab.pl/',
     description: 'Plakart Lab to miejsce, gdzie sztuka i wyrażenie osobiste spotykają się w postaci pięknych plakatów. Nasz sklep oferuje wybór unikalnych i artystycznych plakatów, które dodają charakteru i wyjątkowego stylu każdemu pomieszczeniu. https://www.plakartlab.pl/'
@@ -47,14 +42,30 @@ const sponsorList = [
     description: 'Systemy do śledzenia ruchów głowy, a także dodatki do simracingu. https://www.irtrack.pl/ '
   },
   {
-    imgSrc: '/partners/kiwi.png',
-    link: 'https://kiwiautocentrum.pl/',
-    description: 'Kiwi Auto Centrum - Kompleksowe usługi z zakresu mechaniki pojazdów, likwidacja szkód, samochody zastępcze oraz car detailing. https://www.kiwiautocentrum.pl/'
-  },
-  {
     imgSrc: '/partners/difficult_big.png',
     link: 'https://www.instagram.com/difficult_js/',
     description: 'Jan "DiffiCult" Stróżecki - Dziennikarz oraz komentator sportowy'
+  },
+  {
+    imgSrc: '/partners/simracing_centre.png',
+    link: 'https://simracing-centre.com/',
+    description: 'Explore the world of sim racing with Simracing Centre. Immerse yourself in our expertly crafted F1, WRC, and ACC programs.'
+  },
+  {
+    imgSrc: '/partners/p1_logo_white.png',
+    link: 'https://p1racingmodels.pl/',
+    description: 'Sklep internetowy z modelami samochodów w skali, stworzonym z myślą o każdym pasjonacie motorsportu.'
+  },
+  {
+    imgSrc: '/partners/sim_masters.png',
+    link: 'https://www.simmasters.pl/',
+    description: 'Sklep z sprzętem simracingowym!\n' +
+      'Z kodem #WRL 5% zniżki!'
+  },
+  {
+    imgSrc: '/partners/simfun_biale_transparent.png',
+    link: 'https://simfun.pl/',
+    description: 'Oferujemy najwyższej jakości symulatory, które daja uczucie pełnego wcielenia w świat wirtualnyuch wyścigów. Poczuj się jak prawdziwy kierowca!'
   }
 ]
 </script>
