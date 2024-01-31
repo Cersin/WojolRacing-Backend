@@ -42,6 +42,11 @@ const images = [
     link: 'https://drivesquad.pl/'
   },
   {
+    name: 'Cammus',
+    src: 'cammus.png',
+    link: 'https://cammusracing.com/'
+  },
+  {
     name: 'Difficult',
     src: 'difficult_small.png',
     link: 'https://www.instagram.com/difficult_js/'
@@ -76,18 +81,15 @@ const images = [
 
 <style scoped lang="scss">
 .sponsors {
-  bottom: 0;
-  right: 0;
-  left: 0;
   overflow: hidden;
   padding: 0 3rem;
   justify-self: flex-end;
-
   display: flex;
   align-items:center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 4rem;
+  width: 600px;
+
 
   img {
     width: 125px;
@@ -97,7 +99,7 @@ const images = [
 
 .image__wrapper {
   animation-name: move;
-  animation-duration: 8s;
+  animation-duration: 15s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: linear;
@@ -105,12 +107,13 @@ const images = [
 
 @keyframes move {
   0%   {
+    transform: translate(-1000px);
   }
 
-  50% {
-  }
+
 
   100% {
+    transform: translate(1000px);
   }
 
 }

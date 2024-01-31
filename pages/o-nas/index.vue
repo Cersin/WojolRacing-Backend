@@ -61,10 +61,6 @@ const aboutList = [
         image: '/ekipa/duniec.png',
       },
       {
-        name: 'Antoni Olejniczak',
-        image: '/ekipa/olejniczak.png',
-      },
-      {
         name: 'Kacper Szafrański',
         image: '/ekipa/szafranski.png',
       },
@@ -90,10 +86,6 @@ const aboutList = [
     header: 'Administratorzy Assetto',
     persons: [
       {
-        name: 'Miłosz Matuszyk',
-        image: '/ekipa/matuszyk.png',
-      },
-      {
         name: 'Klaudiusz Kawalec',
         image: '/ekipa/kawalec.png',
       },
@@ -109,10 +101,6 @@ const aboutList = [
       {
         name: 'Kuba Janiczek',
         image: '/ekipa/janiczek.png',
-      },
-      {
-        name: 'Antoni Stańczak',
-        image: '/ekipa/default.png',
       },
       {
         name: 'Mateusz Stalmirski',

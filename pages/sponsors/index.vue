@@ -17,6 +17,11 @@ import BaseSponsor from "../../components/shared/BaseSponsor";
 
 const sponsorList = [
   {
+    imgSrc: '/partners/cammus.png',
+    link: 'https://cammusracing.com/',
+    description: 'Shenzhen CAMMUS Electronic Technology Co., Ltd was founded in 2008, located in Shenzhen Nanshan, focuses on the R&D of automotive frontier technology. The company adheres to the concept of science humanization, with world-leading technology, has been focusing on the R&D of automotive electronics and promotion for over 10 years, particularly in automotive performance and power modification, including electronic accelerator, throttle controller, intelligent driving controller, racing gauge, engine computer, automobile control arms, titanium exhaust, tower bar series and so on.'
+  },
+  {
     imgSrc: '/partners/plakatartlab.png',
     link: 'https://www.plakartlab.pl/',
     description: 'Plakart Lab to miejsce, gdzie sztuka i wyrażenie osobiste spotykają się w postaci pięknych plakatów. Nasz sklep oferuje wybór unikalnych i artystycznych plakatów, które dodają charakteru i wyjątkowego stylu każdemu pomieszczeniu. https://www.plakartlab.pl/'

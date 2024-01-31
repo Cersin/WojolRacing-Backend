@@ -3,7 +3,7 @@
     <VField v-model="model" :label="label" :name="name" v-slot="{ field }" :rules="rules">
       <div class="form--wrapper">
         <label class="form--label">{{ label }}</label>
-        <input :style="inputStyles" class="form--input" :type="type" v-bind="field">
+        <textarea :style="inputStyles" class="form--input" style="min-height: 200px" :type="type" v-bind="field" ></textarea>
         <VErrorMessage :name="name" v-slot="{ message }">
           <p class="form--error">{{ message }}</p>
         </VErrorMessage>

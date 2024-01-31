@@ -15,6 +15,7 @@
         <div class="navigation__block">
           <h2>Formuła 1</h2>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/informacje">Informacje</NuxtLink>
+          <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/karty-gracza">Karty kierowców</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula">Klasyfikacja zawodników</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/teams">Klasyfikacja konstruktorów</NuxtLink>
           <NuxtLink @click="active = false" exact-active-class="active-route" to="/formula/wyniki">Wyniki</NuxtLink>

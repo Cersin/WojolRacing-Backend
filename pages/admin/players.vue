@@ -240,7 +240,6 @@ async function send() {
       }
 
       const payloadFalsy = removeEmpty(payload);
-      console.log(payloadFalsy);
 
       const formData = new FormData();
 
