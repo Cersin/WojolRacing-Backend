@@ -25,7 +25,7 @@
         <Sponsors/>
       </div>
 
-      <a class="madeby" href="https://frontszymon.pl">v.3.5 Strona wykonana przez FRONTSZYMON.pl</a>
+      <a class="madeby" href="https://frontszymon.pl">v.3.6 Strona wykonana przez FRONTSZYMON.pl</a>
     </div>
 
     <div class="aside">
