@@ -7,6 +7,10 @@
             to: '/formula/informacje',
           },
           {
+            title: 'Karty kierowców',
+            to: '/formula/karty-gracza',
+          },
+          {
             title: 'Wyniki',
             to: '/formula/wyniki',
           },

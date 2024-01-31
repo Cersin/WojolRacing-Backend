@@ -29,7 +29,7 @@
     <div class="aside">
       <NavHeader aside/>
       <div style="display: flex; flex-direction: column; align-items: center;;">
-        <BaseHeader black title="KARTY GRACZA"/>
+        <BaseHeader black title="KARTY KIEROWCÓW"/>
 
         <BaseButton @click="navigateToCards" secondary style="width: 75%; margin: 2rem;">Zobacz więcej</BaseButton>
 
