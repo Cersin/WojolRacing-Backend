@@ -78,33 +78,33 @@
 
       <DropDownMenuItem title="Powtórki" :dropdown="[
           {
-            title: 'Sezon 3 F1',
+            title: 'F1 - S4',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk05jyiSXirJ2zop8806fP1z',
+            link: true
+          },
+          {
+            title: 'F1 - S3',
             to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk0EI6Musr3ChVFoeLOnbXOP',
             link: true
           },
           {
-            title: 'Sezon 3 F2',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk2WCNgdWvx5fUo8PyDd2Yvm',
-            link: true
-          },
-          {
-            title: 'Sezon 2 F1',
+            title: 'F1 - S2',
             to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3r7cpbhUiOD5R6obpDaZ2_',
             link: true
           },
           {
-            title: 'Sezon 2 F2',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk0be_A_Uo3m2pi51dvyal86',
+            title: 'F1 - S1',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-\n',
             link: true
           },
           {
-            title: 'Sezon 1 F1',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk1z2jCMUMkFw5IXh-cNruUi',
+            title: 'AC - Drive Squad',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk2jtU9OzNFkP8CIpeTaJxRs',
             link: true
           },
            {
-            title: 'Sezon 1 F2',
-            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk3aDoBEds_pXhoOv2is2-e-',
+            title: 'AC - S1 Cup',
+            to: 'https://www.youtube.com/playlist?list=PLNmZj_25aJk1WInxJXx_LIPKObRNaylih',
             link: true
           },
         ]"/>

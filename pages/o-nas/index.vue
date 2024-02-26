@@ -139,6 +139,14 @@ const aboutList = [
         name: 'Bartek Kamać ',
         image: '/ekipa/kamac.png',
       },
+      {
+        name: 'Jakub Pres',
+        image: '/ekipa/pres.png',
+      },
+      {
+        name: 'Kuba Kozłowski',
+        image: '/ekipa/kozlowski.png',
+      },
     ]
   },
   {
