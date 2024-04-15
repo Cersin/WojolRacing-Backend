@@ -86,7 +86,7 @@ const raceColumn = [
 const selectedSplit = ref(split["1"]);
 
 const params = ref({
-  season: assettoSeasons["Drive Squad Super S Cup"].value
+  season: assettoSeasons["GT300 Cup"].value,
 });
 
 const classification = ref();
