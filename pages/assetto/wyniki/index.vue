@@ -132,7 +132,7 @@ const raceColumn = [
 ]
 
 const params = ref({
-  season: assettoSeasons["Drive Squad Super S Cup"].value,
+  season: assettoSeasons["GT300 Cup"].value,
   number: 0
 });
 

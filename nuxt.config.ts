@@ -44,7 +44,10 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             status: process.env.NODE_ENV,
-            API_BASE_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : 'https://wojolracing.pl/api/'
+            API_BASE_URL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : 'https://wojolracing.pl/api/',
+            EMAIL_USER_ID: process.env.EMAIL_USER_ID,
+            EMAIL_SERVICE_ID: process.env.EMAIL_SERVICE_ID,
+            EMAIL_TEMPLATE_ID: process.env.EMAIL_TEMPLATE_ID,
         }
     }
 })

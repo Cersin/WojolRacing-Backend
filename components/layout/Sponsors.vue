@@ -42,14 +42,9 @@ const images = [
     link: 'https://drivesquad.pl/'
   },
   {
-    name: 'Auto-KIWI',
-    src: 'kiwi.png',
-    link: 'https://kiwiautocentrum.pl/'
-  },
-  {
-    name: 'TrueSim',
-    src: 'truesim.png',
-    link: 'https://www.truesim.pl/'
+    name: 'Cammus',
+    src: 'cammus.png',
+    link: 'https://cammusracing.com/'
   },
   {
     name: 'Difficult',
@@ -61,23 +56,40 @@ const images = [
     src: 'plakatartlab.png',
     link: 'https://www.plakartlab.pl/'
   },
+  {
+    name: 'Simracing Centre',
+    src: 'simracing_centre.png',
+    link: 'https://simracing-centre.com/',
+  },
+  {
+    name: 'P1 Racing Models',
+    src: 'p1_logo_white.png',
+    link: 'https://p1racingmodels.pl/',
+  },
+  {
+    name: 'Sim Masters',
+    src: 'sim_masters.png',
+    link: 'https://www.simmasters.pl/',
+  },
+  {
+    name: 'Simfun',
+    src: 'simfun_biale_transparent.png',
+    link: 'https://simfun.pl/',
+  }
 ]
 </script>
 
 <style scoped lang="scss">
 .sponsors {
-  bottom: 0;
-  right: 0;
-  left: 0;
   overflow: hidden;
   padding: 0 3rem;
   justify-self: flex-end;
-
   display: flex;
   align-items:center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 4rem;
+  width: 600px;
+
 
   img {
     width: 125px;
@@ -87,7 +99,7 @@ const images = [
 
 .image__wrapper {
   animation-name: move;
-  animation-duration: 8s;
+  animation-duration: 15s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: linear;
@@ -95,12 +107,13 @@ const images = [
 
 @keyframes move {
   0%   {
+    transform: translate(-1000px);
   }
 
-  50% {
-  }
+
 
   100% {
+    transform: translate(1000px);
   }
 
 }

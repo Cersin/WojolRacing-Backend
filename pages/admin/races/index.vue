@@ -203,7 +203,7 @@ const {data: fetched, pending, refresh} = await useFetch('players', {
 
 const params = ref({
   split: 1,
-  season: 3,
+  season: 4,
   number: 0
 });
 

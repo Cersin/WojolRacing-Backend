@@ -1,7 +1,7 @@
 <template>
   <div class="firmDescription">
-    Jesteśmy ligą oraz zespołem esportowym. Wojol Racing to nie tylko simracing. Wojol Racing to grupa miłośników motosportu, dobrej zabawy i zdrowej rywalizacji.
-  </div>
+    Organizacja tworząca lige F1, AC oraz zespół esportowy.
+    Grupa miłośników motosportu, dobrej zabawy i zdrowej rywalizacji.  </div>
 </template>
 
 <script>

@@ -61,10 +61,6 @@ const aboutList = [
         image: '/ekipa/duniec.png',
       },
       {
-        name: 'Antoni Olejniczak',
-        image: '/ekipa/olejniczak.png',
-      },
-      {
         name: 'Kacper Szafrański',
         image: '/ekipa/szafranski.png',
       },
@@ -75,6 +71,14 @@ const aboutList = [
       {
         name: 'Jakub Stanek',
         image: '/ekipa/stanek.png',
+      },
+      {
+        name: 'Mateusz Onik',
+        image: '/ekipa/onik.png',
+      },
+      {
+        name: 'Jakub Pres',
+        image: '/ekipa/pres.png',
       }
     ]
   },
@@ -82,16 +86,12 @@ const aboutList = [
     header: 'Administratorzy Assetto',
     persons: [
       {
-        name: 'Miłosz Matuszyk',
-        image: '/ekipa/matuszyk.png',
-      },
-      {
         name: 'Klaudiusz Kawalec',
         image: '/ekipa/kawalec.png',
       },
       {
         name: 'Krzysztof Helbin',
-        image: '/ekipa/default.png',
+        image: '/ekipa/helbin.png',
       },
     ]
   },
@@ -101,10 +101,6 @@ const aboutList = [
       {
         name: 'Kuba Janiczek',
         image: '/ekipa/janiczek.png',
-      },
-      {
-        name: 'Antoni Stańczak',
-        image: '/ekipa/default.png',
       },
       {
         name: 'Mateusz Stalmirski',
@@ -124,10 +120,6 @@ const aboutList = [
         image: '/ekipa/kowalczyk.png',
       },
       {
-        name: 'Bartek Laszkiewicz',
-        image: '/ekipa/laszkiewicz.png',
-      },
-      {
         name: 'Szymon Puchyrski',
         image: '/ekipa/puchyrski.png',
       },
@@ -143,6 +135,18 @@ const aboutList = [
         name: 'Michał Petrycki',
         image: '/ekipa/petrycki.png',
       },
+      {
+        name: 'Bartek Kamać ',
+        image: '/ekipa/kamac.png',
+      },
+      {
+        name: 'Jakub Pres',
+        image: '/ekipa/pres.png',
+      },
+      {
+        name: 'Kuba Kozłowski',
+        image: '/ekipa/kozlowski.png',
+      },
     ]
   },
   {
@@ -150,7 +154,7 @@ const aboutList = [
     persons: [
       {
         name: 'Kamil Sasak',
-        image: '/ekipa/default.png',
+        image: '/ekipa/sasak.png',
       },
       {
         name: 'Robert Radaj',

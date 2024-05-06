@@ -183,7 +183,7 @@ const {data: fetched, pending, refresh} = await useFetch('assetto-players', {
 });
 
 const params = ref({
-  season: assettoSeasons["Drive Squad Super S Cup"].value,
+  season: assettoSeasons["GT300 Cup"].value,
 });
 
 const results = ref();

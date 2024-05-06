@@ -21,15 +21,17 @@
         />
       </div>
 
-      <Sponsors/>
+      <div style="display: flex; justify-content:center; align-items: center;">
+        <Sponsors/>
+      </div>
 
-      <a class="madeby" href="https://frontszymon.pl">v.3.3 Strona wykonana przez FRONTSZYMON.pl</a>
+      <a class="madeby" href="https://frontszymon.pl">v.4.1 Strona wykonana przez FRONTSZYMON.pl</a>
     </div>
 
     <div class="aside">
       <NavHeader aside/>
       <div style="display: flex; flex-direction: column; align-items: center;;">
-        <BaseHeader black title="KARTY GRACZA"/>
+        <BaseHeader black title="KARTY KIEROWCÓW"/>
 
         <BaseButton @click="navigateToCards" secondary style="width: 75%; margin: 2rem;">Zobacz więcej</BaseButton>
 
