@@ -143,7 +143,7 @@ const findRaces = catchAsync(async (req, res) => {
         res.status(200).json({
             status: 'success',
             length: races.length,
-            data: {...races, tracks: tracks}
+            data: {races: races, tracks: tracks}
         })
 });
 

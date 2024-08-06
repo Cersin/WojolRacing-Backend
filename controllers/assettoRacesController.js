@@ -99,7 +99,7 @@ const findRaces = catchAsync(async (req, res) => {
         res.status(200).json({
             status: 'success',
             length: races.length,
-            data: {...races, tracks: tracks}
+            data: {races: races, tracks: tracks}
         })
 });
 
@@ -372,27 +372,10 @@ const constructorsPoints = catchAsync(async (req, res) => {
         const constructors = await Races.aggregate([
             {
                 "$match": {
-                    "split": +req.query.split,
-                    "season": +req.query.season
-                },
-            },
-            {"$unwind": "$results"},
-            {
-                "$group": {
-                    _id: {$cond: {
-                            if: {$eq: ["$results.team", 'Rezerwa']},
-                            then: null,
-                            else: "$results.team"
-                        }},
-                    points: {$sum: {
-                            $cond: {
-                                if: {$eq: ["$results.team", 'Rezerwa']},
-                                then: 0,
-                                else: "$results.points"
-                            }
-                        }}
+                    "season": req.query.season
                 }
             },
+
             {
                 "$sort": {
                     points: -1

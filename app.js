@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import express from 'express';
 import mongoose from "mongoose";
 import helmet from 'helmet';
@@ -17,6 +16,15 @@ import seasonRoutes from "./routes/seasonRoutes.js";
 import splitRoutes from "./routes/splitRoutes.js";
 import {globalErrorHandler} from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
+
+// const express = require('express')
+// const mongoose = require('mongoose')
+// const helmet = require('helmet')
+// const mongoSanitize = require('express-mongo-sanitize')
+// const xss = require('xss-clean')
+// const hpp = require('hpp')
+// const cookieParser = require('cookie-parser')
+// const cors = require('cors')
 
 const app = express();
 const router = express.Router();
@@ -56,6 +64,7 @@ app.use('/api/assetto-race', assettoRacesRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api/seasons', seasonRoutes);
 app.use('/api/splits', splitRoutes);
+app.use(express.static('public'));
 
 // app.all('*', (req,res,next) => {
 //     next(new AppError(`Nie mogę znaleźć ${req.originalUrl} na tym serwerze!`, 404));
