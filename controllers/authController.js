@@ -61,10 +61,16 @@ export const protect = (async (req, res, next) => {
 
 export const verify = catchAsync(async (req, res) => {
     let token;
+
     if (req.cookies.jwt) {
         token = req.cookies.jwt;
     }
     if (!token) {
+        res.status(401).json({
+            status: 'failed',
+            logged: false,
+            role: null
+        })
         throw new Error('Nie jesteś zalogowany. Zaloguj się!');
     }
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);

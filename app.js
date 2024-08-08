@@ -24,20 +24,16 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.json()); // middleware for sending request
 
-// const whitelist = ['https://wojolracing.pl', 'lhttp://localhost:3001']
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     }
-// }
-// app.use(cors());
-// app.use(helmet({
-//     crossOriginEmbedderPolicy: false,
-// }));
+const whitelist = ['*']
+const corsOptions = {
+    origin: 'http://localhost:3001',
+    credentials: true,
+
+}
+app.use(cors(corsOptions));
+app.use(helmet({
+    crossOriginEmbedderPolicy: false,
+}));
 
 app.use(hpp());
 app.use(cookieParser());
@@ -55,8 +51,8 @@ process.on('uncaughtException', err => {
 
 // app.enable("trust proxy");
 
-// const db =  process.env.DATABASE_LOCAL;
-const db = process.env.DATABASE_GLOBAL
+const db =  process.env.DATABASE_LOCAL;
+// const db = process.env.DATABASE_GLOBAL
 mongoose.connect(db).then(() => {
     console.log('Połączono z bazą danych');
 });
