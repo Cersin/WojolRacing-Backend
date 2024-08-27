@@ -14,6 +14,7 @@ import seasonRoutes from "./routes/seasonRoutes.js";
 import splitRoutes from "./routes/splitRoutes.js";
 import {globalErrorHandler} from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
+import articlesRoutes from "./routes/articlesRoutes.js";
 
 const app = express();
 const router = express.Router();
@@ -65,6 +66,7 @@ app.use('/api/assetto-race', assettoRacesRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api/seasons', seasonRoutes);
 app.use('/api/splits', splitRoutes);
+app.use('/api/articles', articlesRoutes);
 app.use(express.static('public'));
 
 app.all('*', (req,res,next) => {

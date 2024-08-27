@@ -45,6 +45,7 @@ const getPlayers = catchAsync(async (req, res, next) => {
         .limitFields()
         .paginate();
     const players = await features.query;
+
     const count = await Players.countDocuments();
     let pagination = {};
     if (req.query.limit && req.query.page) {
@@ -55,9 +56,7 @@ const getPlayers = catchAsync(async (req, res, next) => {
     res.status(201).json({
         status: 'success',
         pagination: {...pagination},
-        data: {
-            players
-        }
+        data: players,
     })
 })
 
@@ -74,6 +73,7 @@ const getPlayer = catchAsync(async (req, res) => {
 });
 
 const editPlayer = catchAsync(async (req, res) => {
+    console.log(req.body)
     const body = {...req.body};
     if (req.file) body.photo = req.file.filename;
 

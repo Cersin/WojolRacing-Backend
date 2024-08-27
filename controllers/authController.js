@@ -38,8 +38,6 @@ export const protect = (async (req, res, next) => {
         // validate the token
         // jwt.verify(token, process.env.JWT_SECRET); // not returning a promise
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET); // then it will return a promise
-        // console.log(decoded);
-        // console.log(new Date(decoded.exp * 1000));
 
         // if user still exist
         const freshUser = await User.findById(decoded.id);
@@ -61,21 +59,14 @@ export const protect = (async (req, res, next) => {
 
 export const verify = catchAsync(async (req, res) => {
     let token;
-
     if (req.cookies.jwt) {
         token = req.cookies.jwt;
     }
-    if (!token) {
-        res.status(401).json({
-            status: 'failed',
-            logged: false,
-            role: null
-        })
-        throw new Error('Nie jesteś zalogowany. Zaloguj się!');
-    }
+
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
     const freshUser = await User.findById(decoded.id);
+
     if (!freshUser) {
         throw new Error('Nie ma takiego użytkownika. Zaloguj się ponownie!');
     }

@@ -1,11 +1,23 @@
 import lodash from "lodash";
 import removeFalsyObject from "../utils/functions.js";
 
+function search(query) {
+    return function(element) {
+        for(const i in query) {
+            if(query[i] !== element[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
 class APIFeatures {
     constructor(query, queryString) {
         this.query = query;
         this.queryString = queryString;
     }
+
 
     filter() {
         const queryObj = { ...removeFalsyObject(this.queryString) };
