@@ -6,7 +6,7 @@ import multer from 'multer';
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/img/players')
+        cb(null, `${process.cwd()}/public/players`)
     },
     filename: (req, file, cb) => {
         const ext = file.mimetype.split('/')[1];
@@ -25,13 +25,16 @@ const multerFilter = (req, file, cb) => {
 
 const upload = multer({
    storage: multerStorage,
-   fileFilter: multerFilter
+   fileFilter: multerFilter,
 });
 
 const uploadPlayerPhoto = upload.single('photo');
 
 const createPlayer = catchAsync(async (req, res) => {
-    const newPlayer = await Players.create(req.body);
+    const body = {...req.body};
+    if (req.file) body.photo = req.file.filename;
+
+    const newPlayer = await Players.create(body);
     res.status(201).json({
         status: 'success',
         player: newPlayer
@@ -73,7 +76,6 @@ const getPlayer = catchAsync(async (req, res) => {
 });
 
 const editPlayer = catchAsync(async (req, res) => {
-    console.log(req.body)
     const body = {...req.body};
     if (req.file) body.photo = req.file.filename;
 
