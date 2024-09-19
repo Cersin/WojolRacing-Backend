@@ -10,11 +10,8 @@ router
     .post(protect, restrictTo('admin'), articleController.uploadArticlePhoto, articleController.createArticle);
 
 router
-    .route('/:name')
-    .get(articleController.getArticles);
-
-router
     .route('/:id')
+    .get(articleController.getArticle)
     .patch(protect, restrictTo('admin'), articleController.uploadArticlePhoto, articleController.editArticle)
     .delete(protect, restrictTo('admin'), articleController.deleteArticle);
 

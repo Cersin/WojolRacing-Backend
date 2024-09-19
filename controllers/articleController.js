@@ -6,7 +6,7 @@ import multer from "multer";
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/img/articles')
+        cb(null, `${process.cwd()}/public/articles`)
     },
     filename: (req, file, cb) => {
         const ext = file.mimetype.split('/')[1];
@@ -28,29 +28,46 @@ const upload = multer({
     fileFilter: multerFilter
 });
 
-const uploadArticlePhoto = upload.single('photo');
+const uploadArticlePhoto = upload.single('mainPhoto');
 
 
 const getArticles = catchAsync(async (req,res,next) => {
-    const articles = new APIFeatures(Article.find(), req.query).filter().sort().limitFields().paginate();
+    const features = new APIFeatures(Article.find(), req.query).filter().sort().limitFields().paginate();
+    const articles = await features.query;
     const count = await Article.countDocuments();
     let pagination = {};
     if (req.query.limit && req.query.page) {
-        pagination.page = req.query.page;
+        pagination.page = +req.query.page;
         pagination.pages = Math.ceil(count / +req.query.limit)
     };
 
-    if(!articles) return next(new AppError('Brak zawodników', 404))
+    if(!articles) return next(new AppError('Brak artykułów', 404))
 
     res.status(201).json({
         status: 'success',
         pagination: {...pagination},
+        size: count,
         data: articles,
     })
 })
 
+const getArticle = catchAsync(async (req,res,next) => {
+    const features = new APIFeatures(Article.findById(req.params.id), req.query);
+    const article = await features.query;
+
+    if(!article) return next(new AppError('Brak artykułu', 404))
+
+    res.status(201).json({
+        status: 'success',
+        data: article,
+    })
+})
+
 const createArticle = catchAsync(async (req,res) => {
-    const newArticle = await Article.create(req.body);
+    const body = {...req.body};
+    if (req.file) body.mainPhoto = req.file.filename;
+
+    const newArticle = await Article.create(body);
 
     res.status(201).json({
         status: 'success',
@@ -59,7 +76,10 @@ const createArticle = catchAsync(async (req,res) => {
 })
 
 const editArticle = catchAsync(async (req,res, next) => {
-    const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
+    const body = {...req.body};
+    if (req.file) body.mainPhoto = req.file.filename;
+
+    const article = await Article.findByIdAndUpdate(req.params.id, body, {
         new: true,
         runValidators: true,
     })
@@ -83,6 +103,7 @@ const deleteArticle = catchAsync(async (req, res) => {
 
 export default {
     getArticles,
+    getArticle,
     createArticle,
     editArticle,
     deleteArticle,

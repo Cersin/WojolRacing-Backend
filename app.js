@@ -29,7 +29,6 @@ const whitelist = ['*']
 const corsOptions = {
     origin: 'http://localhost:3001',
     credentials: true,
-
 }
 app.use(cors(corsOptions));
 app.use(helmet({
