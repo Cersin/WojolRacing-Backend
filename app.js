@@ -17,30 +17,40 @@ import AppError from "./utils/appError.js";
 import articlesRoutes from "./routes/articlesRoutes.js";
 
 const app = express();
+app.use(express.urlencoded({extended: true}));
+
+app.enable("trust proxy");
+
 const router = express.Router();
 
 const port  = process.env.PORT || 3000;
 
-app.use(express.urlencoded({extended: true}));
 
+
+// const whitelist = ['*', 'https://wojolracing.pl', 'http://wojolracing.pl']
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
+// const corsOptions = {
+//     origin: 'http://localhost:3001',
+//     credentials: true,
+// }
+
+app.use(helmet());
 app.use(express.json()); // middleware for sending request
-
-const whitelist = ['*']
-const corsOptions = {
-    origin: 'http://localhost:3001',
-    credentials: true,
-}
-app.use(cors(corsOptions));
-app.use(helmet({
-    crossOriginEmbedderPolicy: false,
-}));
-
+app.use(cors());
 app.use(hpp());
 app.use(cookieParser());
+
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
 })
-
 
 
 process.on('uncaughtException', err => {
@@ -49,10 +59,9 @@ process.on('uncaughtException', err => {
     process.exit(1);
 })
 
-// app.enable("trust proxy");
 
-const db =  process.env.DATABASE_LOCAL;
-// const db = process.env.DATABASE_GLOBAL
+// const db =  process.env.DATABASE_LOCAL;
+const db = process.env.DATABASE_GLOBAL
 mongoose.connect(db).then(() => {
     console.log('Połączono z bazą danych');
 });
