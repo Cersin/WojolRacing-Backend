@@ -42,8 +42,10 @@ const createPlayer = catchAsync(async (req, res) => {
 });
 
 const getPlayers = catchAsync(async (req, res, next) => {
-    const features = new APIFeatures(Players.find(), req.query)
-        .filter()
+    const search = req.query.name || ""
+    const features = new APIFeatures(Players.find({
+        name: { $regex: search }
+    }), req.query)
         .sort()
         .limitFields()
         .paginate();
