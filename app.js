@@ -15,6 +15,7 @@ import splitRoutes from "./routes/splitRoutes.js";
 import {globalErrorHandler} from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
 import articlesRoutes from "./routes/articlesRoutes.js";
+import leMansRoutes from "./routes/leMansRoutes.js";
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -72,6 +73,7 @@ app.use('/api/race', racesRoutes);
 app.use('/api/assetto-players', assettoPlayersRoutes);
 app.use('/api/assetto-race', assettoRacesRoutes);
 app.use('/api/calendar', calendarRoutes);
+app.use('/api/lemans', leMansRoutes);
 app.use('/api/seasons', seasonRoutes);
 app.use('/api/splits', splitRoutes);
 app.use('/api/articles', articlesRoutes);
