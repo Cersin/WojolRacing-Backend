@@ -12,7 +12,10 @@ const createPlayer = catchAsync(async (req, res) => {
 });
 
 const getPlayers = catchAsync(async (req, res, next) => {
-    const features = new APIFeatures(Players.find(), req.query)
+    const search = req.query.name || ""
+    const features = new APIFeatures(Players.find({
+        name: { $regex: search }
+    }), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -28,9 +31,7 @@ const getPlayers = catchAsync(async (req, res, next) => {
     res.status(201).json({
         status: 'success',
         pagination: {...pagination},
-        data: {
-            players
-        }
+        data: players,
     })
 })
 
