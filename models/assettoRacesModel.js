@@ -14,6 +14,11 @@ const racesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    endurance: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     results: [{
         player: {
             type: mongoose.Schema.Types.ObjectId,

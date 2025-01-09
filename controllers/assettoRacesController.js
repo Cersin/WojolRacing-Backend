@@ -38,6 +38,7 @@ const getRace = catchAsync(async (req, res) => {
             "$group": {
                 _id: '$_id',
                 track: {"$first": '$track'},
+                endurance: {"$first": '$endurance'},
                 season: {"$first": '$season'},
                 split: {"$first": '$split'},
                 date: {"$first": '$date'},
@@ -79,6 +80,7 @@ const findRaces = catchAsync(async (req, res) => {
                     _id: '$_id',
                     track: {"$first": '$track'},
                     season: {"$first": '$season'},
+                    endurance: {"$first": '$endurance'},
                     split: {"$first": '$split'},
                     date: {"$first": '$date'},
                     points: {$sum: "$results.points"},
